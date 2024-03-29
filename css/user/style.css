@@ -1,0 +1,430 @@
+body {
+    margin: 0;
+}
+
+.box-top {
+    float: left; /*Box đầy màn hình*/
+    width: 100%;
+    background-color: #0d47a1;
+    height: 40px;
+}
+
+.box-logo {
+    /* background-image: url(../img/banner-background.jpg); */
+    float: left; 
+    width: 100%;
+    height: auto;
+    border-bottom: 1px #ccc solid;
+    float: left;
+    padding-top: 30px;
+}
+
+.box-logo img {
+    height: 120px;
+    margin-bottom: 30px;
+}
+
+.name-school {
+    width: 100%;
+    margin-left: 171px;
+    margin-top: -110px;
+    margin-bottom: 90px;
+}
+
+.box-logo a {
+    font-size: 3vh;
+    text-decoration: none;
+    color: #1e1a99;
+}
+
+
+
+.box-menu {
+    float: left; 
+    width: 100%;
+    height: 80px;
+    background-color: white;
+    justify-content: center;
+}
+
+
+
+.box-center {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.box-top-left {
+    float: left;
+    height: 50px;
+    line-height: 40px;
+    color: #ffffff;
+}
+
+.box-top-right {
+    float: right;
+    height: 50px;
+    line-height: 40px;   
+}
+
+.box-top-right a {
+    color: #ffffff;
+    margin-left: 8px;
+    text-decoration: none;
+    margin-right: 25px;
+}
+
+.box-top-right i {
+    color: #fff;
+}
+
+.text-menu li a {
+    
+    font-size: 2.5vh;
+}
+
+
+article {
+    float: left;
+    width: 100%;
+    min-height: 700px;
+    margin: 30px 0;
+}
+
+.document-content {
+    margin-left: 25px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.document-content a {
+    font-size: 25px;
+    text-decoration: none;
+    color: black;
+}
+
+.text-main {
+    font-size: 20px;
+}
+
+.text-main-title {
+    font-size: 20px;
+}
+
+
+.title {
+    margin-top: 10px;
+}
+
+.title a:hover {
+    color: red;
+    text-decoration: underline
+}
+
+.date-post {
+    margin-top: 15px;
+}
+
+.date-post i {
+    align-items: center;
+}
+
+.block-1 {
+    margin-right: 20px;
+}
+
+.fa {
+    margin-right: 5px;
+}
+
+footer {
+    float: left;
+    width: 100%;
+    min-height: 150px;
+    background-color: #0e346f;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+ul li {
+    list-style-type: none; /* Bỏ dấu chấm */
+    float: left; /* Nằm cùng hàng */
+    padding: 15px 20px;
+    font-size: 11pt;
+}
+
+ul li:hover ul {
+    display: block;
+    position: absolute;
+    
+}
+
+ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+ul li a:hover {
+    color: #0089ff;
+}
+
+ul li ul {
+    display: none;
+    background-color: #fff;
+    margin-top: 15px;
+    width: 200px;
+   
+}
+
+ul li ul li {
+    float: none;
+    border-bottom: 1px #ccc solid;
+    border-left: 1px #ccc solid;
+    border-right: 1px #ccc solid;
+    padding: 10px 20px;
+    
+}
+
+ul li ul li:hover {
+    color: white;
+    background-color: #0089ff;
+}
+
+ul li ul li a:hover {
+    color: white;
+}
+
+ul li ul li:first-child {
+    border-top: 1px #ccc solid;
+}
+
+.row {
+    float: left;
+    width: 100%;
+    margin-bottom: 50px;
+    margin-top: 30px;
+}
+
+.box-center-2 {
+    width: 60%;
+    margin: 0 auto;
+    padding-left: 500px;
+}
+
+.box-footer-1 {
+    width: 18%;
+    float: left;
+}
+
+.box-footer-1 h4,
+.box-footer-2 h4,
+.box-footer-3 h4 {
+    display: inline-block;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #FFF;
+}
+
+.box-footer-2 {
+    width: 22%;
+    float: left;
+}
+
+.add {
+    margin-top: 24px;
+    align-items: center;
+    display: flex;
+}
+
+.add a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+.add a:hover {
+    color: #0089ff;
+}
+
+.box-add-1 {
+    
+    align-items: center;
+    display: flex;
+}
+
+.box-add-2 {
+    align-items: center;
+    display: flex;
+}
+
+.box-add-2 span {
+    margin-right: 10px;
+}
+
+.box-add-1 span {
+    margin-right: 10px;
+}
+
+
+
+
+
+/* .address {
+    
+    display: flex;
+    align-items: center;
+}
+
+.address span  {
+    margin-right: 10px;
+} */
+
+.mr2 {
+    margin-right: 2%;
+}
+
+.box-footer-3 {
+    width: 60%;
+    float: left;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.color-white {
+    color: white;
+}
+
+.margin-bottom {
+    margin-bottom: 5px;
+}
+
+.row-2 {
+    margin-bottom: 10px;
+}
+
+.box-icon-footer a > i {
+    color: white;
+    font-size: 32px;
+    margin-right: 25px;
+    margin-top: 20px;
+}
+
+
+
+.main-1 {
+    float: left;
+    width: 60%;   
+}
+
+.main-2 {
+    margin-top: 20px;
+    float: right;
+    width: 35%;
+    
+}
+
+
+.box-search {
+    height: 20px;
+    display: flex;
+    cursor: pointer;
+    padding: 10px 20px;
+    background: hsl(0, 0%, 100%);
+    border-radius: 30px;
+    align-items: center;
+    box-shadow: 0 10px 25px rgba(157, 152, 152, 0.2);
+
+    
+}
+
+.box-search:hover input {
+    width: 400px;
+}
+
+.box-search input {
+    width: 0;
+    outline: none;
+    border: none;
+    font-weight: 500;
+    transition: 0.8s;
+    background: transparent;
+}
+
+.box-search a .fas {
+    color: #1daf;
+    font-size: 18px;
+    
+}
+
+
+.box-content-1 {
+    float: left;
+    width: 100%;
+    margin-bottom: 30px;
+    background-color: #f2ecec3d;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 8px 0px;
+}
+
+
+
+ .box-content-2 {
+    float: right;
+    width: 100%;
+    margin-bottom: 30px;
+}  
+
+.box-content-2 h1 {
+    font-size: 4vh;
+    margin-top: 30px;
+}
+
+.main-1 h1 {
+    font-size: 4vh;
+}
+
+.block-categories {
+    width: 70%;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 8px 0px;
+    background-color: #f2ecec3d;
+    margin-bottom: 50px;
+    padding-bottom: 20px;
+}
+
+.title-block-categories {
+    text-align: center;
+    font-size: 25px;
+    color: #0e4582;
+    font-weight: 700;
+    padding: 20px 10px 10px 10px;
+    margin-bottom: 15px;
+   
+}
+
+
+.text-categories {
+    margin-bottom: 15px;
+    padding-left: 20px;
+    font-size: 25px;
+}
+
+.text-categories a {
+    text-decoration: none;
+    color: black;
+}
+
+.text-categories a:hover {
+    text-decoration: underline;
+}
+
+.text-categories i {
+    margin-right: 5px;
+    font-size: 7px;
+}
+
+
+
+

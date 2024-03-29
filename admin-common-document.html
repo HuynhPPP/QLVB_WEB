@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý văn bản chung</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link
+          href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+          rel="stylesheet"
+      >
+    <link rel="stylesheet" href="fontawesome-free-6.5.1-web/fontawesome-free-6.5.1-web/css/all.min.css">
+    <link rel="stylesheet" href="css/admin/style-admin.css">
+    <link rel="stylesheet" href="css/admin/admin-style-trangchu.css">
+    <link rel="stylesheet" href="css/admin/admin-table.css">
+    <link rel="stylesheet" href="css/admin/pagination-style-admin.css">
+    <link rel="stylesheet" href="css/admin/modal-style.css">
+    
+    
+    
+</head>
+<body>
+    <div class="main-content-right">
+        <div class="content">
+            <div class="header-wrapper">
+                <div class="header-title">
+                    <h2>Danh sách văn bản</h2>
+                </div>
+                <div class="breadcrumb">
+                    <ul class="breadcrumb_list">
+                      <li class="li-1"><a href='#'>Danh sách văn bản</a></li>
+                      <li><a href=''>Quản lý khoa</a></li>
+                    </ul>
+                  </div>
+            </div>
+
+            <div class="card-container">
+                <div class="main-table">
+                    <div class="table">
+                        <div class="table_header">
+                            <div>
+                                <form action="" method="post">
+                                    <input placeholder="Nhập tên văn bản"/>
+                                    <button class="btn_search" type="submit">Tìm kiếm</button>
+                                    <button type="button" id="open_modal" class="add_new">
+                                        <a href="">+ Thêm văn bản</a>
+                                    </button>
+                                </form>  
+
+                                    <!--Modal start-->
+                                    <div class="modal-container" id="modal-container-2">
+                                        <div class="modal">
+                                            <div class="modal-header">
+                                                <h2>Thêm văn bản</h2>
+                                                <i class="fa fa-close" id="close-icon"></i>
+                                            </div>
+                                            <div class="modal-content">
+                                                <p>
+                                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries
+                                                </p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn-confirm" id="confirm_modal">Xác nhận</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Modal end-->
+                                       
+                            </div>
+                        </div>
+                        <div class="table-section">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Số thứ tự</th>
+                                        <th>Tên văn bản</th>
+                                        <th>Thể loại</th>
+                                        <th>Ngày đăng</th>
+                                        <th>Tệp tin</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>BCH ĐẢNG BỘ KHỐI CƠ QUAN DCĐ THÀNH PHỐ </td>
+                                        <td>Sự kiện</td>
+                                        <td>2023-11-14</td>
+                                        <td>635_TB_ĐHKTCN_thongbao_Vvnophochocky_I_namhoc_2023-2024 (1).pdf</td>
+                                        <td>
+                                            <button><i class="fa-solid fa-pen-to-square"></i></button>
+                                            <button><i class="fa-solid fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Quyết định sửa đổi Quy định về yểu cầu chuẩn kỹ năng công nghệ thông tin</td>
+                                        <td>Tin tức</td>
+                                        <td>2023-11-14</td>
+                                        <td>tkegthuat.docx</td>
+                                        <td>
+                                            <button><i class="fa-solid fa-pen-to-square"></i></button>
+                                            <button><i class="fa-solid fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>1</td>
+                                        <td>BCH ĐẢNG BỘ KHỐI CƠ QUAN DCĐ THÀNH PHỐ TỔ CHỨC HỘI NGHỊ LẦN THỨ 15‚ KHÓA VIII</td>
+                                        <td>Sự kiện</td>
+                                        <td>2023-11-14</td>
+                                        <td>635_TB_ĐHKTCN_thongbao_Vvnophochocky_I_namhoc_2023-2024 (1).pdf</td>
+                                        <td>
+                                            <button><i class="fa-solid fa-pen-to-square"></i></button>
+                                            <button><i class="fa-solid fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>1</td>
+                                        <td>BCH ĐẢNG BỘ KHỐI CƠ QUAN DCĐ THÀNH PHỐ TỔ CHỨC HỘI NGHỊ LẦN THỨ 15‚ KHÓA VIII</td>
+                                        <td>Sự kiện</td>
+                                        <td>2023-11-14</td>
+                                        <td>635_TB_ĐHKTCN_thongbao_Vvnophochocky_I_namhoc_2023-2024 (1).pdf</td>
+                                        <td>
+                                            <button><i class="fa-solid fa-pen-to-square"></i></button>
+                                            <button><i class="fa-solid fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>1</td>
+                                        <td>BCH ĐẢNG BỘ KHỐI CƠ QUAN DCĐ THÀNH PHỐ TỔ CHỨC HỘI NGHỊ LẦN THỨ 15‚ KHÓA VIII</td>
+                                        <td>Sự kiện</td>
+                                        <td>2023-11-14</td>
+                                        <td>635_TB_ĐHKTCN_thongbao_Vvnophochocky_I_namhoc_2023-2024 (1).pdf</td>
+                                        <td>
+                                            <button><i class="fa-solid fa-pen-to-square"></i></button>
+                                            <button><i class="fa-solid fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>1</td>
+                                        <td>BCH ĐẢNG BỘ KHỐI CƠ QUAN DCĐ THÀNH PHỐ TỔ CHỨC HỘI NGHỊ LẦN THỨ 15‚ KHÓA VIII</td>
+                                        <td>Sự kiện</td>
+                                        <td>2023-11-14</td>
+                                        <td>635_TB_ĐHKTCN_thongbao_Vvnophochocky_I_namhoc_2023-2024 (1).pdf</td>
+                                        <td>
+                                            <button><i class="fa-solid fa-pen-to-square"></i></button>
+                                            <button><i class="fa-solid fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>1</td>
+                                        <td>BCH ĐẢNG BỘ KHỐI CƠ QUAN DCĐ THÀNH PHỐ TỔ CHỨC HỘI NGHỊ LẦN THỨ 15‚ KHÓA VIII</td>
+                                        <td>Sự kiện</td>
+                                        <td>2023-11-14</td>
+                                        <td>635_TB_ĐHKTCN_thongbao_Vvnophochocky_I_namhoc_2023-2024 (1).pdf</td>
+                                        <td>
+                                            <button><i class="fa-solid fa-pen-to-square"></i></button>
+                                            <button><i class="fa-solid fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>1</td>
+                                        <td>BCH ĐẢNG BỘ KHỐI CƠ QUAN DCĐ THÀNH PHỐ TỔ CHỨC HỘI NGHỊ LẦN THỨ 15‚ KHÓA VIII</td>
+                                        <td>Sự kiện</td>
+                                        <td>2023-11-14</td>
+                                        <td>635_TB_ĐHKTCN_thongbao_Vvnophochocky_I_namhoc_2023-2024 (1).pdf</td>
+                                        <td>
+                                            <button><i class="fa-solid fa-pen-to-square"></i></button>
+                                            <button><i class="fa-solid fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>1</td>
+                                        <td>BCH ĐẢNG BỘ KHỐI CƠ QUAN DCĐ THÀNH PHỐ TỔ CHỨC HỘI NGHỊ LẦN THỨ 15‚ KHÓA VIII</td>
+                                        <td>Sự kiện</td>
+                                        <td>2023-11-14</td>
+                                        <td>635_TB_ĐHKTCN_thongbao_Vvnophochocky_I_namhoc_2023-2024 (1).pdf</td>
+                                        <td>
+                                            <button><i class="fa-solid fa-pen-to-square"></i></button>
+                                            <button><i class="fa-solid fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>1</td>
+                                        <td>BCH ĐẢNG BỘ KHỐI CƠ QUAN DCĐ THÀNH PHỐ TỔ CHỨC HỘI NGHỊ LẦN THỨ 15‚ KHÓA VIII</td>
+                                        <td>Sự kiện</td>
+                                        <td>2023-11-14</td>
+                                        <td>635_TB_ĐHKTCN_thongbao_Vvnophochocky_I_namhoc_2023-2024 (1).pdf</td>
+                                        <td>
+                                            <button><i class="fa-solid fa-pen-to-square"></i></button>
+                                            <button><i class="fa-solid fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>1</td>
+                                        <td>BCH ĐẢNG BỘ KHỐI CƠ QUAN DCĐ THÀNH PHỐ TỔ CHỨC HỘI NGHỊ LẦN THỨ 15‚ KHÓA VIII</td>
+                                        <td>Sự kiện</td>
+                                        <td>2023-11-14</td>
+                                        <td>635_TB_ĐHKTCN_thongbao_Vvnophochocky_I_namhoc_2023-2024 (1).pdf</td>
+                                        <td>
+                                            <button><i class="fa-solid fa-pen-to-square"></i></button>
+                                            <button><i class="fa-solid fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="Pagination">
+                            <button class="btn1" onclick="backBtn()"> <img src="img/448-arrow.png" alt=""> Trước</button>
+                            <ul class="pagination-ul">
+                                <li class="link active" value="1" onclick="activeLink()">1</li>
+                                <li class="link" value="2" onclick="activeLink()">2</li>
+                                <li class="link" value="3" onclick="activeLink()">3</li>
+                                <li class="link" value="4" onclick="activeLink()">4</li>
+                                <li class="link" value="5" onclick="activeLink()">5</li>
+                                <li class="link" value="6" onclick="activeLink()">6</li>
+                            </ul>
+                            <button class="btn2" onclick="nextBtn()">Sau <img src="img/448-arrow.png" alt=""></button>
+                        </div>
+                        
+                    </div>     
+                </div>
+                
+            </div> 
+        </div>
+    </div>
+
+    <nav>
+        <div class="sidebar-top">
+            <a href="admin_layout.html" class="logo__wrapper">
+            <img src="img/logo_school_2.png" alt="Logo" class="logo">
+            <h1 class="hide">Trang quản lý</h1>
+            </a>
+            <!-- <div class="expand-btn">
+            <img src="img/chevron.svg" alt="Chevron">
+            </div> -->
+        </div>
+        <div class="sidebar-links">
+            <ul>
+                <li>
+                <a href="admin_layout.html" title="Dashboard" class="tooltip">
+                    <i class="fa-solid fa-house"></i>
+                    <span class="link hide">Trang chủ</span>
+                    <!-- <span class="tooltip__content">Dashboard</span> -->
+                </a>
+                </li>
+                <li>
+                <a href="#project" title="Project" class="tooltip">
+                    <i class="fa-solid fa-file-lines"></i>
+                    <span class="link hide">Văn bản khoa</span>
+                    <!-- <span class="tooltip__content">Văn bản khoa</span> -->
+                </a>
+                </li>
+                <li>
+                <a href="admin-common-document.html" title="Performance" class="tooltip">
+                    <i class="fa-regular fa-file-lines"></i>
+                    <span class="link hide">Văn bản chung</span>
+                    <!-- <span class="tooltip__content">Văn bản chung</span> -->
+                </a>
+                </li>
+                <li>
+                <!-- <a href="#funds" title="Funds" class="tooltip">
+                    <i class="fa-regular fa-folder-open"></i>
+                    <span class="link hide">Loại văn bản</span> -->
+                    <!-- <span class="tooltip__content">Loại văn bản</span> -->
+                <!-- </a> -->
+                <a href="#funds" title="Funds" class="tooltip">
+                    <i class="fa-solid fa-user"></i>
+                    <span class="link hide">Tài khoản</span>
+                    <!-- <span class="tooltip__content">Loại văn bản</span> -->
+                </a>
+                <a href="#funds" title="Funds" class="tooltip">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span class="link hide">Email</span>
+                    <!-- <span class="tooltip__content">Loại văn bản</span> -->
+                </a>
+                </li>
+            </ul>
+        </div>
+        <div class="sidebar-bottom">
+            <!-- <div class="sidebar-links">
+                <ul>
+                <li>
+                    <a href="#help" title="Help" class="tooltip">
+                    <img src="assets/help.svg" alt="Help">
+                    <span class="link hide">Help</span>
+                    <span class="tooltip__content">Help</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#settings" title="Settings" class="tooltip">
+                    <img src="assets/settings.svg" alt="Settings">
+                    <span class="link hide">Settings</span>
+                    <span class="tooltip__content">Settings</span>
+                    </a>
+                </li>
+                </ul>
+            </div> -->
+            <div class="sidebar__profile">
+                <div class="avatar__wrapper">
+                <img class="avatar" src="img/avatar-trang-y-nghia.jpeg" alt="Profile">
+                <div class="online__status"></div>
+                </div>
+                <div class="avatar__name hide">
+                    <div class="user-name">Admin</div>
+                    <div class="email">Admin123@gmail.com</div>
+                </div>
+                <div class="user-sign"><a href=""><i class="fa-solid fa-right-from-bracket"></i></a></div>
+
+            </div>
+        </div>
+    </nav>
+     
+    <script src="Script/script-pagination.js"></script>
+    <script src="Script/script-modal.js"></script>
+    
+</body>
+</html>
+

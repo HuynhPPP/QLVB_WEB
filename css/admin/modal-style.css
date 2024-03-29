@@ -1,0 +1,69 @@
+.modal-container {
+    background: rgba(0,0 ,0 ,0.2);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal-container.show {
+    z-index: 1;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal {
+    background: #fff;
+    width: 550px;
+    max-width: 100%;
+    border-radius: 5px;
+}
+
+.modal-header {
+    display: flex;
+    background: #45b39d;
+    color: #fff;
+    padding: 15px 20px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header i {
+    cursor: pointer;
+}
+
+.modal-content {
+    padding: 20px 15px;
+    line-height: 2rem;
+    text-align: justify;
+}
+
+.modal-footer {
+    border-top: 1px solid #ddd;
+    padding: 20px 15px;
+}
+
+.modal-footer .btn-confirm {
+    display: block;
+    margin-left: auto;
+    background: transparent;
+    color: #333;
+    outline: 1px solid #45b39d;
+    padding: 10px 30px;
+    cursor: pointer;
+}
+
+.modal-footer .btn-confirm:hover {
+    background: #45b39d;
+    color: #fff;
+    transition: 0.3s;
+}
