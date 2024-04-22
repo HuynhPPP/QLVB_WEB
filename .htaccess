@@ -1,0 +1,16 @@
+RewriteEngine ON
+RewriteBase /QLVB/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^(.*)/(.*)/(.*)/(.*)$ index.php?mod=$1&act=$2&id=$3&idpage=$4 [L]
+
+
+
+
+RewriteRule ^upload/(.*)$ upload/$1 [L]
+RewriteRule ^template/(.*)$ template/$1 [L]
+
+
+RewriteRule ^(.*)/(.*)/(.*)$ index.php?mod=$1&act=$2&id=$3 [L]
+RewriteRule ^(.*)/(.*)$ index.php?mod=$1&act=$2 [L]

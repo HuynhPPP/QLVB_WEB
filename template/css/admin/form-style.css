@@ -1,0 +1,39 @@
+.admin-add-form form {
+   max-width: 50rem;
+   margin: 0 auto;
+   padding: 2rem;
+   border-radius: .5rem;
+   background: #eee;
+   
+}
+
+.admin-add-form form .box  {
+   width: 100%;
+   padding: 1rem 1.5rem;
+   font-size: 15px;
+   border: none;
+   background: white;
+   
+   margin-bottom: 20px;
+}
+
+
+
+::placeholder {
+   color: black;
+}
+
+select {
+   font-size: 0.9rem;
+   padding: 2px 5px;
+ }
+
+ .admin-add-form form .lb {
+   float: left;
+   color: black;
+   top: 0;
+   margin-bottom: 7px;
+ }
+ 
+   
+   

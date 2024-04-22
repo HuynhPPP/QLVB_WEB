@@ -1,0 +1,71 @@
+.modal-container-addLoaiVB {
+    background: rgba(0,0 ,0 ,0.2);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal-container-addLoaiVB.show {
+    z-index: 1;
+    opacity: 2;
+    pointer-events: auto;
+    /* overflow: auto; */
+    
+}
+
+.modal-addLoaiVB {
+    background: #fff;
+    width: 700px;
+    max-width: 100%;
+    border-radius: 5px;
+    height: 300px;
+}
+
+.modal-header-addLoaiVB {
+    display: flex;
+    background: #1243e3;
+    color: #fff;
+    padding: 15px 20px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header-addLoaiVB i {
+    cursor: pointer;
+}
+
+.modal-content-addLoaiVB {
+    padding: 20px 15px;
+    /* line-height: 4rem; */
+    text-align: justify;
+}
+
+.modal-footer-addLoaiVB {
+    
+    padding: 5px 15px;
+}
+
+.modal-footer-addLoaiVB .btn-confirm-addLoaiVB {
+    display: block;
+    margin-left: auto;
+    background: #1243e3;
+    color: #ffffff;
+    outline: 1px solid #d7d5e8;
+    padding: 10px 30px;
+    cursor: pointer;
+}
+
+.modal-footer-addLoaiVB .btn-confirm-addLoaiVB:hover {
+    background: rgb(7, 7, 154);
+    color: #fff;
+    transition: 0.6s;
+}
