@@ -37,11 +37,13 @@
                 <span class="link hide">Loại văn bản</span> -->
                 <!-- <span class="tooltip__content">Loại văn bản</span> -->
             <!-- </a> -->
+            <?php if($_SESSION['user']['loaitaikhoan']==1):?>
             <a href="<?=$base_url?>taikhoan/home_admin" title="Funds" class="tooltip">
                 <i class="fa-solid fa-user"></i>
                 <span class="link hide">Tài khoản</span>
                 <!-- <span class="tooltip__content">Loại văn bản</span> -->
             </a>
+            <?php endif; ?>
             <a href="<?=$base_url?>page/mail" title="Funds" class="tooltip">
                 <i class="fa-solid fa-envelope"></i>
                 <span class="link hide">Email</span>

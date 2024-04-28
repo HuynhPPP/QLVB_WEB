@@ -45,6 +45,7 @@
                                                 <select class="box" name="loaitaikhoan">
                                                     <option value="0" selected>Người dùng</option>
                                                     <option value="1">Quản trị viên</option>
+                                                    <option value="2">Quản lý</option>
                                                 </select>
                                                 <select class="box" name="idkhoa">
                                                 <option selected>Chọn khoa</option>
@@ -92,10 +93,15 @@
                                         case '0': 
                                             echo'Người dùng';
                                             break;
-                                        case '1':
+                                    
+                                        case '1':                     
                                             echo'Quản trị viên';
-                                            break;                       
-                                        default:
+                                            break;  
+                                          
+                                        case '2':
+                                            echo'Quản lý';
+                                            break;                     
+                                        default;
                                     }
                                 ?>    
                                 </td>

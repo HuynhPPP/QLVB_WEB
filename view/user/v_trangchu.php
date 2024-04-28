@@ -1,7 +1,21 @@
+<?php
+    if(is_array($khoa)) {
+        extract($khoa);
+    }
+?>
+
 <article>
-        <div class="box-center">       
+        <div class="box-center">   
+
+            <div class="menu-bar">
+                <div class="menu-content">
+                    <div class="menu-1"><a href="">Văn bản chung</a></div>
+                    <div class="menu-2"><a href="<?=$base_url?>khoa/home_user/<?=$_SESSION['user']['idkhoa']?>">Văn thuộc khoa <?=$tenkhoa?></a></div>
+                </div>
+            </div>    
+
             <div class="main-1"> 
-                <h1>Văn bản mới cập nhật</h1>
+                <div class="title-category">Văn bản mới cập nhật</div>
                 <?php $list_document_newest = list_document_newest();
                         foreach($list_document_newest as $vb): ?> 
                         <div class="box-content-1">
@@ -19,22 +33,12 @@
                                 </p>
                             </div>
                         </div>
-                <?php endforeach; ?> 
-
-         
-                
+                <?php endforeach; ?>  
             </div>
 
             <div class="main-2">
-                <!-- <div class="box-search">
-                    <input type="text" placeholder="Tìm kiếm..."> 
-                    <a href="">
-                        <i class="fas fa-solid fa-magnifying-glass"></i>
-                    </a>
-                </div> -->
-                
+                <div class="title-category">Danh mục</div>
                 <div class="box-content-2">
-                    <h1>Danh mục</h1>
                     <div class="block-categories">
                         <div class="title-block-categories">
                             <span>Văn bản thuộc phòng</span>
@@ -44,13 +48,14 @@
                             foreach($dsphong as $phong): ?> 
 
                         <div class="text-categories">
-                            <i class="fa-solid fa-paperclip"></i><a href="<?=$base_url?>phong/home_user/<?=$phong['id']?>"><?=$phong['tenphong']?></a>
+                            <i class="fa-solid fa-chevron-right"></i><a href="<?=$base_url?>phong/home_user/<?=$phong['id']?>"><?=$phong['tenphong']?></a>
                         </div>
 
                         <?php endforeach; ?>  
                     
                     </div>
 
+                    <?php if($_SESSION['user']['loaitaikhoan']>=1):?>
                     <div class="block-categories">
                         <div class="title-block-categories">
                             <span>Văn bản thuộc khoa</span>
@@ -60,11 +65,12 @@
                             foreach($dskhoa as $khoa): ?> 
 
                         <div class="text-categories">
-                            <i class="fa-solid fa-paperclip"></i><a href="<?=$base_url?>khoa/home_user/<?=$khoa['id']?>"><?=$khoa['tenkhoa']?></a>
+                            <i class="fa-solid fa-chevron-right"></i><a href="<?=$base_url?>khoa/home_user/<?=$khoa['id']?>"><?=$khoa['tenkhoa']?></a>
                         </div>
 
-                        <?php endforeach; ?>  
+                        <?php endforeach; ?>     
                     </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

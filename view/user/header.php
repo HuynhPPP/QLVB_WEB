@@ -7,17 +7,25 @@
                     <i class="fa-solid fa-user"></i><a href="<?=$base_url?>user/login">Đăng nhập</a>
                 <?php else:?>
                     <div class="dropdown">
-                        <i class="fa-solid fa-user"></i>
-                        <a href=""><span><?=$_SESSION['user']['taikhoan']?></span>
-                        <i class="ml-5 fa-drop fa-solid fa-caret-down"></i></a>
-
+                        <?php if($_SESSION['user']['loaitaikhoan']==0):?> 
+                            <i class="fa-solid fa-user"></i>
+                            <a href=""><span><?=$_SESSION['user']['taikhoan']?></span>
+                            <i class="ml-5 fa-drop fa-solid fa-caret-down"></i></a>
+                            <div class="dropdown-content">
+                                <a href="<?=$base_url?>user/logout">Đăng xuất</a>
+                            </div>
+                        <?php endif; ?>
+                        
                         <!-- Hiển thị khi có quyền là quản lý-->
                         <?php if($_SESSION['user']['loaitaikhoan']>=1):?>   
+                            <i class="fa-solid fa-user"></i>
+                            <a href=""><span><?=$_SESSION['user']['taikhoan']?></span>
+                            <i class="ml-5 fa-drop fa-solid fa-caret-down"></i></a>
                         <div class="dropdown-content">
                             <a href="<?=$base_url?>page/home_admin">Trang quản lí</a> 
-                        <?php endif; ?>
                             <a href="<?=$base_url?>user/logout">Đăng xuất</a>
                         </div>
+                        <?php endif; ?>
                     </div> 
                 <?php endif;?> 
             </div>

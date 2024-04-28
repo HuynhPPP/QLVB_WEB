@@ -91,8 +91,37 @@ article {
     float: left;
     width: 100%;
     min-height: 700px;
-    margin: 30px 0;
     
+    
+}
+
+.menu-bar {
+    
+    float: right;
+    width: 70%;
+    padding-top: 10px;
+}
+
+.menu-content {
+   
+    display: flex;
+}
+
+.menu-content a {
+    color: black;
+    text-decoration: none;
+    font-size: 25px;
+}
+
+.menu-content a:hover {
+    color: #0d47a1;
+    text-decoration: underline;
+    transition: 0.5s;
+    
+}
+
+.menu-bar .menu-1 {
+    padding-right: 60px;
 }
 
 .document-content {
@@ -102,9 +131,19 @@ article {
 }
 
 .document-content a {
-    font-size: 25px;
+    font-size: 23px;
+    text-transform: uppercase;
     text-decoration: none;
-    color: black;
+    color: #1e1a99;
+    padding-right: 10px;
+    display: -webkit-box;
+    max-height: 5.2rem;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    -webkit-line-clamp: 2;
+    line-height: 1.6rem;
 }
 
 .text-noidung {
@@ -128,12 +167,15 @@ article {
 
 
 .title {
+    padding-bottom: 10px;
+    margin-right: 8px;
     margin-top: 10px;
 }
 
 .title a:hover {
     color: red;
-    text-decoration: underline
+    text-decoration: underline;
+    transition: 0.5s;
 }
 
 .date-post {
@@ -331,17 +373,29 @@ ul li ul li:first-child {
 
 
 .main-1 {
+    margin-top: 80px;
     float: left;
     width: 60%;   
 }
 
 .main-2 {
-    margin-top: 20px;
+    margin-top: 80px;
     float: right;
     width: 35%;
     
 }
 
+.main-1 .title-category {
+    font-weight: 600;
+    font-size: 25px;
+    margin-bottom: 30px;
+}
+
+.main-2 .title-category {
+    font-weight: 600;
+    font-size: 25px;
+    margin-bottom: 30px;
+}
 
 .box-search {
     height: 20px;
@@ -426,11 +480,13 @@ ul li ul li:first-child {
     padding-left: 20px;
     font-size: 25px;
     padding-top: 10px ;
+    align-items: center;
 }
 
 .text-categories a {
     text-decoration: none;
     color: black;
+    
 }
 
 .text-categories a:hover {
@@ -438,8 +494,9 @@ ul li ul li:first-child {
 }
 
 .text-categories  i {
-    margin-right: 5px;
+    margin-right: 10px;
     font-size: 12px;
+    
 }
 
 .ml-5 {
