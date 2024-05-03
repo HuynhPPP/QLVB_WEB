@@ -6,6 +6,12 @@
     <link rel="stylesheet" href="<?=$base_url?>template/css/admin/form-style.css">
 </head>
 
+<?php
+  if(is_array( $ds_vb_khoa)){
+    extract( $ds_vb_khoa);
+  }
+?>
+
 
 <div class="content-2">
     <div class="header-wrapper">
@@ -32,7 +38,7 @@
                                 + Thêm văn bản
                             </button>
                         </form>  
-                        <!--Modal start-->
+                        <!--Modal ADD start-->
                             <div class="modal-container-addVB" id="modal-container-addVB">
                                 <div class="modal-addVB">
                                     <div class="modal-header-addVB">
@@ -77,7 +83,58 @@
                                     
                                 </div>
                             </div>
-                        <!--Modal end-->
+                        <!--Modal ADD end-->
+
+
+                         <!--Modal EDIT start-->
+                         <div class="modal-container-addVB" id="modal-container-editVBKHOA">
+                                <div class="modal-addVB">
+                                    <div class="modal-header-addVB">
+                                        <h2>Sửa văn bản</h2>
+                                        <i class="fa fa-close" id="close-icon-editVBKHOA"></i>
+                                    </div>
+                                    <div class="modal-content-addVB">
+                                        <div class="admin-add-form">
+                                            <form action="<?=$base_url?>khoa/update_vb_khoa" method="post" enctype="multipart/form-data">
+                                                <input type="hidden" name="idvb" id='idvb'>
+                                                <input type="text" name="tieude" id="tieude" placeholder="Nhập tiêu đề" class="box">
+                                                <textarea name="noidung" id="noidung" cols="20" rows="5" placeholder="Nhập nội dung" class="box"></textarea>
+
+                                                <select id="tenloaivb" name="idloaivb" class="box">
+                                                    <option value="">--Chọn loại văn bản--</option>
+                                                    <?php
+                                                        foreach ($dsLoaiVanBan as $lvb) {
+                                                                
+                                                                echo '<option value="'.$lvb['id'].'">'.$lvb['loaivanban'].'</option>';
+                                                        }
+                                                    ?>
+                                                </select>
+
+                                                <select id="tenkhoa" name="idkhoa" class="box">
+                                                    <option value="">--Chọn Khoa--</option>
+                                                    <?php
+                                                        foreach ($dskhoa as $khoa) {
+                                                                
+                                                                echo '<option value="'.$khoa['id'].'">'.$khoa['tenkhoa'].'</option>';
+                                                        }
+                                                    ?>
+                                                </select>
+                                                <label for="date" class="lb">Chọn ngày đăng :</label>
+                                                <input type="date" id="ngaydang" name="ngaydang" placeholder="Chọn ngày đăng" value="" min="2018-01-01" max="2024-12-31" class="box"/>
+                                                <p>file hiện tại: </p>
+                                                <label for="file" id="file" class="lb"></label>
+                                                <input type="file" name="file"  class="box">
+
+                                                <div class="modal-footer-addVB">
+                                                    <button type="submit" name="confirm_modal_editVB_khoa" class="btn-confirm-addVB" id="confirm_modal_editVBKHOA">Xác nhận</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        <!--Modal EDIT end-->
                             
                                 
                     </div>
@@ -86,6 +143,7 @@
                     <table>
                         <thead>
                             <tr>
+                                <th style="display: none;"></th>
                                 <th>Số thứ tự</th>
                                 <th>Tên văn bản</th>
                                 <th>Thể loại</th>
@@ -99,6 +157,9 @@
                         <tbody>
                         <?php $i=1;  foreach($ds_vb_khoa as $vb): ?> 
                             <tr>
+                                <td class="idvb_khoa" style="display: none;">
+                                    <?php echo $vb['idvb']?>
+                                </td>
                                 <td><?=$i?></td>
                                 <td>
                                     <a href="<?=$base_url?>vanban/content/<?=$vb['idvb']?>"><?=$vb['tieude']?></a>
@@ -110,7 +171,9 @@
                                     <a href="<?=$base_url?>/khoa/download/<?=$vb['file']?>"><?=$vb['file']?></a>
                                 </td>
                                 <td>
-                                    <button type="button" id="open_modal"><a href=""></a><i class="fa-solid fa-pen-to-square"></i></button>
+                                    <button type="button" class="open_modal_editVBKHOA" data-idvb="<?=$vb['idvb']?>">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
                                     <button onclick="deleteDocument(<?=$vb['idvb']?>)"><i class="fa-solid fa-trash"></i></button>
                                 </td>
                             </tr>
@@ -136,6 +199,7 @@
     </div> 
 </div>
 
+
 <script>
     function deleteDocument(id){
         var kq = confirm("Bạn có muốn xoá văn bản này không");
@@ -143,4 +207,40 @@
             window.location = '<?=$base_url?>khoa/delete_document/'+id;
         }
     }
+</script>
+
+<script src="<?=$base_url?>template/Script/script-modal_add.js"></script>
+<script src="<?=$base_url?>template/Script/script-modal_edit.js"></script>
+
+<script>
+    $(document).ready(function() { 
+        $('.open_modal_editVBKHOA').on('click', function(e) {
+            e.preventDefault();
+            var idvb = $(this).closest('tr').find('.idvb_khoa').text();  
+            console.log(idvb);
+
+            $.ajax({
+                method: "POST",
+                url: "<?=$base_url?>khoa/edit_vb_khoa",
+                data: {
+                    'click_edit_btn': true,
+                    'idvb':idvb,
+                },
+                success: function(response) { 
+                    // console.log(response);
+                    $.each(response, function(Key, Value) { 
+                        // console.log(Value['tieude']);
+                        $('#idvb').val(Value['idvb']);
+                        $('#tieude').val(Value['tieude']);
+                        $('#noidung').val(Value['noidung']);
+                        $('#tenloaivb').val(Value['loaivanban']);
+                        $('#tenkhoa').val(Value['idkhoa']);
+                        $('#ngaydang').val(Value['ngaydang']);
+                        $('#file').text(Value['file']);
+                    });
+
+                }
+            });
+        });
+    });        
 </script>

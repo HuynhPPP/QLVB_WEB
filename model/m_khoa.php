@@ -26,8 +26,16 @@
                  VALUES(?,?,?,?,?,?)",$tieude, $noidung, $loaivb, $khoa, $ngayky, $file);
     }
 
-    function editKhoa($tenkhoa, $Idkhoa) {
-        pdo_execute("UPDATE khoa SET tenkhoa=? WHERE id=?",  $tenkhoa, $Idkhoa);
+    function edit_vbkhoa($tieude, $noidung, $loaivb, $khoa, $ngayky, $file, $id) {
+        if($file != "") {
+            pdo_execute("UPDATE vanban SET tieude=?, noidung=?, loaivanban=?, idkhoa=?, ngaydang=?, file=? WHERE idvb=?",  $tieude, $noidung, $loaivb, $khoa, $ngayky, $file, $id);    
+        }else{
+            pdo_execute("UPDATE vanban SET tieude=?, noidung=?, loaivanban=?, idkhoa=?, ngaydang=?  WHERE idvb=?",  $tieude, $noidung, $loaivb, $khoa, $ngayky, $id);    
+        }           
+    }
+
+    function edit_Khoa($id_khoa, $text, $column_name) {
+        pdo_execute("UPDATE khoa SET $column_name='$text' WHERE id ='$id_khoa'");
     }
 
     function deleteKhoa($Id) {
@@ -51,7 +59,7 @@
     }
 
     function getAll_VB_khoa() {
-        return pdo_query("SELECT * FROM vanban, loaivanban, khoa WHERE vanban.loaivanban = loaivanban.id AND vanban.idkhoa = khoa.id");
+        return pdo_query("SELECT * FROM vanban, loaivanban, khoa WHERE vanban.loaivanban = loaivanban.id AND vanban.idkhoa = khoa.id ORDER BY idvb ");
     }
 
     function get_VB_khoa($id,$page=1) {
@@ -87,6 +95,12 @@
             $sql.=" vanban.idkhoa=".$id;
         }
         $sql.=" ORDER BY ngaydang DESC LIMIT 0,5";
+        return pdo_query($sql); 
+        
+    }
+
+    function list_document_khoa_newest() {
+        $sql = "SELECT * FROM vanban ORDER BY ngaydang DESC LIMIT 0,6"; 
         return pdo_query($sql); 
         
     }

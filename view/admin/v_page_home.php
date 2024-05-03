@@ -1,10 +1,8 @@
 <head>
     <link rel="stylesheet" href="<?=$base_url?>template/css/admin/admin-style-trangchu.css">
     <link rel="stylesheet" href="<?=$base_url?>template/css/admin/admin-table_trangchu.css">
-    <link rel="stylesheet" href="<?=$base_url?>template/css/admin/modal-add-khoa.css">
-    <link rel="stylesheet" href="<?=$base_url?>template/css/admin/modal-edit-khoa.css">
+    <link rel="stylesheet" href="<?=$base_url?>template/css/admin/modal-add-khoa.css">   
     <link rel="stylesheet" href="<?=$base_url?>template/css/admin/modal-add-loaiVB.css">
-    <link rel="stylesheet" href="<?=$base_url?>template/css/admin/modal-edit-LoaiVB.css">
     <link rel="stylesheet" href="<?=$base_url?>template/css/admin/form-style.css">
 </head>
 
@@ -96,11 +94,11 @@
                                     </div>
                                     <div class="modal-content-addKhoa">
                                         <div class="admin-add-form">
-                                            <form action="<?=$base_url?>page/add_khoa" method="post">
-                                                <input type="text" name="tenkhoa" id="" placeholder="Nhập khoa mới" class="box">  
+                                            <form  method="post" id="form_add_Khoa">
+                                                <input type="text" name="tenkhoa" id="ten_Khoa" placeholder="Nhập khoa mới" class="box">  
                                               
                                                 <div class="modal-footer-addKhoa">
-                                                    <button type="submit" name="confirm_addKhoa" class="btn-confirm-addKhoa" id="confirm_modal_addKhoa">Xác nhận</button>
+                                                    <button type="submit" name="confirm_addKhoa" class="btn-confirm-addKhoa" id="btn_add_Khoa">Xác nhận</button>
                                                 </div>                                                                                                                                                                                         
                                             </form>
                                         </div>
@@ -110,8 +108,8 @@
                             </div>
                             <!--Modal end-->    
 
-                            <!--Modal edit start-->
-                                <div class="modal-container-editKhoa" id="modal-container-editKhoa">
+                            <!-- Modal edit start-->
+                                <!-- <div class="modal-container-editKhoa" id="modal-container-editKhoa">
                                     <div class="modal-editKhoa">
                                         <div class="modal-header-editKhoa">
                                             <h2>Đổi tên khoa</h2>
@@ -128,8 +126,8 @@
                                             <button type="submit" class="btn-confirm-editKhoa" id="confirm_modal_editKhoa">Xác nhận</button>
                                         </div>
                                     </div>
-                                  </div>
-                              <!--Modal edit end--> 
+                                  </div> -->
+                              <!--Modal edit end  -->
                 </div>
                 <div class="tb-sec-khoa">
                     <table>
@@ -144,9 +142,11 @@
                         <?php $i=1;  foreach($dskhoa as $khoa): ?> 
                             <tr>
                                 <td><?=$i?></td>
-                                <td><?=$khoa['tenkhoa']?></td>
+                                <td class="tenKhoa" data-id2="<?php echo $khoa['id']; ?>" contenteditable>
+                                    <?=$khoa['tenkhoa']?>
+                                </td>
                                 <td>
-                                    <button type="button" id="open_modal_editKhoa"><i class="fa-solid fa-pen-to-square"></i></button>
+                                    <!-- <button type="button" id="open_modal_editKhoa"><i class="fa-solid fa-pen-to-square"></i></button> -->
                                      
                                     <button onclick="deleteKhoa(<?=$khoa['id']?>)"><i class="fa-solid fa-trash"></i></button>
                                 </td>
@@ -200,10 +200,10 @@
                             <!--Modal end-->        
 
                             <!--Modal edit start-->
-                            <div class="modal-container-editLoaiVB" id="modal-container-editLoaiVB">
+                            <!-- <div class="modal-container-editLoaiVB" id="modal-container-editLoaiVB">
                                 <div class="modal-editLoaiVB">
                                     <div class="modal-header-editLoaiVB">
-                                        <h2>Đổi loại văn bản</h2>
+                                        <h2>Sửa loại văn bản</h2>
                                         <i class="fa fa-close" id="close-icon-editLoaiVB"></i>
                                     </div>
                                     <div class="modal-content-editLoaiVB">
@@ -217,11 +217,11 @@
                                         <button type="submit" class="btn-confirm-editLoaiVB" id="confirm_modal_editLoaiVB">Xác nhận</button>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                               <!--Modal edit end--> 
                 </div>
 
-                <div class="table-section-loaivb" id="form_data_loaiVB">
+                <div class="table-section-loaivb">
                     <table>
                         <thead>
                             <tr>
@@ -234,9 +234,11 @@
                         <?php  $i=1;  foreach($dsLoaiVanBan as $lvb): ?> 
                             <tr>
                                 <td><?=$i?></td>
-                                <td><?=$lvb['loaivanban']?></td>
+                                <td class="tenloaiVB" data-id1="<?php echo $lvb['id']; ?>" contenteditable>
+                                    <?=$lvb['loaivanban']?>
+                                </td>
                                 <td>
-                                    <button type="button" id="open_modal_editLoaiVB"><a href=""></a><i class="fa-solid fa-pen-to-square"></i></button>
+                                    <!-- <button class="open_modal_editLoaiVB" data-id="<?$lvb['id']?>"><i class="fa-solid fa-pen-to-square"></i></button> -->
                                     <button onclick="deleteTypeDocument(<?=$lvb['id']?>)"><i class="fa-solid fa-trash"></i></button>
                                 </td>
                             </tr>
@@ -250,11 +252,10 @@
     </div>
 </div>
 
+<script src="<?=$base_url?>template/Script/script-modal-Khoa.js"></script>
+<script src="<?=$base_url?>template/Script/script-modal-LoaiVB.js"></script>
 
-<script src="<?=$base_url?>template/Script/script-modal-addKhoa.js"></script>
-<script src="<?=$base_url?>template/Script/script-modal-editKhoa.js"></script>
-<script src="<?=$base_url?>template/Script/script-modal-addLoaiVB.js"></script>
-<script src="<?=$base_url?>template/Script/script-modal-editLoaiVB.js"></script>
+
 <script>
     function deleteKhoa(id){
         var kq = confirm("Bạn có muốn xoá khoa này không");
@@ -273,6 +274,35 @@
     }
 </script>
 
+<!-- ADD KHOA -->
+<script type="text/javascript">
+    $(document).ready(function(){
+        
+
+        $('#btn_add_Khoa').on('click', function(){
+            var ten_Khoa = $('#ten_Khoa').val();
+
+            if(ten_Khoa == '') {
+            alert('Bạn chưa nhập tên khoa');
+
+            }else {
+                $.ajax({
+                    url: "<?=$base_url?>page/add_khoa",
+                    method: "POST",
+                    data:{ten_Khoa:ten_Khoa},
+                    success: function(data) {
+                        
+                        alert('Thêm thành công !');
+                        
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+
+<!-- ADD LOAIVB -->
 <script type="text/javascript">
     $(document).ready(function(){
         
@@ -282,12 +312,14 @@
 
             if(ten_loaiVB == '') {
             alert('Bạn chưa nhập tên loại văn bản');
+
             }else {
                 $.ajax({
                     url: "<?=$base_url?>page/add_loaiVB",
                     method: "POST",
                     data:{ten_loaiVB:ten_loaiVB},
                     success: function(data) {
+                        
                         alert('Thêm thành công !');
                         
                     }
@@ -295,8 +327,61 @@
             }
         });
     });
-   
+</script>
 
-    
+
+<!-- EDIT KHOA -->
+<script>
+    function edit_khoa(id, text, column_name) {
+        $.ajax({
+                    url: "<?=$base_url?>page/edit_khoa",
+                    method: "POST",
+                    data:{id:id, text:text, column_name:column_name},
+                    success: function(data) {
+                        
+                        alert('Chỉnh sửa thành công !');
+                        
+                    }
+                });
+    }
+    $(document).on('blur','.tenKhoa',function() {
+        var id = $(this).data('id2');
+        var text = $(this).text().trim();
+
+        edit_khoa(id, text, "tenkhoa");
+    })
 
 </script>
+
+
+<!-- EDIT LOAIVB -->
+<script>
+    function edit_loaiVB(id, text, column_name) {
+        $.ajax({
+                    url: "<?=$base_url?>page/edit_loaiVB",
+                    method: "POST",
+                    data:{id:id, text:text, column_name:column_name},
+                    success: function(data) {
+                        
+                        alert('Chỉnh sửa thành công !');
+                        
+                    }
+                });
+    }
+    $(document).on('blur','.tenloaiVB',function() {
+        var id = $(this).data('id1');
+        var text = $(this).text().trim();
+
+        edit_loaiVB(id, text, "loaivanban");
+    })
+
+</script>
+
+
+
+
+
+
+
+
+

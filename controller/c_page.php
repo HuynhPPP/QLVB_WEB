@@ -26,31 +26,26 @@
                 require_once 'model/m_document.php';
                 require_once 'model/m_user.php';
 
-                if  ( isset($_POST['confirm_addKhoa']) ) {
-                    $tenkhoa = $_POST['tenkhoa'];
-
-                    $kq_phong =  checkKhoa($tenkhoa);
-                    if ( $kq_phong ) { // Đúng, bị trùng, không thêm
-                        $_SESSION['loi']='Đã tồn tại <strong>'.$tenkhoa.'</strong>.' ;
-                    }
-                    else { // Sai, không trùng, thêm 
-                        if (empty($_POST['tenkhoa'])) {
-                            $_SESSION['loi']='Bạn chưa nhập tên khoa !';
-                        }
-                        else {
-                            addKhoa($tenkhoa);
-                            $_SESSION['thongbao'] = 'Đã thêm <strong>'.$tenkhoa.'</strong>.';
-                        }
-                    }
+                if  ( isset($_POST['ten_Khoa']) ) {
+                    $tenkhoa = $_POST['ten_Khoa'];
+                    addKhoa($tenkhoa);
                 }
-                $tong_loaivb = total_loaivanban();
-                $tong_vb_khoa = total_document();
-                $tong_vb_chung = total_document_chung();
-                $tong_user = total_user();
+                            
+                break;
+
+            case 'edit_khoa':
+                require_once 'model/m_phong.php'; 
+                require_once 'model/m_khoa.php';
+                require_once 'model/m_document.php';
+                require_once 'model/m_user.php';
+                if (isset($_POST['id'], $_POST['text'], $_POST['column_name'])) {
+                    $id_khoa = $_POST['id'];
+                    $text = $_POST['text'];
+                    $column_name = $_POST['column_name'];
+                }                       
+                    edit_Khoa($id_khoa, $text, $column_name);
+                        
                 
-                $dskhoa = getAllKhoa();
-                $dsLoaiVanBan = document_getAllLoaiVanBan();
-                $view_name = 'page_home';
                 break;
 
             case 'add_loaiVB':
@@ -65,6 +60,21 @@
                 }
                 // header('Location: '.$base_url.'page/home_admin');
                  
+                break;
+
+            case 'edit_loaiVB':
+                require_once 'model/m_phong.php'; 
+                require_once 'model/m_khoa.php';
+                require_once 'model/m_document.php';
+                require_once 'model/m_user.php';
+                if (isset($_POST['id'], $_POST['text'], $_POST['column_name'])) {
+                    $id_loaiVB = $_POST['id'];
+                    $text = $_POST['text'];
+                    $column_name = $_POST['column_name'];
+                }                       
+                    document_editLoaiVanBan($id_loaiVB, $text, $column_name);
+                      
+                
                 break;
 
             case 'delete_loaiVB':

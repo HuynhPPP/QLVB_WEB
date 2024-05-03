@@ -126,3 +126,5 @@
         }
     }
 </script>
+
+<script src="<?=$base_url?>template/Script/script-modal.js"></script>

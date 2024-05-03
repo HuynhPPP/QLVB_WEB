@@ -1,4 +1,5 @@
 <article>
+    <div class="box-content-document">
         <div class="box-center">
             <div class="card-detail">
                 <div class="detail-title">
@@ -26,42 +27,9 @@
                     </p>
                 </div>
             </div>
-            
         </div>
+    </div>
 </article>
 
 
-    <div class="container my-4">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                <?php
-                    if(is_array($vanban)) {
-                        extract($vanban);
-                    }
-                ?>
-                    <div class="card-header text-white bg-primary">
-                        <h3></h3>                     
-                    </div>                  
-                    <div class="card-body">
-                       
-                        <p class="card-text font-weight-light">
-                            <i class="fa fa-clock-o"></i> Đăng ngày <br>
-                            
-                            <?php /*
-                            if($_SESSION['user']['taikhoan']) {
-                                echo '<i class="fa fa-user pl-2"></i> Bởi '.$_SESSION['user']['taikhoan'].'';
-                            } */
-                            ?>
-                            
-                        </p>
-                        <h4>Tóm tắt nội dung văn bản</h4>
-                        <p class="card-text">
-                        
-                        </p>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-    </div>
+    

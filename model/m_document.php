@@ -26,8 +26,8 @@
         return pdo_query("SELECT * FROM loaivanban WHERE loaivanban LIKE '%$keyword%'");
     }
 
-    function document_editLoaiVanBan($tenloaivb, $Idloaivb) {
-        pdo_execute("UPDATE loaivanban SET loaivanban=? WHERE id=?",  $tenloaivb, $Idloaivb);
+    function document_editLoaiVanBan($id_loaiVB, $text, $column_name) {
+        pdo_execute("UPDATE loaivanban SET $column_name='$text' WHERE id ='$id_loaiVB'");
     }
 
     function document_deleteLoaiVanBan($Id) {

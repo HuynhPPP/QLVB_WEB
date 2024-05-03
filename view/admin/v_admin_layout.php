@@ -28,11 +28,9 @@
     <?php require_once('view/admin/navbar.php')?>
     <!--NAVBAR-->
     
-    <script src="<?=$base_url?>template/Script/script-modal.js"></script>
-    <script src="<?=$base_url?>template/Script/script-modal-addKhoa.js"></script>
-    <script src="<?=$base_url?>template/Script/script-modal-editKhoa.js"></script>
-    <script src="<?=$base_url?>template/Script/script-modal-addLoaiVB.js"></script>
-    <script src="<?=$base_url?>template/Script/script-modal-addUser.js"></script>
+   
+   
+    
     <script src="<?=$base_url?>template/Script/script-pagination.js"></script>
     
     

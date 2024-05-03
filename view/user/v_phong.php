@@ -15,7 +15,7 @@
 
             <div class="box-search">
                 <form method="post" action="<?=$base_url?>phong/search_vanban_phong/<?=$id?>">
-                    <input type="search" name="keyword_vb_phong" placeholder="Tìm kiếm..."> 
+                    <input type="search" name="keyword_vb_phong" placeholder="Nhập tên văn bản cần tìm kiếm..."> 
                     <a href="<?=$base_url?>phong/search_vanban_phong/<?=$id?>">
                         <i class="fas fa-solid fa-magnifying-glass"></i>
                     </a>

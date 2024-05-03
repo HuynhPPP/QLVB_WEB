@@ -1,3 +1,7 @@
+.box-content-document {
+    margin-top: 50px;
+}
+
 .card-detail {
     position: relative;
     display: -ms-flexbox;

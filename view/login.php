@@ -36,6 +36,11 @@
                         
                         
                     </form>
+                    <?php if (isset($_SESSION['error_login'])):?>
+                        <div class="mt-4 alert alert-danger" role="alert">
+                        <?= $_SESSION['error_login']?>
+                        </div>
+                        <?php endif; unset($_SESSION['error_login']);?>
                    <div class="signin">
                         <span><a href="#" class="fs-5">Quên mật khẩu ?</a></span>
                    </div>

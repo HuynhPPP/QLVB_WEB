@@ -14,3 +14,4 @@ open_modal_khoa.addEventListener("click", function() {
 close_icon_addKhoa.addEventListener("click", function() {
     modal_container_addKhoa.classList.remove("show");
 });
+

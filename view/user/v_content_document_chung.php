@@ -1,4 +1,5 @@
 <article>
+    <div class="box-content-document">
         <div class="box-center">
             <div class="card-detail">
                 <div class="detail-title">
@@ -26,8 +27,8 @@
                     </p>
                 </div>
             </div>
-            
         </div>
+    </div>
 </article>
 
 

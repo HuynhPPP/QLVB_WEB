@@ -96,27 +96,56 @@
                 require_once('view/admin/v_admin_layout.php');
                 break;
 
-            case 'edit':
+            case 'edit_vb_khoa':
+                require_once 'model/m_document.php';
                 require_once 'model/m_khoa.php';
-                $Idkhoa = $_GET['id'];
-                
-                if  ( isset($_POST['submit']) ) {
-                    $tenkhoa = $_POST['tenkhoa'];
+               
 
-                    $kq_khoa =  checkKhoa($tenkhoa);
-                    if ( $kq_khoa ) { // Đúng, bị trùng, không thêm
-                        $_SESSION['loi']='Đã tồn tại <strong>'.$tenkhoa.'</strong> ! Vui lòng đặt tên khác';
-                    }
-                    else { // Sai, không trùng, thêm 
-                        
-                        editKhoa($tenkhoa, $Idkhoa);
-                        $_SESSION['thongbao'] = 'Đã đổi tên khoa thành công !';
+                if ( isset($_POST['click_edit_btn'])) {
+                    $id = $_POST['idvb'];
+                    $arr_result = [];
+                    $conn = mysqli_connect('localhost', 'root', '', 'da1_qlvb');
+
+                    /* echo $id; */
+                    $fetch_query = "SELECT * FROM vanban WHERE idvb='$id'";
+                    $fetch_query_run = mysqli_query($conn, $fetch_query);
+
+                    if (mysqli_num_rows($fetch_query_run) > 0) {
+                        while ($row = mysqli_fetch_array($fetch_query_run)){
+                            array_push($arr_result, $row);
+                            header('content-type: application/json');
+                            echo json_encode($arr_result);
+                        }
                     }
                 }
-                $khoa = getByIdKhoa($Idkhoa);
-                $view_name = 'edit_khoa';
-                require_once('view/v_admin_layout.php');
                 break;
+
+            case 'update_vb_khoa':
+                require_once 'model/m_document.php';
+                require_once 'model/m_khoa.php';
+
+                if(isset($_POST['confirm_modal_editVB_khoa'])) {
+                    $id = $_POST['idvb'];
+                    $tieude = $_POST['tieude'];
+                    $noidung = $_POST['noidung'];
+                    $loaivb = $_POST['idloaivb'];
+                    $khoa = $_POST['idkhoa'];
+                    $ngayky = $_POST['ngaydang'];
+                    $file = $_FILES['file']['name'];
+
+                    if($file!=""){
+                    $target_dir = "upload/file_khoa/";
+                    $target_file = $target_dir . basename($_FILES["file"]["name"]);
+                    move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
+                    }else{
+                        $file="";
+                    }
+                    edit_vbkhoa($tieude, $noidung, $loaivb, $khoa, $ngayky, $file, $id);
+                }
+                header('Location: '.$base_url.'khoa/home_admin');    
+                require_once('view/admin/v_admin_layout.php'); 
+                break;
+
 
             case 'delete':
                 require_once 'model/m_khoa.php';               

@@ -14,7 +14,8 @@
                       header('Location: '.$base_url.'page_user/trangchu');
                   }
                   else{
-                      $_SESSION['loi'] = 'Tên đăng nhập hoặc mật khẩu không đúng !';
+                      $_SESSION['error_login'] = 'Tên đăng nhập hoặc mật khẩu không đúng !';
+                      
                   }
                   
               }                        
