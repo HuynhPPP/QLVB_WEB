@@ -46,7 +46,7 @@ thead th {
 }
 
 th:nth-child(1) {
-    width: 5%;
+    width: 0%;
 }
 
 th:nth-child(2) {
@@ -58,15 +58,28 @@ th:nth-child(3) {
 }
 
 th:nth-child(4) {
-    width: 10%;
+    width: 25%;
 }
 
 th:nth-child(5) {
-    width: 8%;
+    width: 15%;
 }
 
 th:nth-child(6) {
-    width: 8%;
+    width: 15%;
+}
+
+th:nth-child(7) {
+    width: 10%;
+}
+
+
+td:nth-child(4), td:nth-child(5) {
+    border-bottom: 1px solid #dddddd;
+    padding: 10px 20px;
+    word-break: keep-all;
+    text-align: justify;
+    font-size: 15px;
 }
 
 th,td {

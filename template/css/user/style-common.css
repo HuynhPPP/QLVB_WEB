@@ -4,7 +4,11 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 }
-
+.box-content .box-result-search{
+  height: 50px;
+  margin-top: 100px;
+  width: 50%;
+}
 .box-menu {
   height: 150px;
   background-image: url(../../img/img_new/bg4.jpg);
@@ -67,6 +71,102 @@
     font-size: 18px;
     
 }
+
+.form-search-date{
+  float: left;
+  height: auto;
+  margin-top: 5px;
+}
+
+.form-search-date .date-start {
+  margin-right: 50px;
+  width: 220px;
+  height: 20px;
+  padding: 12px;
+  border-radius: 5px;
+  border: 1.5px solid lightgrey;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  box-shadow: 0px 0px 20px -18px;
+}
+
+.date-start:hover {
+  border: 2px solid lightgrey;
+  box-shadow: 0px 0px 20px -17px;
+}
+
+.date-start:active {
+  transform: scale(0.95);
+}
+
+.date-start:focus {
+  border: 2px solid grey;
+}
+
+.form-search-date .date-end {
+  margin-right: 50px;
+  width: 220px;
+  height: 20px;
+  padding: 12px;
+  border-radius: 5px;
+  border: 1.5px solid lightgrey;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  box-shadow: 0px 0px 20px -18px;
+}
+
+.date-end:hover {
+  border: 2px solid lightgrey;
+  box-shadow: 0px 0px 20px -17px;
+}
+
+.date-end:active {
+  transform: scale(0.95);
+}
+
+.date-end:focus {
+  border: 2px solid grey;
+}
+
+.btn-filter {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #0D47A1;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 15px;
+  padding: 16px;
+  width: 120px;
+  transition: all 0.5s;
+  cursor: pointer;
+ 
+}
+
+.btn-filter span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+ }
+ 
+ .btn-filter span:after {
+  content: '»';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -15px;
+  transition: 0.5s;
+ }
+ 
+ .btn-filter:hover span {
+  padding-right: 15px;
+ }
+ 
+ .btn-filter:hover span:after {
+  opacity: 1;
+  right: 0;
+ }
 
 .error h1 {
   margin-top: 100px;

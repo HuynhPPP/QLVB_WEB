@@ -37,21 +37,59 @@
             case 'search_vanban_phong':             
                 require_once 'model/m_phong.php'; 
                 
-                if( isset($_GET['id']) && ($_GET['id'] > 0)) {
-                    $id = $_GET['id']; 
-                }  if(isset($_POST['keyword_vb_phong']) && !empty($_POST['keyword_vb_phong'])) {
-                    $keyword = $_POST['keyword_vb_phong'];  
-                } else {
-                    $keyword = '';
-                    $_SESSION['thongbao'] = 'Không tìm thấy kết quả tìm kiếm hoặc bạn chưa nhập từ khoá !';
-                }
+                if( isset($_POST["From"], $_POST["to"], $_POST['id_phong'])) 
+                {
+                    $conn = mysqli_connect('localhost', 'root', '', 'da1_qlvb');
+                    $id_phong = $_POST['id_phong'];
+                    $start_day = $_POST["From"];
+                    $end_day = $_POST["to"];
+                    // $link_content = "$base_url_2/phong/content/$idvb_chung";
 
-                $dsvb_phong = search_vanban_phong($keyword, $id);
-                $phong = getByIdPhong($id);
-                $dsvb_phong_new = get_new_VB_phong($id);
-                $view_name ="search_vanban_phong";
-                require_once('view/user/v_user_layout.php');
+                    // echo "From: " . $start_day . "<br>";
+                    // echo "To: " . $end_day . "<br>";
+                    // echo "ID Phong: " . $id_phong . "<br>";
+
+                    $result = '';
+                    $query = "SELECT * FROM vanban_chung, phong  
+                            WHERE vanban_chung.idphong = phong.id AND vanban_chung.idphong='".$id_phong."' 
+                            AND vanban_chung.ngaydang BETWEEN '".$start_day."' AND '".$end_day."'";
+                    $sql = mysqli_query($conn, $query);
+                   
+                    $result .='
+                        <div class="box-content">
+                    ';
+                    if(mysqli_num_rows($sql) > 0)
+                    {
+                        while($row = mysqli_fetch_array($sql))
+                        {
+                            $result .='
+                            <div class="document-content">
+                                    <div class="title"><a href="">'.$row['tenvanban'].'</a></div>
+                                    <div class="date-post">
+                                        <span class="block-1"><i class="fa fa-regular fa-clock"></i> Đăng ngày <span>'.$row['ngaydang'].'</span></span>
+                                        <i class="fa fa-solid fa-user-tie"></i> <span>Quản trị viên</span>
+                                    </div>
+                                    <p class="text-main-title">Nội dung chính</p>
+                                    <p class="text-main">'.$row['noidung'].'</p>
+                                    <a href=""><button class="button-6" role="button">Chi tiết</button></a>
+                            </div>
+                                ';
+                        }
+                    }
+                    else
+                    {
+                        $result .='
+                        
+                            <script> alert("Không tìm thấy kết quả trả về !"); </script>
+                        
+                        ';
+                    }
+                    $result .='</div>';
+                    echo $result;
+                }
+                
                 break;
+             
 
         // --- USER --- 
 

@@ -59,7 +59,7 @@
     }
 
     function getAll_VB_khoa() {
-        return pdo_query("SELECT * FROM vanban, loaivanban, khoa WHERE vanban.loaivanban = loaivanban.id AND vanban.idkhoa = khoa.id ORDER BY idvb ");
+        return pdo_query("SELECT * FROM vanban, loaivanban, khoa WHERE vanban.loaivanban = loaivanban.id AND vanban.idkhoa = khoa.id ORDER BY ngaydang DESC ");
     }
 
     function get_VB_khoa($id,$page=1) {

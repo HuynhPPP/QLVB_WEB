@@ -84,6 +84,9 @@
                 break;
                 
             case 'mail':
+                require_once 'model/m_user.php';
+
+                $dsTK = user_getAll();
                 // Hiển thị dữ liệu
                 $view_name = 'mail'; 
                 

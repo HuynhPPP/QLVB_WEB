@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="<?=$base_url?>template/fontawesome-free-6.5.1-web/fontawesome-free-6.5.1-web/css/all.min.css">
     <link rel="stylesheet" href="<?=$base_url?>template/css/admin/style-admin.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
 </head>
 <body>
     

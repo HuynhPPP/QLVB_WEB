@@ -71,7 +71,8 @@
             case 'add_vb_khoa':
                 require_once 'model/m_khoa.php';
                 require_once 'model/m_document.php';
-                if  ( isset($_POST['confirm_modal_addVB']) ) {
+                if (isset($_POST['confirm_modal_addVB_khoa'])) {
+                    
                     $tieude = $_POST['tieude'];
                     $noidung = $_POST['noidung'];
                     $loaivb = $_POST['idloaivb'];
@@ -85,15 +86,11 @@
                     $target_file = $target_dir . basename($_FILES["file"]["name"]);
                     move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
 
-                    $kq = check_documentKhoa($tieude);
-                    if ( $kq ) { // Đúng, bị trùng, không thêm
-                        $_SESSION['loi']='Đã tồn tại văn bản với tiêu đề <strong>'.$tieude.'</strong>' ;
-                    }
+                    
                     
                 }
-                $ds_vb_khoa = getAll_VB_khoa();
-                $view_name = 'page_admin_vbkhoa';
-                require_once('view/admin/v_admin_layout.php');
+                header('Location: '.$base_url.'khoa/home_admin');    
+                require_once('view/admin/v_admin_layout.php'); 
                 break;
 
             case 'edit_vb_khoa':

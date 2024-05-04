@@ -32,8 +32,8 @@
     // //     return $user_khoa;
     // }
 
-    function user_edit($taikhoan, $matkhau, $loaitaikhoan, $khoa, $Id) {
-        pdo_execute("UPDATE user SET taikhoan=?, matkhau=?, loaitaikhoan=?, idkhoa=? WHERE iduser=?",  $taikhoan, $matkhau, $loaitaikhoan, $khoa, $Id);
+    function user_edit($hoten, $matkhau, $mail, $loaitk, $khoa, $id) {
+        pdo_execute("UPDATE user SET taikhoan=?, matkhau=?, loaitaikhoan=?, mail=?, idkhoa=? WHERE iduser=?",  $hoten, $matkhau, $loaitk, $mail, $khoa, $id);
     }
 
 

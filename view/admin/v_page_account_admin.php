@@ -28,7 +28,7 @@
                                 + Thêm tài khoản
                             </button>
                         
-                            <!--Modal start-->
+                            <!--Modal ADD start-->
                             <div class="modal-container-addUser" id="modal-container-addUser">
                                 <div class="modal-addUser">
                                     <div class="modal-header-addUser">
@@ -37,18 +37,19 @@
                                     </div>
                                     <div class="modal-content-addUser">
                                         <div class="admin-add-form">
-                                            <form action="<?=$base_url?>taikhoan/add" method="post">
+                                            <form action="<?=$base_url?>taikhoan/add_account" method="post">
                                                 <input type="text" name="taikhoan" placeholder="Nhập tên đăng nhập" class="box">
                                                 <input type="password" name="matkhau" placeholder="Nhập mật khẩu" class="box">
                                                 <input type="email" name="mail" placeholder="Nhập email" class="box">
                                                 
                                                 <select class="box" name="loaitaikhoan">
-                                                    <option value="0" selected>Người dùng</option>
+                                                    <option selected>-- Chọn quyền --</option>
+                                                    <option value="0">Người dùng</option>
                                                     <option value="1">Quản trị viên</option>
                                                     <option value="2">Quản lý</option>
                                                 </select>
                                                 <select class="box" name="idkhoa">
-                                                <option selected>Chọn khoa</option>
+                                                <option selected>-- Chọn khoa --</option>
                                                     <?php
                                                     foreach ($dskhoa as $khoa) {
                                                             
@@ -66,12 +67,55 @@
                                     
                                 </div>
                             </div>
-                            <!--Modal end-->        
+                            <!--Modal ADD end-->   
+                            
+                            <!--Modal EDIT start-->
+                            <div class="modal-container-addUser" id="modal-container-editUser">
+                                <div class="modal-addUser">
+                                    <div class="modal-header-addUser">
+                                        <h2>Sửa tài khoản</h2>
+                                        <i class="fa fa-close" id="close-icon-editUser"></i>
+                                    </div>
+                                    <div class="modal-content-addUser">
+                                        <div class="admin-add-form">
+                                            <form action="<?=$base_url?>taikhoan/update_account" method="post">
+                                                <input type="hidden" name="iduser" id='iduser'>
+                                                <input type="text" name="taikhoan" id="name_user" placeholder="Nhập tên đăng nhập" class="box">
+                                                <input type="password" name="matkhau" id="password_user" placeholder="Nhập mật khẩu" class="box">
+                                                <input type="email" name="mail" id="mail_user" placeholder="Nhập email" class="box">
+                                                
+                                                <select class="box" name="loaitaikhoan" id="role_user">
+                                                    <option selected>-- Chọn quyền --</option>
+                                                    <option value="0">Người dùng</option>
+                                                    <option value="1">Quản trị viên</option>
+                                                    <option value="2">Quản lý</option>
+                                                </select>
+                                                <select class="box" name="idkhoa" id="khoa_user">
+                                                <option selected>-- Chọn khoa --</option>
+                                                    <?php
+                                                    foreach ($dskhoa as $khoa) {
+                                                            
+                                                            echo '<option value="'.$khoa['id'].'">'.$khoa['tenkhoa'].'</option>';
+                                                    }
+                                                    ?>
+                                                </select>
+                                                
+                                                <div class="modal-footer-addUser">
+                                                    <button type="submit" name="confirm_modal_addUser" class="btn-confirm-addUser" id="confirm_modal_editUser">Xác nhận</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <!--Modal EDIT end-->  
                 </div>
                 <div class="table-section">
                     <table>
                         <thead>
                             <tr>
+                                <th style="display: none;"></th>
                                 <th>Số thứ tự</th>
                                 <th>Họ Tên</th>
                                 <th>Email</th>
@@ -83,6 +127,9 @@
                         <tbody>
                         <?php $i=1; foreach($dsTK as $tk): ?> 
                             <tr>
+                                <td class="id_user" style="display: none;">
+                                    <?php echo $tk['iduser']?>
+                                </td>
                                 <td><?=$i?></td>
                                 <td><?=$tk['taikhoan']?></td>
                                 <td><?=$tk['mail']?></td>
@@ -106,7 +153,7 @@
                                 ?>    
                                 </td>
                                 <td>
-                                    <button type="button" id="open_modal"><a href=""></a><i class="fa-solid fa-pen-to-square"></i></button>
+                                    <button type="button" class="open_modal_editUser"><i class="fa-solid fa-pen-to-square"></i></button>
                                     <button onclick="deleteUser(<?=$tk['iduser']?>)"><i class="fa-solid fa-trash"></i></button>
                                 </td>
                             </tr>
@@ -140,4 +187,40 @@
     }
 </script>
 
+<script src="<?=$base_url?>template/Script/script-modal-eidtUser.js"></script>
 <script src="<?=$base_url?>template/Script/script-modal-addUser.js"></script>
+
+
+
+<script>
+    $(document).ready(function() { 
+        $('.open_modal_editUser').on('click', function(e) {
+            e.preventDefault();
+            var id_user = $(this).closest('tr').find('.id_user').text();  
+            console.log(id_user);
+
+            $.ajax({
+                method: "POST",
+                url: "<?=$base_url?>taikhoan/edit_user",
+                data: {
+                    'click_edituser_btn': true,
+                    'id_user':id_user,
+                },
+                success: function(response) { 
+                    // console.log(response);
+                    $.each(response, function(Key, Value) { 
+                        // console.log(Value['taikhoan']);
+                        $('#iduser').val(Value['iduser']);
+                        $('#name_user').val(Value['taikhoan']);
+                        $('#password_user').val(Value['matkhau']);
+                        $('#mail_user').val(Value['mail']);
+                        $('#role_user').val(Value['loaitaikhoan']);
+                        $('#khoa_user').val(Value['idkhoa']);
+                       
+                    });
+
+                }
+            });
+        });
+    });        
+</script>

@@ -76,6 +76,8 @@
 
     }
 
+   
+
     function get_new_VB_phong($id) {
         $sql = "SELECT * FROM vanban_chung, loaivanban, phong WHERE vanban_chung.id_loaivanban = loaivanban.id AND vanban_chung.idphong = phong.id AND";
             if($id > 0) {
@@ -131,15 +133,10 @@
         return $ketqua;
     }
 
-    function search_vanban_phong($keyword,$id) {
-        if($keyword != "" && $id > 0) {
-            $sql = "SELECT * FROM vanban_chung, phong  WHERE vanban_chung.idphong = phong.id AND";
-            $sql.=" vanban_chung.idphong='".$id."' AND vanban_chung.tenvanban LIKE '%".$keyword."%'";
-            $sql.=" ORDER BY vanban_chung.idvb_chung";
-        } if(empty($keyword) && $id > 0) {
-            $sql = "SELECT * FROM vanban_chung, phong  WHERE vanban_chung.idphong = phong.id AND";
-            $sql.=" vanban_chung.idphong='".$id."' LIMIT 0,0";
-        }
+    function search_vanban_phong($start_day, $end_day, $id_phong) {
+        $sql = "SELECT * FROM vanban_chung, phong  WHERE vanban_chung.idphong = phong.id AND";
+        $sql.=" vanban_chung.idphong='".$id_phong."' AND vanban_chung.ngaydang BETWEEN '".$start_day."' AND '".$end_day."'";
+            
         $ketqua = pdo_query($sql);
         return $ketqua;
 

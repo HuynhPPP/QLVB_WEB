@@ -6,11 +6,7 @@
     <link rel="stylesheet" href="<?=$base_url?>template/css/admin/form-style.css">
 </head>
 
-<?php
-  if(is_array( $ds_vb_khoa)){
-    extract( $ds_vb_khoa);
-  }
-?>
+
 
 
 <div class="content-2">
@@ -45,13 +41,13 @@
                                         <h2>Thêm văn bản</h2>
                                         <i class="fa fa-close" id="close-icon-addVB"></i>
                                     </div>
-                                    <div class="modal-content-addVB">
+                                    <div class="modal-content-addVB" id="insert_data_vbkhoa">
                                         <div class="admin-add-form">
                                             <form action="<?=$base_url?>khoa/add_vb_khoa" method="post" enctype="multipart/form-data">
-                                                <input type="text" name="tieude" id="" placeholder="Nhập tiêu đề" class="box">
+                                                <input type="text" name="tieude" id="tieude_vbkhoa" placeholder="Nhập tiêu đề" class="box">
                                 
-                                                <textarea name="noidung" id="" cols="20" rows="5" placeholder="Nhập nội dung" class="box"></textarea>
-                                                <select id="" name="idloaivb" class="box">
+                                                <textarea name="noidung" id="noidung_vbkhoa" cols="20" rows="5" placeholder="Nhập nội dung" class="box"></textarea>
+                                                <select id="loaivb_vbkhoa" name="idloaivb" class="box">
                                                     <option value="">--Chọn loại văn bản--</option>
                                                     <?php
                                                         foreach ($dsLoaiVanBan as $lvb) {
@@ -60,7 +56,7 @@
                                                         }
                                                     ?>
                                                 </select>
-                                                <select id="" name="idkhoa" class="box">
+                                                <select id="tenkhoa_vbkhoa" name="idkhoa" class="box">
                                                     <option value="">--Chọn Khoa--</option>
                                                     <?php
                                                         foreach ($dskhoa as $khoa) {
@@ -70,12 +66,12 @@
                                                     ?>
                                                 </select>
                                                 <label for="date" class="lb">Chọn ngày đăng :</label>
-                                                <input type="date" id="start" name="ngayky" placeholder="Chọn ngày đăng" value="" min="2018-01-01" max="2024-12-31" class="box"/>
+                                                <input type="date" id="ngaydang_vbkhoa" name="ngayky" placeholder="Chọn ngày đăng" value="" min="2018-01-01" max="2024-12-31" class="box"/>
                                                 <label for="file" class="lb">Chọn file :</label>
-                                                <input type="file" name="file" id="" class="box">
+                                                <input type="file" name="file" id="tenfile_vbkhoa" class="box">
 
                                                 <div class="modal-footer-addVB">
-                                                    <button type="submit" name="confirm_modal_addVB" class="btn-confirm-addVB" id="confirm_modal_addVB">Xác nhận</button>
+                                                    <button type="submit" name="confirm_modal_addVB_khoa" class="btn-confirm-addVB" id="confirm_modal_addVB">Xác nhận</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -211,6 +207,11 @@
 
 <script src="<?=$base_url?>template/Script/script-modal_add.js"></script>
 <script src="<?=$base_url?>template/Script/script-modal_edit.js"></script>
+
+
+
+
+
 
 <script>
     $(document).ready(function() { 

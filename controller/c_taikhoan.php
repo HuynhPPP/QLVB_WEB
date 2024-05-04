@@ -11,9 +11,10 @@
                 $dskhoa = getAllKhoa();
                 // Hiển thị dữ liệu
                 $view_name = 'page_account_admin';
+                require_once 'view/admin/v_admin_layout.php';
                 break;
 
-            case 'add':
+            case 'add_account':
                 // Lấy dữ liệu
                 require_once 'model/m_user.php';
                 require_once 'model/m_khoa.php';
@@ -36,38 +37,52 @@
                     }
                 }
                 // Hiển thị dữ liệu
-                $dsTK = user_getAll();
-                $dskhoa = getAllKhoa();
-                $view_name = 'page_account_admin';
+                header('Location: '.$base_url.'taikhoan/home_admin');    
+                require_once('view/admin/v_admin_layout.php'); 
                 break;
 
-            case 'edit':
+            case 'edit_user':
                 // Lấy dữ liệu
                 require_once 'model/m_user.php';
-                require_once'model/m_khoa.php';
-                $Id = $_GET['id'];
-                if  ( isset($_POST['submit']) ) {
-                    $taikhoan = $_POST['taikhoan'];
-                    $matkhau = $_POST['matkhau'];
-                    $loaitaikhoan = $_POST['loaitaikhoan'];
-                    $khoa = $_POST['idkhoa'];
+                require_once 'model/m_khoa.php';
 
-                    $kq = user_checkTaiKhoan($taikhoan);
+                if ( isset($_POST['click_edituser_btn'])) {
+                    $id_user = $_POST['id_user'];
+                    $arr_result = [];
+                    $conn = mysqli_connect('localhost', 'root', '', 'da1_qlvb');
 
-                    if ( $kq  ) { // Đúng, bị trùng, không sửa
-                        $_SESSION['loi']='Tài khoản <strong>'.$taikhoan.'</strong> đã tồn tại';
+                   
+                    $fetch_query = "SELECT * FROM user WHERE iduser='$id_user'";
+                    $fetch_query_run = mysqli_query($conn, $fetch_query);
+
+                    if (mysqli_num_rows($fetch_query_run) > 0) {
+                        while ($row = mysqli_fetch_array($fetch_query_run)){
+                            array_push($arr_result, $row);
+                            header('content-type: application/json');
+                            echo json_encode($arr_result);
+                        }
                     }
-                    else { // Sai, không trùng, sửa tài khoản
-                        user_edit($taikhoan, $matkhau, $loaitaikhoan, $khoa, $Id);
-                            $_SESSION['thongbao'] = 'Thông tin thay đổi đã được lưu lại';
-                    }
-
                 }
-                $dskhoa = getAllKhoa();
-                $tk = user_getById($Id);
-                // Hiển thị dữ liệu
-                $view_name = 'edit_account';
                 break;
+
+            case 'update_account':
+                require_once 'model/m_user.php';
+
+                if(isset($_POST['confirm_modal_addUser'])) {
+                    $id = $_POST['iduser'];
+                    $hoten = $_POST['taikhoan'];
+                    $matkhau = $_POST['matkhau'];
+                    $mail = $_POST['mail'];
+                    $loaitk = $_POST['loaitaikhoan'];
+                    $khoa = $_POST['idkhoa'];
+                    
+                    
+                    user_edit($hoten, $matkhau, $mail, $loaitk, $khoa, $id);
+                }
+                header('Location: '.$base_url.'taikhoan/home_admin');    
+                require_once('view/admin/v_admin_layout.php'); 
+                break;
+                
 
             case 'delete':
                 require_once 'model/m_user.php';
@@ -77,6 +92,6 @@
            
             default:
         }
-        require_once 'view/admin/v_admin_layout.php';
+        
     }
 ?>

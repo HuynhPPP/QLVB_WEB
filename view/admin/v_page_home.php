@@ -142,7 +142,7 @@
                         <?php $i=1;  foreach($dskhoa as $khoa): ?> 
                             <tr>
                                 <td><?=$i?></td>
-                                <td class="tenKhoa" data-id2="<?php echo $khoa['id']; ?>" contenteditable>
+                                <td class="tenKhoa" data-id2="<?php echo $khoa['id']; ?>" contenteditable spellcheck="false">
                                     <?=$khoa['tenkhoa']?>
                                 </td>
                                 <td>
@@ -234,7 +234,7 @@
                         <?php  $i=1;  foreach($dsLoaiVanBan as $lvb): ?> 
                             <tr>
                                 <td><?=$i?></td>
-                                <td class="tenloaiVB" data-id1="<?php echo $lvb['id']; ?>" contenteditable>
+                                <td class="tenloaiVB" data-id1="<?php echo $lvb['id']; ?>" contenteditable spellcheck="false">
                                     <?=$lvb['loaivanban']?>
                                 </td>
                                 <td>

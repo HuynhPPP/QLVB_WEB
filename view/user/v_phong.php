@@ -2,8 +2,16 @@
     if(is_array($phong)) {
         extract($phong);
     }
+
+    if(is_array($dsvb_phong)) {
+        extract($dsvb_phong);
+    }
+    
     
 ?>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"/>
+</head>
 
 <article>
     
@@ -12,7 +20,14 @@
         </div>
 
         <div class="box-center">
-
+            <div class="form-search-date">
+                <input type="hidden" data-idvbchung="<?php echo $idvb_chung ?>">
+                <input type="text" class="date-start" name="" id="start-date" placeholder="Ngày bắt đầu"/>
+                <input type="text" class="date-end" name="" id="end-date" placeholder="Ngày kết thúc"/>
+                <button class="btn-filter" name="filter" id="filter" data-idphong="<?php echo $id ?>">
+                    <span>Tìm kiếm</span>
+                </button>
+            </div>
             <div class="box-search">
                 <form method="post" action="<?=$base_url?>phong/search_vanban_phong/<?=$id?>">
                     <input type="search" name="keyword_vb_phong" placeholder="Nhập tên văn bản cần tìm kiếm..."> 
@@ -22,7 +37,12 @@
                 </form>
             </div>
 
+            
+            <div id="filter-vb" class="box-result-search">
+
+            </div>
             <div class="main">
+            
                 <?php foreach($dsvb_phong as $key => $item) {
                     extract($item);
                     $link_content = "$base_url_2/phong/content/$idvb_chung";
@@ -79,4 +99,46 @@
         </div>
         
 </article>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+
+<script>
+      $(document).ready(function() { 
+        $.datepicker.setDefaults({
+            dateFormat: 'yy-mm-dd'
+        });
+        $(function() {
+            $("#start-date").datepicker();
+            $("#end-date").datepicker();
+        });
+
+        $('#filter').click(function(){
+            var id_phong = $(this).data("idphong");
+            
+            var From = $('#start-date').val();
+            var to = $('#end-date').val();
+            if(From != '' && to != '') {
+            $.ajax({
+                url: "<?=$base_url?>/phong/search_vanban_phong",
+                method: "POST",
+                data: {From:From, to:to, id_phong:id_phong},
+                success: function(data) 
+                {
+                    // console.log(data);
+                    $('#filter-vb').html(data);
+                    
+
+                }
+            });
+        }
+        else
+        {
+            alert("Bạn chưa chọn ngày !");
+        }
+
+        });   
+});
+</script>
+
 
