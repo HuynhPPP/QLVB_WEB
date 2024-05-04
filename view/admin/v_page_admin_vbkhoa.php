@@ -4,6 +4,8 @@
     <link rel="stylesheet" href="<?=$base_url?>template/css/admin/pagination-style-admin.css">
     <link rel="stylesheet" href="<?=$base_url?>template/css/admin/modal-style.css">
     <link rel="stylesheet" href="<?=$base_url?>template/css/admin/form-style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"/>
 </head>
 
 
@@ -26,10 +28,20 @@
         <div class="main-table">
             <div class="table">
                 <div class="table_header">
-                    <div>
                         <form class="frm_search" action="" method="post">
+                            <div class="form-search-date">
+                                <input type="hidden" data-idvbchung="<?php echo $idvb_chung ?>">
+                                <input type="text" class="date-start" name="" id="start-date" placeholder="Ngày bắt đầu"/>
+                                <input type="text" class="date-end" name="" id="end-date" placeholder="Ngày kết thúc"/>
+                                <button class="btn-filter" name="filter" id="filter" data-idphong="<?php echo $id ?>">
+                                    <span><i class="fa-solid fa-sort"></i> Lọc</span>
+                                </button>
+                            </div>
+
+                            <div class="form-search-name">
                             <input  placeholder="Nhập tên văn bản" class="input_search">
                             <button class="btn_search" type="submit">Tìm kiếm</button>
+                            </div>
                             <button type="button" id="open_modal_addVB" class="add_new">
                                 + Thêm văn bản
                             </button>
@@ -130,10 +142,7 @@
                                     
                                 </div>
                             </div>
-                        <!--Modal EDIT end-->
-                            
-                                
-                    </div>
+                        <!--Modal EDIT end-->     
                 </div>
                 <div class="table-section">
                     <table>
@@ -208,6 +217,9 @@
 <script src="<?=$base_url?>template/Script/script-modal_add.js"></script>
 <script src="<?=$base_url?>template/Script/script-modal_edit.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+
 
 
 
@@ -244,4 +256,44 @@
             });
         });
     });        
+</script>
+
+
+
+<script>
+      $(document).ready(function() { 
+        $.datepicker.setDefaults({
+            dateFormat: 'yy-mm-dd'
+        });
+        $(function() {
+            $("#start-date").datepicker();
+            $("#end-date").datepicker();
+        });
+
+        $('#filter').click(function(){
+            var id_phong = $(this).data("idphong");
+            
+            var From = $('#start-date').val();
+            var to = $('#end-date').val();
+            if(From != '' && to != '') {
+            $.ajax({
+                url: "<?=$base_url?>/phong/search_vanban_phong",
+                method: "POST",
+                data: {From:From, to:to, id_phong:id_phong},
+                success: function(data) 
+                {
+                    // console.log(data);
+                    $('#filter-vb').html(data);
+                    
+
+                }
+            });
+        }
+        else
+        {
+            alert("Bạn chưa chọn ngày !");
+        }
+
+        });   
+});
 </script>

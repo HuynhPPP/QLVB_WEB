@@ -4,6 +4,10 @@
     }
 ?>
 
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"/>
+</head>
+
 <article>
     
         <div class="box-menu">
@@ -11,6 +15,14 @@
         </div>
 
         <div class="box-center">
+            <div class="form-search-date">
+                <input type="hidden" data-idvbchung="<?php echo $idvb_chung ?>">
+                <input type="text" class="date-start" name="" id="start-date" placeholder="Ngày bắt đầu"/>
+                <input type="text" class="date-end" name="" id="end-date" placeholder="Ngày kết thúc"/>
+                <button class="btn-filter" name="filter" id="filter" data-idphong="<?php echo $id ?>">
+                    <span>Tìm kiếm</span>
+                </button>
+            </div>
             <div class="box-search">
                 <form method="post" action="<?=$base_url?>khoa/search_vanban_khoa/<?=$id?>">
                     <input type="search" name="keyword_vb_khoa" placeholder="Tìm kiếm..."> 
@@ -94,4 +106,45 @@
         console.log('Đang tìm kiếm cho từ khóa:', searchTerm);
       }
     }
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+
+<script>
+      $(document).ready(function() { 
+        $.datepicker.setDefaults({
+            dateFormat: 'yy-mm-dd'
+        });
+        $(function() {
+            $("#start-date").datepicker();
+            $("#end-date").datepicker();
+        });
+
+        $('#filter').click(function(){
+            var id_phong = $(this).data("idphong");
+            
+            var From = $('#start-date').val();
+            var to = $('#end-date').val();
+            if(From != '' && to != '') {
+            $.ajax({
+                url: "<?=$base_url?>/phong/search_vanban_phong",
+                method: "POST",
+                data: {From:From, to:to, id_phong:id_phong},
+                success: function(data) 
+                {
+                    // console.log(data);
+                    $('#filter-vb').html(data);
+                    
+
+                }
+            });
+        }
+        else
+        {
+            alert("Bạn chưa chọn ngày !");
+        }
+
+        });   
+});
 </script>

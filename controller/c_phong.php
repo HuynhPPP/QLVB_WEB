@@ -99,11 +99,85 @@
 
         // --- ADMIN ---
             case 'home_admin':
-                require_once'model/m_phong.php';
+                require_once 'model/m_document.php';
+                require_once 'model/m_phong.php';
                 $dsphong = getAllPhong();
+                $dsLoaiVanBan = document_getAllLoaiVanBan();
                 $ds_vb_chung = getAll_VB_chung();
                 $view_name = 'page_admin_vbphong';
                 require_once('view/admin/v_admin_layout.php');
+                break;
+
+            case 'add_vb_phong':
+                require_once 'model/m_document.php'; 
+                require_once 'model/m_phong.php';
+                if  (isset($_POST['confirm_modal_addVB_phong'])) {
+                    $tieude = $_POST['tieude'];
+                    $noidung = $_POST['noidung'];
+                    $loaivb = $_POST['idloaivb'];
+                    $phong = $_POST['idphong'];
+                    $ngayky = $_POST['ngayky'];
+                    $file = $_FILES['file']['name'];
+                    
+                    addVanBan_chung($tieude, $noidung, $loaivb, $phong, $ngayky, $file);
+                    $_SESSION['thongbao'] = 'Đăng văn bản thành công !';
+                    $target_dir = "upload/file_phong/";
+                    $target_file = $target_dir . basename($_FILES["file"]["name"]);
+                    move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
+
+                }
+                header('Location: '.$base_url.'phong/home_admin');    
+                require_once('view/admin/v_admin_layout.php'); 
+                break;
+
+
+            case 'edit_vanban_phong':
+                require_once 'model/m_document.php';
+                require_once 'model/m_phong.php';
+            
+                if ( isset($_POST['click_edit_btn'])) {
+                    $id = $_POST['idvb'];
+                    $arr_result = [];
+                    $conn = mysqli_connect('localhost', 'root', '', 'da1_qlvb');
+
+                    /* echo $id; */
+                    $fetch_query = "SELECT * FROM vanban_chung WHERE idvb_chung='$id'";
+                    $fetch_query_run = mysqli_query($conn, $fetch_query);
+
+                    if (mysqli_num_rows($fetch_query_run) > 0) {
+                        while ($row = mysqli_fetch_array($fetch_query_run)){
+                            array_push($arr_result, $row);
+                            header('content-type: application/json');
+                            echo json_encode($arr_result);
+                        }
+                    }
+                }
+                break;
+
+            case 'update_vb_phong':
+                require_once 'model/m_document.php';
+                require_once 'model/m_phong.php';
+
+                if(isset($_POST['confirm_modal_editVB_phong'])) {
+                    $id = $_POST['idvb'];
+                    $tieude = $_POST['tieude'];
+                    $noidung = $_POST['noidung'];
+                    $loaivb = $_POST['idloaivb'];
+                    $phong = $_POST['idphong'];
+                    $ngayky = $_POST['ngaydang'];
+                    $file = $_FILES['file']['name'];
+
+                    if($file!=""){
+                    $target_dir = "upload/file_phong/";
+                    $target_file = $target_dir . basename($_FILES["file"]["name"]);
+                    move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
+                    }else{
+                        $file="";
+                    }
+                    editVanBan_chung($tieude, $noidung, $loaivb, $phong, $ngayky, $file, $id);
+                }
+                header('Location: '.$base_url.'phong/home_admin');    
+                require_once('view/admin/v_admin_layout.php'); 
                 break;
 
             case 'list':
@@ -131,104 +205,6 @@
                 $dsvanban_chung = getAllVanBan_chung();   
                 $view_name = 'content_document_chung';      
                 require_once('view/v_admin_layout.php');          
-                break;
-
-            case 'add':
-                require_once 'model/m_phong.php';
-                if  ( isset($_POST['submit']) ) {
-                    $tenphong = $_POST['tenphong'];
-
-                    $kq_phong =  checkPhong($tenphong);
-                    if ( $kq_phong ) { // Đúng, bị trùng, không thêm
-                        $_SESSION['loi']='Đã tồn tại <strong>'.$tenphong.'</strong>.' ;
-                    }
-                    else { // Sai, không trùng, thêm 
-                        
-                        addPhong($tenphong);
-                        $_SESSION['thongbao'] = 'Đã thêm <strong>'.$tenphong.'</strong>.';
-                    }
-                }
-                $view_name = 'add_phong';
-                require_once('view/v_admin_layout.php');
-                break;
-
-            case 'add_vanban_chung':
-                require_once 'model/m_document.php'; 
-                require_once 'model/m_phong.php';
-                if  ( isset($_POST['submit']) ) {
-                    $tieude = $_POST['tieude'];
-                    $noidung = $_POST['noidung'];
-                    $loaivb = $_POST['idloaivb'];
-                    $phong = $_POST['idphong'];
-                    $ngayky = $_POST['ngayky'];
-                    $file = $_FILES['file']['name'];
-                  
-                    addVanBan_chung($tieude, $noidung, $loaivb, $phong, $ngayky, $file);
-                    $_SESSION['thongbao'] = 'Đăng văn bản thành công !';
-                    $target_dir = "upload/file_phong/";
-                    $target_file = $target_dir . basename($_FILES["file"]["name"]);
-                    move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
-
-                }
-                $dsphong = getAllPhong();
-                $dsLoaiVanBan = document_getAllLoaiVanBan();    
-                $view_name = 'add_document_chung';
-                require_once('view/v_admin_layout.php');
-                break;
-
-            case 'edit':
-                require_once 'model/m_phong.php';
-                $Idphong = $_GET['id'];
-                
-                if  ( isset($_POST['submit']) ) {
-                    $tenphong = $_POST['tenphong'];
-
-                    $kq_phong =  checkPhong($tenphong);
-                    if ( $kq_phong ) { // Đúng, bị trùng, không thêm
-                        $_SESSION['loi']='Đã tồn tại <strong>'.$tenphong.'</strong> ! Vui lòng đặt tên khác';
-                    }
-                    else { // Sai, không trùng, thêm 
-                        
-                        editPhong($tenphong, $Idphong);
-                        $_SESSION['thongbao'] = 'Đã đổi tên phòng ban thành công !';
-                    }
-                }
-                $phong = getByIdPhong($Idphong);
-                $view_name = 'edit_phong';
-                require_once('view/v_admin_layout.php');
-                break;
-
-            case 'edit_vanban_chung':
-                require_once 'model/m_document.php';
-                require_once 'model/m_phong.php';
-            
-                $Idvb_chung = $_GET['id'];
-
-                if  ( isset($_POST['submit']) ) {
-                    $tieude = $_POST['tieude'];
-                    $noidung = $_POST['noidung'];
-                    $loaivb = $_POST['loaivanban'];
-                    $phong = $_POST['idphong'];
-                    $ngayky = $_POST['ngayky'];
-                    $file = $_FILES['file']['name'];
-
-                    if($file!=""){
-                    $target_dir = "upload/";
-                    $target_file = $target_dir . basename($_FILES["file"]["name"]);
-                    move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
-                    }else{
-                        $file="";
-                    }
-                    
-
-                    editVanBan_chung($tieude, $noidung, $loaivb, $phong, $ngayky, $file, $Idvb_chung);
-                    $_SESSION['thongbao'] = 'Đã sửa văn bản thành công !';
-                }
-                $dsphong = getAllPhong();
-                $dsLoaiVanBan = document_getAllLoaiVanBan();
-                $vb_chung = getByIdvb_chung($Idvb_chung);
-                $view_name = 'edit_vanban_chung';
-                require_once('view/v_admin_layout.php');
                 break;
 
             case 'delete':

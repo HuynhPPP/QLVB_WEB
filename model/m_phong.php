@@ -38,7 +38,8 @@
     }
 
     function getAll_VB_chung() {
-        return pdo_query("SELECT * FROM vanban_chung, loaivanban, phong WHERE vanban_chung.idphong = phong.id AND vanban_chung.id_loaivanban = loaivanban.id ORDER BY vanban_chung.idvb_chung");
+        return pdo_query("SELECT * FROM vanban_chung, loaivanban, phong 
+        WHERE vanban_chung.idphong = phong.id AND vanban_chung.id_loaivanban = loaivanban.id ORDER BY vanban_chung.ngaydang DESC");
     }
 
 
@@ -101,11 +102,11 @@
 
     }
 
-    function editVanBan_chung($tieude, $noidung, $loaivb, $phong, $ngayky, $file, $Idvb_chung) {
+    function editVanBan_chung($tieude, $noidung, $loaivb, $phong, $ngayky, $file, $id) {
         if($file != "") {
-            pdo_execute("UPDATE vanban_chung SET tenvanban=?, noidung=?, id_loaivanban=?, idphong=?, ngaydang=?, file=? WHERE idvb_chung=?",  $tieude, $noidung, $loaivb, $phong, $ngayky, $file, $Idvb_chung);    
+            pdo_execute("UPDATE vanban_chung SET tenvanban=?, noidung=?, id_loaivanban=?, idphong=?, ngaydang=?, file=? WHERE idvb_chung=?",  $tieude, $noidung, $loaivb, $phong, $ngayky, $file, $id);    
         }else{
-            pdo_execute("UPDATE vanban_chung SET tenvanban=?, noidung=?, id_loaivanban=?, idphong=?, ngaydang=?  WHERE idvb_chung=?",  $tieude, $noidung, $loaivb, $phong, $ngayky, $Idvb_chung);    
+            pdo_execute("UPDATE vanban_chung SET tenvanban=?, noidung=?, id_loaivanban=?, idphong=?, ngaydang=?  WHERE idvb_chung=?",  $tieude, $noidung, $loaivb, $phong, $ngayky, $id);    
         }           
     }
 
@@ -133,14 +134,7 @@
         return $ketqua;
     }
 
-    function search_vanban_phong($start_day, $end_day, $id_phong) {
-        $sql = "SELECT * FROM vanban_chung, phong  WHERE vanban_chung.idphong = phong.id AND";
-        $sql.=" vanban_chung.idphong='".$id_phong."' AND vanban_chung.ngaydang BETWEEN '".$start_day."' AND '".$end_day."'";
-            
-        $ketqua = pdo_query($sql);
-        return $ketqua;
-
-    }
+    
 
     function list_document_newest() {
         $sql = "SELECT * FROM vanban_chung ORDER BY ngaydang DESC LIMIT 0,6"; 

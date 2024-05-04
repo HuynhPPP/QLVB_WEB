@@ -10,6 +10,7 @@ document.querySelectorAll(".open_modal_editVBKHOA").forEach(function(open_modal_
         modal_container_editVBKHOA.classList.add("show");
     });
 });
+
 confirm_editVBKHOA.addEventListener("click", function() {
     modal_container_editVBKHOA.classList.remove("show");
 });

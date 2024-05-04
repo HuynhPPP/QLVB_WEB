@@ -29,41 +29,104 @@
                         <form class="frm_search" action="" method="post">
                             <input  placeholder="Nhập tên văn bản" class="input_search">
                             <button class="btn_search" type="submit">Tìm kiếm</button>
-                            <button type="button" id="open_modal_addVB" class="add_new">
+                            <button type="button" id="open_modal_addVBPhong" class="add_new">
                                 + Thêm văn bản
                             </button>
                         </form>  
                         <!--Modal start-->
-                            <div class="modal-container-addVB" id="modal-container-addVB">
+                            <div class="modal-container-addVB" id="modal-container-addVBPhong">
                                 <div class="modal-addVB">
                                     <div class="modal-header-addVB">
                                         <h2>Thêm văn bản</h2>
-                                        <i class="fa fa-close" id="close-icon-addVB"></i>
+                                        <i class="fa fa-close" id="close-icon-addVBPhong"></i>
                                     </div>
                                     <div class="modal-content-addVB">
                                         <div class="admin-add-form">
-                                            <form action="" method="post">
-                                                <input type="text" name="" id="" placeholder="Nhập tiêu đề" class="box">
-                                                <textarea name="" id="" cols="30" rows="8" placeholder="Nhập nội dung" class="box"></textarea>
-                                                <select id="" class="box">
+                                            <form action="<?=$base_url?>phong/add_vb_phong" method="post" enctype="multipart/form-data">
+                                                <input type="text" name="tieude" id="" placeholder="Nhập tiêu đề" class="box">
+                                                <textarea name="noidung" id="" cols="20" rows="5" placeholder="Nhập nội dung" class="box"></textarea>
+                                                <select name="idloaivb" id="" class="box">
                                                     <option value="">--Chọn loại văn bản--</option>
-                                                    <option value="dog">Tin tức</option>
-                                                    <option value="cat">Sự kiện</option>
+                                                    <?php
+                                                        foreach ($dsLoaiVanBan as $lvb) {
+                                                            echo '<option value="'.$lvb['id'].'">'.$lvb['loaivanban'].'</option>';
+                                                        }
+                                                    ?>
+                                                </select>
+
+                                                <select name="idphong" id="" class="box">
+                                                    <option value="">--Chọn phòng--</option>
+                                                    <?php
+                                                        foreach ($dsphong  as $phong) {
+                                                            echo '<option value="'.$phong['id'].'">'.$phong['tenphong'].'</option>';
+                                                        }
+                                                    ?>
                                                 </select>
                                                 
                                                 <label for="date" class="lb">Chọn ngày đăng :</label>
-                                                <input type="date" id="start" name="trip-start" placeholder="Chọn ngày đăng" value="" min="2018-01-01" max="2024-12-31" class="box"/>
+                                                <input type="date" id="start" name="ngayky" placeholder="Chọn ngày đăng" value="" min="2018-01-01" max="2024-12-31" class="box"/>
                                                 <label for="file" class="lb">Chọn file :</label>
-                                                <input type="file" name="" id="" class="box">
+                                                <input type="file" name="file" id="" class="box">
+
+                                                <div class="modal-footer-addVB">
+                                                    <button type="submit" name="confirm_modal_addVB_phong" class="btn-confirm-addVB" id="confirm_modal_addVBPhong">Xác nhận</button>
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
-                                    <div class="modal-footer-addVB">
-                                        <button type="submit" class="btn-confirm-addVB" id="confirm_modal_addVB">Xác nhận</button>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         <!--Modal end-->
+
+
+                        <!--Modal EDIT start-->
+                        <div class="modal-container-addVB" id="modal-container-editVBPhong">
+                                <div class="modal-addVB">
+                                    <div class="modal-header-addVB">
+                                        <h2>Sửa văn bản</h2>
+                                        <i class="fa fa-close" id="close-icon-editVBPhong"></i>
+                                    </div>
+                                    <div class="modal-content-addVB">
+                                        <div class="admin-add-form">
+                                            <form action="<?=$base_url?>phong/update_vb_phong" method="post" enctype="multipart/form-data">
+                                                <input type="hidden" name="idvb" id='idvb'>
+                                                <input type="text" name="tieude" id="tieude" placeholder="Nhập tiêu đề" class="box">
+                                                <textarea name="noidung" id="noidung" cols="20" rows="5" placeholder="Nhập nội dung" class="box"></textarea>
+                                                <select name="idloaivb" id="tenloaivb" class="box">
+                                                    <option value="">--Chọn loại văn bản--</option>
+                                                    <?php
+                                                        foreach ($dsLoaiVanBan as $lvb) {
+                                                            echo '<option value="'.$lvb['id'].'">'.$lvb['loaivanban'].'</option>';
+                                                        }
+                                                    ?>
+                                                </select>
+
+                                                <select name="idphong" id="tenphong" class="box">
+                                                    <option value="">--Chọn phòng--</option>
+                                                    <?php
+                                                        foreach ($dsphong  as $phong) {
+                                                            echo '<option value="'.$phong['id'].'">'.$phong['tenphong'].'</option>';
+                                                        }
+                                                    ?>
+                                                </select>
+                                                
+                                                <label for="date" class="lb">Chọn ngày đăng :</label>
+                                                <input type="date" id="ngaydang" name="ngaydang" placeholder="Chọn ngày đăng" value="" min="2018-01-01" max="2024-12-31" class="box"/>
+                                                <p>file hiện tại: </p>
+                                                <label for="file" id="file" class="lb"></label>
+                                                <input type="file" name="file" id="file" class="box">
+
+                                                <div class="modal-footer-addVB">
+                                                    <button type="submit" name="confirm_modal_editVB_phong" class="btn-confirm-addVB" id="confirm_modal_editVBPhong">Xác nhận</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        <!--Modal EDIT end-->
                             
                                 
                     </div>
@@ -72,6 +135,7 @@
                     <table>
                         <thead>
                             <tr>
+                                <th style="display: none;"></th>
                                 <th>Số thứ tự</th>
                                 <th>Tên văn bản</th>
                                 <th>Thể loại</th>
@@ -83,6 +147,9 @@
                         <tbody>
                         <?php $i=1;  foreach($ds_vb_chung as $vb): ?> 
                             <tr>
+                                <td class="idvb_chung" style="display: none;">
+                                    <?php echo $vb['idvb_chung']?>
+                                </td>
                                 <td><?=$i?></td>
                                 <td>
                                     <a href="<?=$base_url?>phong/content_admin/<?=$vb['idvb_chung']?>"><?=$vb['tenvanban']?></a>
@@ -93,7 +160,7 @@
                                     <a href="<?=$base_url?>/phong/download_file_phong/<?=$vb['file']?>"><?=$vb['file']?></a>
                                 </td>
                                 <td>
-                                    <button type="button" id="open_modal"><a href=""></a><i class="fa-solid fa-pen-to-square"></i></button>
+                                    <button type="button" class="open_modal_editVBPhong"><i class="fa-solid fa-pen-to-square"></i></button>
                                     <button onclick="deleteDocument(<?=$vb['idvb_chung']?>)"><i class="fa-solid fa-trash"></i></button>
                                 </td>
                             </tr>
@@ -127,4 +194,39 @@
     }
 </script>
 
-<script src="<?=$base_url?>template/Script/script-modal.js"></script>
+<script src="<?=$base_url?>template/Script/script-modal_add_vbphong.js"></script>
+<script src="<?=$base_url?>template/Script/script-modal_edit_vbphong.js"></script>
+
+
+<script>
+    $(document).ready(function() { 
+        $('.open_modal_editVBPhong').on('click', function(e) {
+            e.preventDefault();
+            var idvb = $(this).closest('tr').find('.idvb_chung').text();  
+            console.log(idvb);
+
+            $.ajax({
+                method: "POST",
+                url: "<?=$base_url?>phong/edit_vanban_phong",
+                data: {
+                    'click_edit_btn': true,
+                    'idvb':idvb,
+                },
+                success: function(response) { 
+                    // console.log(response);
+                    $.each(response, function(Key, Value) { 
+                        // console.log(Value['idvb']);
+                        $('#idvb').val(Value['idvb_chung']);
+                        $('#tieude').val(Value['tenvanban']);
+                        $('#noidung').val(Value['noidung']);
+                        $('#tenloaivb').val(Value['id_loaivanban']);
+                        $('#tenphong').val(Value['idphong']);
+                        $('#ngaydang').val(Value['ngaydang']);
+                        $('#file').text(Value['file']);
+                    });
+
+                }
+            });
+        });
+    });        
+</script>

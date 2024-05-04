@@ -21,12 +21,88 @@
     color: #000000;
 }
 
+.table_header .frm_search {
+    display: flex;
+}
+
+.frm_search .form-search-date {
+    float: left;
+    margin-right: 80px;
+}
+
+.frm_search .form-search-name {
+    margin-right: 390px;
+}
+
+.frm_search .add_new {
+    float: right;
+}
+
+.form-search-date .date-start {
+    margin-right: 30px;
+    width: 200px;
+    height: 35px;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1.5px solid lightgrey;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0px 0px 20px -18px;
+  }
+
+  .date-start:hover {
+    border: 2px solid lightgrey;
+    box-shadow: 0px 0px 20px -17px;
+  }
+  
+  .date-start:active {
+    transform: scale(0.95);
+  }
+  
+  .date-start:focus {
+    border: 2px solid grey;
+  }
+  .form-search-date .date-end {
+    margin-right: 30px;
+    width: 200px;
+    height: 35px;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1.5px solid lightgrey;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0px 0px 20px -18px;
+  }
+
+  .date-end:hover {
+    border: 2px solid lightgrey;
+    box-shadow: 0px 0px 20px -17px;
+  }
+  
+  .date-end:active {
+    transform: scale(0.95);
+  }
+  
+  .date-end:focus {
+    border: 2px solid grey;
+  }
+
+  .btn-filter {
+    background-color: #0298cf;
+    color: #FFFFFF;
+  }
+
+  .add_new {
+    background-color: #0298cf;
+    color: #FFFFFF;
+  }
+  
 .input_search {
     padding: 10px 20px;
     margin: 0 10px;
     outline: none;
-    border: 1px solid #0298cf;
-    border-radius: 6px;
+    border: 1px solid #d1cdcd;
+    border-radius: 4px;
     
 }
 
@@ -97,6 +173,42 @@ td:nth-child(1), td:nth-child(3), td:nth-child(5), td:nth-child(6), td:nth-child
     text-align: justify;
     font-size: 15px;
 }
+
+.ui-datepicker th:nth-child(1) {
+    width: 13%;
+}
+
+.ui-datepicker th:nth-child(2) {
+    width: 13%;
+}
+
+.ui-datepicker th:nth-child(3) {
+    width: 13%;
+}
+
+.ui-datepicker th:nth-child(4) {
+    width: 13%;
+}
+
+.ui-datepicker th:nth-child(5) {
+    width: 13%;
+}
+
+.ui-datepicker th:nth-child(6) {
+    width: 13%;
+}
+
+.ui-datepicker th:nth-child(7) {
+    width: 13%;
+}
+
+
+
+
+
+
+
+
 
 th {
     padding: 15px 20px;
