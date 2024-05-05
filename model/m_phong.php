@@ -110,6 +110,19 @@
         }           
     }
 
+    function search_vanban_phong($keyword,$id) { 
+        if($keyword != "" && $id > 0) {
+            $sql = "SELECT * FROM vanban_chung, phong  WHERE vanban_chung.idphong = phong.id AND";
+            $sql.=" vanban_chung.idphong='".$id."' AND vanban_chung.tenvanban LIKE '%".$keyword."%'";
+        } if(empty($keyword) && $id > 0) {
+            $sql = "SELECT * FROM vanban_chung, phong  WHERE vanban_chung.idphong = phong.id AND";
+            $sql.=" vanban_chung.idphong='".$id."' LIMIT 0,0";
+        }
+        $ketqua = pdo_query($sql);
+        return $ketqua;
+    }
+
+
     function search_document_chung($keyword='', $loaivanban=0, $phong=0, $date='') {
        
         $sql = "SELECT * FROM vanban_chung, loaivanban, phong WHERE vanban_chung.id_loaivanban = loaivanban.id AND vanban_chung.idphong = phong.id AND";

@@ -19,7 +19,7 @@
                 <input type="hidden" data-idvbchung="<?php echo $idvb_chung ?>">
                 <input type="text" class="date-start" name="" id="start-date" placeholder="Ngày bắt đầu"/>
                 <input type="text" class="date-end" name="" id="end-date" placeholder="Ngày kết thúc"/>
-                <button class="btn-filter" name="filter" id="filter" data-idphong="<?php echo $id ?>">
+                <button class="btn-filter" name="filter" id="filter_khoa_date" data-idkhoa="<?php echo $id ?>">
                     <span>Tìm kiếm</span>
                 </button>
             </div>
@@ -31,6 +31,30 @@
                     </a>
                 </form>
             </div>
+
+        <div id="filter-vb" >
+            <!-- <p class="title-result">Kết quả tìm kiếm</p>
+            <div class="box-result-search"> -->
+                <!-- <div class="box-content">
+                        <div class="document-content">
+                            <div class="title"><a href="'.$link_content.'">'.$tenvanban.'</a></div>
+
+                            <div class="date-post">
+                                <span class="block-1"><i class="fa fa-regular fa-clock"></i> Đăng ngày <span>'.$ngaydang.'</span></span>
+                                <i class="fa fa-solid fa-user-tie"></i> <span>Quản trị viên</span>
+                            </div>
+                            
+                            <p class="text-main-title">Nội dung chính</p>
+                            <p class="text-main">   
+                                '.$noidung.'
+                            </p>
+                            <a href="'.$link_content.'"><button class="button-6" role="button">Chi tiết</button></a>
+                        </div>
+                    </div> -->
+            <!-- </div> -->
+        </div>
+
+        <p class="title-result-main">Danh sách văn bản</p>
         <div class="main">
             <?php foreach($dsvb_khoa as $key => $item) {
                   extract($item);
@@ -121,16 +145,16 @@
             $("#end-date").datepicker();
         });
 
-        $('#filter').click(function(){
-            var id_phong = $(this).data("idphong");
-            
+        $('#filter_khoa_date').click(function(){
+            var idkhoa = $(this).data("idkhoa");
             var From = $('#start-date').val();
             var to = $('#end-date').val();
+            
             if(From != '' && to != '') {
             $.ajax({
-                url: "<?=$base_url?>/phong/search_vanban_phong",
+                url: "<?=$base_url?>/khoa/search_vanban_khoa_date",
                 method: "POST",
-                data: {From:From, to:to, id_phong:id_phong},
+                data: {From:From, to:to, idkhoa:idkhoa},
                 success: function(data) 
                 {
                     // console.log(data);

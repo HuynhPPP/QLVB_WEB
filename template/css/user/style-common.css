@@ -4,11 +4,33 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 }
-.box-content .box-result-search{
-  height: 50px;
-  margin-top: 100px;
-  width: 50%;
+
+#filter-vb .title-result {
+  width: 500px;
+  margin-bottom: 50px;
+  font-size: 30px;
+  font-weight: 600;
 }
+
+.box-result-search{
+ 
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+}
+
+.box-result-search h1 {
+  margin-top: 50px;
+}
+
+.title-result-main {
+  width: 500px;
+  margin-bottom: -50px;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+
 .box-menu {
   height: 150px;
   background-image: url(../../img/img_new/bg4.jpg);
@@ -76,6 +98,7 @@
   float: left;
   height: auto;
   margin-top: 5px;
+  margin-bottom: 70px;
 }
 
 .form-search-date .date-start {

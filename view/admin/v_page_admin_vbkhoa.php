@@ -8,7 +8,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"/>
 </head>
 
-
+<?php
+    if(is_array($dskhoa)) {
+        extract($dskhoa);
+    }    
+?>
 
 
 <div class="content-2">
@@ -29,11 +33,11 @@
             <div class="table">
                 <div class="table_header">
                         <form class="frm_search" action="" method="post">
+                        <input type="hidden" data-idvb="<?php echo $idvb_chung ?>">
                             <div class="form-search-date">
-                                <input type="hidden" data-idvbchung="<?php echo $idvb_chung ?>">
                                 <input type="text" class="date-start" name="" id="start-date" placeholder="Ngày bắt đầu"/>
                                 <input type="text" class="date-end" name="" id="end-date" placeholder="Ngày kết thúc"/>
-                                <button class="btn-filter" name="filter" id="filter" data-idphong="<?php echo $id ?>">
+                                <button class="btn-filter" name="filter" id="filter-vbkhoa" data-idkhoa="<?php echo $id ?>">
                                     <span><i class="fa-solid fa-sort"></i> Lọc</span>
                                 </button>
                             </div>
@@ -144,7 +148,7 @@
                             </div>
                         <!--Modal EDIT end-->     
                 </div>
-                <div class="table-section">
+                <div class="table-section" id="filter_vb">
                     <table>
                         <thead>
                             <tr>
@@ -224,7 +228,7 @@
 
 
 
-
+<!--Modal EDIT end--> 
 <script>
     $(document).ready(function() { 
         $('.open_modal_editVBKHOA').on('click', function(e) {
@@ -257,9 +261,10 @@
         });
     });        
 </script>
+<!--Modal EDIT end--> 
 
 
-
+<!--Modal FILTER DATE end-->    
 <script>
       $(document).ready(function() { 
         $.datepicker.setDefaults({
@@ -270,20 +275,19 @@
             $("#end-date").datepicker();
         });
 
-        $('#filter').click(function(){
-            var id_phong = $(this).data("idphong");
-            
+        $('#filter-vbkhoa').click(function(){
             var From = $('#start-date').val();
             var to = $('#end-date').val();
+
             if(From != '' && to != '') {
             $.ajax({
-                url: "<?=$base_url?>/phong/search_vanban_phong",
+                url: "<?=$base_url?>/khoa/admin_search_vanban_khoa",
                 method: "POST",
-                data: {From:From, to:to, id_phong:id_phong},
+                data: {From:From, to:to},
                 success: function(data) 
                 {
                     // console.log(data);
-                    $('#filter-vb').html(data);
+                    $('#filter_vb').html(data);
                     
 
                 }
@@ -297,3 +301,4 @@
         });   
 });
 </script>
+<!--Modal FILTER DATE end--> 

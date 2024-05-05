@@ -35,6 +35,66 @@
                 require_once('view/user/v_user_layout.php');
                 break;
 
+
+            case 'search_vanban_khoa_date':             
+                require_once 'model/m_khoa.php'; 
+                
+                if( isset($_POST["From"], $_POST["to"], $_POST['idkhoa'])) 
+                {
+                    $conn = mysqli_connect('localhost', 'root', '', 'da1_qlvb');
+                    $id_khoa = $_POST['idkhoa'];
+                    $start_day = $_POST["From"];
+                    $end_day = $_POST["to"];
+                    $base_url_2 = 'http://localhost/QLVB/';
+
+                    // echo "From: " . $start_day . "<br>";
+                    // echo "To: " . $end_day . "<br>";
+                    // echo "ID Phong: " . $id_phong . "<br>";
+
+                    $result = '';
+                    $query = "SELECT * FROM vanban, khoa  
+                            WHERE vanban.idkhoa = khoa.id AND vanban.idkhoa='".$id_khoa."' 
+                            AND vanban.ngaydang BETWEEN '".$start_day."' AND '".$end_day."'";
+                    $sql = mysqli_query($conn, $query);
+                    
+                    $result .='
+                        <p class="title-result">Kết quả tìm kiếm</p>
+                        <div class="box-result-search">
+                    ';
+                    if(mysqli_num_rows($sql) > 0)
+                    {
+                        while($row = mysqli_fetch_array($sql))
+                        {
+                            $result .='
+                            <div class="box-content">
+                                <div class="document-content">
+                                    <div class="title"><a href="'.$base_url_2.'khoa/content/'.$row['idvb'].'">'.$row['tieude'].'</a></div>
+                                    <div class="date-post">
+                                        <span class="block-1"><i class="fa fa-regular fa-clock"></i> Đăng ngày <span>'.$row['ngaydang'].'</span></span>
+                                        <i class="fa fa-solid fa-user-tie"></i> <span>Quản trị viên</span>
+                                    </div>
+                                    <p class="text-main-title">Nội dung chính</p>
+                                    <p class="text-main">'.$row['noidung'].'</p>
+                                    <a href="'.$base_url_2.'khoa/content/'.$row['idvb'].'"><button class="button-6" role="button">Chi tiết</button></a>
+                                </div>
+                            </div>
+                                ';
+                        }
+                    }
+                    else
+                    {
+                        $result .='
+                        
+                            <script> alert("Không tìm thấy kết quả trả về !"); </script>
+                        
+                        ';
+                    }
+                    $result .='</div>';
+                    echo $result;
+                }
+                
+                break;
+
             case 'search_vanban_khoa':             
                 require_once 'model/m_khoa.php'; 
                 if( isset($_GET['id']) && ($_GET['id'] > 0)) {
@@ -143,6 +203,85 @@
                 require_once('view/admin/v_admin_layout.php'); 
                 break;
 
+            case 'admin_search_vanban_khoa':             
+                require_once 'model/m_document.php';
+                require_once 'model/m_khoa.php'; 
+
+                if( isset($_POST["From"], $_POST["to"])) 
+                {
+                    $ds_vb_khoa = getAll_VB_khoa();
+                    $conn = mysqli_connect('localhost', 'root', '', 'da1_qlvb');
+                    $start_day = $_POST["From"];
+                    $end_day = $_POST["to"];
+                    // $link_content = "$base_url_2/phong/content/$idvb_chung";
+
+                    // echo "From: " . $start_day . "<br>";
+                    // echo "To: " . $end_day . "<br>";
+                    // echo "ID Phong: " . $id_phong . "<br>";
+
+                    $result = '';
+                    $query = "SELECT * FROM vanban WHERE ngaydang BETWEEN '".$start_day."' AND '".$end_day."'";
+                    $sql = mysqli_query($conn, $query);
+                   
+                    $result .='
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th style="display: none;"></th>
+                                    <th>Số thứ tự</th>
+                                    <th>Tên văn bản</th>
+                                    <th>Thể loại</th>
+                                    <th>Khoa</th>
+                                    <th>Ngày đăng</th>
+                                    <th>Tệp tin</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                    ';
+                    if(mysqli_num_rows($sql) > 0)
+                    {
+                        while($row = mysqli_fetch_array($sql))
+                        {
+                                                
+                            $result .='
+                                <tbody>
+                                    <tr>
+                                        <td class="idvb_khoa" style="display: none;">'.$row['idvb'].'</td>
+                                        <td>' .$row['idvb'].'</td>
+                                        <td>
+                                            <a>'.$row['tieude'].'</a>
+                                        </td>
+                                        <td>'.$row['loaivanban'].'</td>
+                                        <td>'. $row['tenkhoa'].'</td>
+                                        <td>'. $row['ngaydang'].'</td>
+                                        <td>
+                                            <a>'.$row['file'].'</a>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="open_modal_editVBKHOA" data-idvb="'.$row['idvb'].'">
+                                                <i class="fa-solid fa-pen-to-square"></i>
+                                            </button>
+                                            <button onclick="deleteDocument('.$row['idvb'].')"><i class="fa-solid fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>';
+                                
+                        }
+                    }
+                    else
+                    {
+                        $result .='
+                        
+                            <script> alert("Không tìm thấy kết quả trả về !"); </script>
+                        
+                        ';
+                    }
+                    $result .='</table>';
+                    echo $result;
+                }
+                
+                break;
+
 
             case 'delete':
                 require_once 'model/m_khoa.php';               
@@ -157,12 +296,7 @@
                 header('Location: '.$base_url.'khoa/home_admin'); 
                 break;
 
-            case 'search':             
-                require_once 'model/m_khoa.php'; 
-                $kq_khoa = search_khoa($_POST['keyword_khoa']);
-                $view_name ="search_khoa";
-                require_once('view/v_admin_layout.php');
-                break;
+            
             
             case 'detail':             
                 require_once 'model/m_document.php';

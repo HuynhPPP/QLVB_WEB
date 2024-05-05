@@ -25,11 +25,8 @@
                     </a>
                 </form>
             </div>
-            <?php if (isset($_SESSION['thongbao'])):?>
-              <div class="error">
-                <h1> <?=$_SESSION['thongbao']?></h1>  
-              </div>                         
-            <?php endif; unset($_SESSION['thongbao']);?> 
+
+            <p class="title-result-main">Kết quả tìm kiếm</p>
             <div class="main">
             <?php foreach($dsvb_khoa as $key => $item) {
                   extract($item);
@@ -55,7 +52,7 @@
 
             } ?>     
            
-            
+        </div>
             
         </div>
 
