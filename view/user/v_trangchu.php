@@ -11,6 +11,7 @@
                 <div class="menu-content">
                     <div class="menu-1"><a href="<?=$base_url?>page_user/trangchu">Văn bản chung</a></div>
                     
+                    
                     <?php if($_SESSION['user']['loaitaikhoan']==0):?>
                     <div class="menu-2"><a href="<?=$base_url?>khoa/home_user/<?=$_SESSION['user']['idkhoa']?>">Văn thuộc khoa <?=$tenkhoa?></a></div>
                     <?php endif; ?>

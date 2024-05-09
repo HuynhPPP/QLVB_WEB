@@ -22,6 +22,12 @@
                     VALUES(?,?,?,?,?)",$taikhoan, $matkhau, $mail, $loaitaikhoan, $khoa);
     }
 
+    function user_mail($email) {
+        $sql = "SELECT * FROM user WHERE mail='".$email."'";
+        $result = pdo_query_one($sql);
+        return $result;
+    }
+
     function user_getById($Id) {
         return pdo_query_one("SELECT * FROM user, khoa WHERE user.idkhoa = khoa.id AND user.iduser=?", $Id);
     }

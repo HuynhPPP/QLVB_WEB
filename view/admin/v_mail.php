@@ -15,7 +15,7 @@
             </div>
             <div class="box_select_mail">
             <label>Chọn mail:</label>
-            <select id="multipleSelect" multiple name="native-select" placeholder="Mail" data-search="true" data-silent-initial-value-set="true">
+            <select id="multipleSelect" multiple name="mail[]" placeholder="Mail" data-search="true" data-silent-initial-value-set="true">
                 <?php
                     foreach ($dsTK as $tk) {
                         echo '<option>'.$tk['mail'].'</option>';
@@ -33,8 +33,9 @@
                 <label>Nội dung :</label>
                 <textarea name="noidung" id="" cols="30" rows="10" class="input_noidung" placeholder="Nhập nội dung"></textarea>
             </div>
+            <input type="submit" name="send" value="Gửi">
         </form>
-        <input type="submit" value="Gửi">
+       
     </div> 
 </div>
 

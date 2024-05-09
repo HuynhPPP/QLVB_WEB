@@ -197,7 +197,7 @@
         $('.open_modal_editUser').on('click', function(e) {
             e.preventDefault();
             var id_user = $(this).closest('tr').find('.id_user').text();  
-            console.log(id_user);
+            // console.log(id_user);
 
             $.ajax({
                 method: "POST",
@@ -207,7 +207,7 @@
                     'id_user':id_user,
                 },
                 success: function(response) { 
-                    // console.log(response);
+                    // alert('Cập nhật thành công !');
                     $.each(response, function(Key, Value) { 
                         // console.log(Value['taikhoan']);
                         $('#iduser').val(Value['iduser']);

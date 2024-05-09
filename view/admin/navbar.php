@@ -79,7 +79,7 @@
             <div class="avatar__name hide">
             <?php if( isset($_SESSION['user']) ): ?>
                 <div class="user-name"><?=$_SESSION['user']['taikhoan']?></div>
-                <div class="email">Admin123@gmail.com</div>
+                <div class="email"><?=$_SESSION['user']['mail']?></div>
             </div>
             <div class="user-sign"><a href="<?=$base_url?>user/logout"><i class="fa-solid fa-right-from-bracket"></i></a></div>
             <?php endif;?>   

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,31 +19,24 @@
             <div class="col-md-6 right">
                 <div class="input-box"> 
                    <header class="fs-4">Hệ thống văn bản</header>
-                   <form action="" method="POST">
+                   <form action="<?=$base_url?>user/quenmatkhau" method="POST">
                         <div class="input-field">
-                                <input type="text" class="input" name="TaiKhoan" id="username" required="" autocomplete="on" autofocus>
-                                <label for="username">Tài khoản</label> 
+                                <input type="text" class="input" name="mail" id="username" autofocus>
+                                <label for="username">Nhập email của bạn</label> 
                             </div> 
-                        <div class="input-field">
-                                <input type="password" class="input" name="MatKhau" id="pass" required="">
-                                <label for="pass">Mật khẩu</label>
-                        </div> 
                         
                         <div class="input-field">
-                                <input type="submit" class="submit" value="Đăng nhập">  
+                                <input type="submit" name="submit" class="submit" value="Yêu cầu xác nhận">  
                         </div> 
-                        
-                        
                         
                     </form>
-                    <?php if (isset($_SESSION['error_login'])):?>
-                        <div class="mt-4 alert alert-danger" role="alert">
-                        <?= $_SESSION['error_login']?>
-                        </div>
-                        <?php endif; unset($_SESSION['error_login']);?>
-                   <div class="signin">
-                        <span><a href="<?=$base_url?>user/quenmatkhau" class="fs-5">Quên mật khẩu ?</a></span>
-                   </div>
+                    
+                    <?php if (isset($error['mail'])): ?>
+                    <div class="mt-4 alert alert-danger" role="alert">
+                        <?php echo $error['mail']; ?>
+                    </div>
+                    <?php unset($error['mail']); endif; ?>
+                      
                 </div>  
                 
             </div>

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,29 +21,16 @@
                    <header class="fs-4">Hệ thống văn bản</header>
                    <form action="" method="POST">
                         <div class="input-field">
-                                <input type="text" class="input" name="TaiKhoan" id="username" required="" autocomplete="on" autofocus>
-                                <label for="username">Tài khoản</label> 
+                                <input type="text" class="input" name="maxacnhan" id="username" required="" autocomplete="on" autofocus>
+                                <label for="username">Nhập mã xác nhận</label> 
                             </div> 
-                        <div class="input-field">
-                                <input type="password" class="input" name="MatKhau" id="pass" required="">
-                                <label for="pass">Mật khẩu</label>
-                        </div> 
                         
                         <div class="input-field">
-                                <input type="submit" class="submit" value="Đăng nhập">  
+                                <input type="submit" name="submit" class="submit" value="Yêu cầu xác nhận">  
                         </div> 
-                        
-                        
-                        
                     </form>
-                    <?php if (isset($_SESSION['error_login'])):?>
-                        <div class="mt-4 alert alert-danger" role="alert">
-                        <?= $_SESSION['error_login']?>
-                        </div>
-                        <?php endif; unset($_SESSION['error_login']);?>
-                   <div class="signin">
-                        <span><a href="<?=$base_url?>user/quenmatkhau" class="fs-5">Quên mật khẩu ?</a></span>
-                   </div>
+                    <div class="mt-4 alert alert-succes" role="alert"> Hãy nhập mã xác trong mail !</div>
+                  
                 </div>  
                 
             </div>

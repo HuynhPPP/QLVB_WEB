@@ -6,4 +6,5 @@
     $base_url_2 = 'http://localhost/QLVB/';
 
     session_start();
+    ob_start();
 ?>

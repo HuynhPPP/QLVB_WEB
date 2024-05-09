@@ -9,6 +9,7 @@
                 require_once 'model/m_khoa.php';
                 $dsTK = user_getAll();
                 $dskhoa = getAllKhoa();
+             
                 // Hiển thị dữ liệu
                 $view_name = 'page_account_admin';
                 require_once 'view/admin/v_admin_layout.php';
