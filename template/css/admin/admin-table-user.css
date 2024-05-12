@@ -135,4 +135,7 @@ td button:nth-child(2) {
 ::placeholder {
     color: #0298cf;
 }
-	
+
+.edit-btn {
+    color: white;
+}

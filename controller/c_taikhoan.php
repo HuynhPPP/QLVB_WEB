@@ -25,6 +25,8 @@
                     $mail = $_POST['mail'];
                     $khoa = $_POST['idkhoa'];
                     $loaitaikhoan = $_POST['loaitaikhoan'];
+
+                    $hashed_password = password_hash($matkhau, PASSWORD_DEFAULT);
                     
                     $kq = user_checkTaiKhoan($taikhoan);
                     if ( $kq ) { // Đúng, bị trùng, không thêm
@@ -32,7 +34,7 @@
                     }
                     else { // Sai, không trùng, thêm tài khoản
                         
-                        user_add($taikhoan, $matkhau, $mail, $loaitaikhoan, $khoa);
+                        user_add($taikhoan, $hashed_password, $mail, $loaitaikhoan, $khoa);
                         $_SESSION['thongbao'] = 'Đã tạo tài khoản với tên đăng nhập <strong>'.$taikhoan.'</strong>.';
                         
                     }
@@ -77,8 +79,9 @@
                     $loaitk = $_POST['loaitaikhoan'];
                     $khoa = $_POST['idkhoa'];
                     
-                    
-                    user_edit($hoten, $matkhau, $mail, $loaitk, $khoa, $id);
+                    $hashed_password = password_hash($matkhau, PASSWORD_DEFAULT);
+
+                    user_edit($hoten, $hashed_password, $mail, $loaitk, $khoa, $id);
                 }
                 header('Location: '.$base_url.'taikhoan/home_admin');    
                 require_once('view/admin/v_admin_layout.php'); 

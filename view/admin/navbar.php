@@ -53,24 +53,25 @@
         </ul>
     </div>
     <div class="sidebar-bottom">
-        <!-- <div class="sidebar-links">
+        <div class="sidebar-links">
             <ul>
             <li>
-                <a href="#help" title="Help" class="tooltip">
-                <img src="assets/help.svg" alt="Help">
-                <span class="link hide">Help</span>
-                <span class="tooltip__content">Help</span>
+            <!-- <a href="#settings" title="Settings" class="tooltip"> -->
+            <div class="user-sign">
+                <a href="<?=$base_url?>user/logout">
+                Đăng xuất <i class="fa-solid fa-right-from-bracket"></i>
                 </a>
+            </div>
             </li>
-            <li>
+            <!-- <li>
                 <a href="#settings" title="Settings" class="tooltip">
                 <img src="assets/settings.svg" alt="Settings">
                 <span class="link hide">Settings</span>
                 <span class="tooltip__content">Settings</span>
                 </a>
-            </li>
+            </li> -->
             </ul>
-        </div> -->
+        </div>
         <div class="sidebar__profile">
             <div class="avatar__wrapper">
             <img class="avatar" src="<?=$base_url?>template/img/img_new/avatar-trang-y-nghia.jpeg" alt="Profile">
@@ -80,8 +81,9 @@
             <?php if( isset($_SESSION['user']) ): ?>
                 <div class="user-name"><?=$_SESSION['user']['taikhoan']?></div>
                 <div class="email"><?=$_SESSION['user']['mail']?></div>
+                
             </div>
-            <div class="user-sign"><a href="<?=$base_url?>user/logout"><i class="fa-solid fa-right-from-bracket"></i></a></div>
+            
             <?php endif;?>   
         </div>
     </div>

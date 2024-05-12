@@ -31,7 +31,7 @@
     <div class="card-container">
         <div class="main-table">
             <div class="table">
-                <div class="table_header">
+            <div class="table_header">
                         <form action="<?=$base_url?>vanban/filter_date_vbkhoa" class="frm_search_date" method="post">
                             <div class="form-search-date">
                                 <input type="text" class="date-start" name="ngaybatdau" id="start-date" placeholder="Ngày bắt đầu"/>
@@ -48,11 +48,10 @@
                                     <input  placeholder="Nhập tên văn bản" class="input_search" name="key_word_vbkhoa">
                                     <button class="btn_search" type="submit" name="btn_search_key">Tìm kiếm</button>
                                 </div>
-                                <button type="button" id="open_modal_addVB" class="add_new">
+                                <!-- <button type="button" id="open_modal_addVB" class="add_new">
                                     + Thêm văn bản
-                                </button>
-                        </form>  
-
+                                </button> -->
+                        </form>   
                         <!--Modal ADD start-->
                             <div class="modal-container-addVB" id="modal-container-addVB">
                                 <div class="modal-addVB">
@@ -99,6 +98,7 @@
                                 </div>
                             </div>
                         <!--Modal ADD end-->
+
 
                          <!--Modal EDIT start-->
                          <div class="modal-container-addVB" id="modal-container-editVBKHOA">
@@ -151,8 +151,12 @@
                         <!--Modal EDIT end-->     
                 </div>
 
-
+                
+                <div class="text_result_title">
+                        <span>Kết quả tìm kiếm</span>
+                </div>
                 <div class="table-section">
+                    
                     <table>
                         <thead>
                             <tr>
@@ -168,7 +172,7 @@
                         </thead>
                         
                         <tbody>
-                        <?php $i=1;  foreach($ds_vb_khoa as $vb): ?> 
+                        <?php $i=1;  foreach($dsvb_khoa_result as $vb): ?> 
                             <tr>
                                 <td class="idvb_khoa" style="display: none;">
                                     <?php echo $vb['idvb']?>
@@ -214,10 +218,17 @@
 
 
 <script>
-    function deleteDocument(id){
-        var kq = confirm("Bạn có muốn xoá văn bản này không");
-        if( kq ){
-            window.location = '<?=$base_url?>khoa/delete_document/'+id;
+    function deleteDocument(id) {
+    if(confirm("Bạn có chắc chắn muốn xoá văn bản này không?")) {
+        $.ajax({
+            url: '<?=$base_url?>khoa/delete_search_vbkhoa',
+            type: 'POST',
+            data: { id: id },
+            success: function(response) {
+                    alert("Văn bản đã được xoá thành công !");
+                    location.reload();
+                }
+            });
         }
     }
 </script>
@@ -277,14 +288,6 @@
         $(function() {
             $("#start-date").datepicker();
             $("#end-date").datepicker();
-        });
-
-        $('#filter-vbkhoa').click(function(){
-            var From = $('#start-date').val();
-            var to = $('#end-date').val()
-            if(From == '' && to == '') {
-                alert("Bạn chưa chọn ngày !");
-            }
         });
 
         // $('#filter-vbkhoa').click(function(){

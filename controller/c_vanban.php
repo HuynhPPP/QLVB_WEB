@@ -88,24 +88,72 @@
                     $vanban = loadone_vanban($_GET['id']);
                   }   
                    
-                $dsVanBan = document_getAllVanBan(); 
+                $dsLoaiVanBan = document_getAllLoaiVanBan();
+                $dskhoa = getAllKhoa();
                 $view_name = 'content_document';
                 
                         
                 break;
-            
-            case 'search':
+
+            case 'filter_date_vbkhoa':
                 require_once 'model/m_khoa.php';
                 require_once 'model/m_document.php';
-                $date = $_POST['date'];
-                $keyword = $_POST['keyword_vb']; 
-                $loaivanban = $_POST['loaivanban'];
-                $khoa = $_POST['idkhoa'];
-                $timkiem = search_document($keyword,$loaivanban, $khoa, $date);
-                
+
+                if (isset($_POST['filter'])) {
+                    if(isset($_POST['ngaybatdau']) && isset($_POST['ngayketthuc'])) {
+                        $start_day = $_POST['ngaybatdau'];  
+                        $end_day = $_POST['ngayketthuc']; 
+                        $dsvb_khoa_result = admin_filter_vanban_khoa($start_day, $end_day);
+                    } else {
+                        $start_day = '';
+                        $end_day = '';
+                        echo '<script> alert("Bạn chưa chọn ngày !");</script>';
+                    }
+                }
                 $dsLoaiVanBan = document_getAllLoaiVanBan();
                 $dskhoa = getAllKhoa();
-                $view_name = 'search_document';
+                
+
+                $view_name = 'admin_search_document_vbkhoa';
+                break;
+            
+            case 'search_vbKhoa':
+                require_once 'model/m_khoa.php';
+                require_once 'model/m_document.php';
+
+                if (isset($_POST['btn_search_key'])) {
+                    if(isset($_POST['key_word_vbkhoa']) && !empty($_POST['key_word_vbkhoa'])) {
+                        $keyword = $_POST['key_word_vbkhoa'];  
+                        $dsvb_khoa_result = admin_search_vanban_khoa($keyword);
+                    } else {
+                        $keyword = '';
+                        $_SESSION['thongbao'] = 'Không tìm thấy kết quả tìm kiếm hoặc bạn chưa nhập từ khoá !';
+                    }
+                }
+                $dsLoaiVanBan = document_getAllLoaiVanBan();
+                $dskhoa = getAllKhoa();
+                
+
+                $view_name = 'admin_search_document_vbkhoa';
+                break;
+
+            case 'search_vbPhong':
+                require_once 'model/m_phong.php';
+                require_once 'model/m_document.php';
+
+                if (isset($_POST['btn_search_key'])) {
+                    if(isset($_POST['key_word_vbphong']) && !empty($_POST['key_word_vbphong'])) {
+                        $keyword = $_POST['key_word_vbphong'];  
+                        $dsvb_phong_result = admin_search_vanban_phong($keyword);
+                    } else {
+                        $keyword = '';
+                        $_SESSION['thongbao'] = 'Không tìm thấy kết quả tìm kiếm hoặc bạn chưa nhập từ khoá !';
+                    }
+                }
+                $dsphong = getAllPhong();
+                
+
+                $view_name = 'admin_search_document_vbphong';
                 break;
 
             case 'download':

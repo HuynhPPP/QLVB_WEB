@@ -203,6 +203,8 @@
                 require_once('view/admin/v_admin_layout.php'); 
                 break;
 
+           
+
             case 'admin_search_vanban_khoa':             
                 require_once 'model/m_document.php';
                 require_once 'model/m_khoa.php'; 
@@ -294,6 +296,12 @@
                 require_once 'model/m_khoa.php';              
                 documentKhoa_delete($_GET['id']);
                 header('Location: '.$base_url.'khoa/home_admin'); 
+                break;
+
+            case 'delete_search_vbkhoa':
+                require_once 'model/m_khoa.php';              
+                documentKhoa_delete($_POST['id']);
+                
                 break;
 
             

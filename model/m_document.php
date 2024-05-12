@@ -100,6 +100,8 @@
         $sql.=" ORDER BY vanban.idvb";
         $ketqua = pdo_query($sql);
         return $ketqua;
+
+    
     }
 
     

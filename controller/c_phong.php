@@ -235,11 +235,10 @@
                 require_once('view/v_admin_layout.php');                
                 break;
 
-            case 'delete_vanban_chung':
+            case 'delete_vanban_phong':
                 require_once 'model/m_phong.php';               
-                document_deleteVB_chung($_GET['id']);
-                header('Location: '.$base_url.'phong/home_admin');    
-                require_once('view/admin/v_admin_layout.php');                
+                document_deleteVB_chung($_POST['id']);
+                              
                 break;
 
             case 'search':             

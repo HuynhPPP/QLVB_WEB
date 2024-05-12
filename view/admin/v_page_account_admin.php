@@ -153,8 +153,8 @@
                                 ?>    
                                 </td>
                                 <td>
-                                    <button type="button" class="open_modal_editUser"><i class="fa-solid fa-pen-to-square"></i></button>
-                                    <button onclick="deleteUser(<?=$tk['iduser']?>)"><i class="fa-solid fa-trash"></i></button>
+                                    <button type="button" class="open_modal_editUser"><i class="edit-btn fa-solid fa-pen-to-square"></i></button>
+                                    <button onclick="deleteUser(<?=$tk['iduser']?>)"><i class="edit-btn fa-solid fa-trash"></i></button>
                                 </td>
                             </tr>
                         <?php $i++; endforeach; ?>

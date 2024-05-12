@@ -147,6 +147,17 @@
         return $ketqua;
     }
 
+    function admin_search_vanban_phong($keyword) { 
+        if(!empty($keyword)) {
+            $sql = "SELECT * FROM vanban_chung, phong, loaivanban WHERE vanban_chung.id_loaivanban = loaivanban.id AND vanban_chung.tenvanban LIKE '%".$keyword."%' AND vanban_chung.idphong = phong.id ORDER BY vanban_chung.idvb_chung";
+        } else {
+            $sql = "SELECT * FROM vanban_chung LIMIT 0,0";
+        }
+    
+        $ketqua = pdo_query($sql);
+        return $ketqua;
+    }
+
     
 
     function list_document_newest() {

@@ -19,6 +19,7 @@
             }                        
             require_once 'view/login.php';
             break;
+            
               
             case 'quenmatkhau':
             require_once 'model/m_user.php'; 

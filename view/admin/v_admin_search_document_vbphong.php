@@ -41,9 +41,9 @@
                                 <input  placeholder="Nhập tên văn bản" class="input_search" name="key_word_vbphong">
                                 <button class="btn_search" type="submit" name="btn_search_key">Tìm kiếm</button>
                             </div>
-                            <button type="button" id="open_modal_addVBPhong" class="add_new">
+                            <!-- <button type="button" id="open_modal_addVBPhong" class="add_new">
                                 + Thêm văn bản
-                            </button>
+                            </button> -->
                     </form> 
                     <!--Modal start-->
                         <div class="modal-container-addVB" id="modal-container-addVBPhong">
@@ -140,6 +140,10 @@
                     <!--Modal EDIT end-->
                 </div>
 
+                <div class="text_result_title">
+                        <span>Kết quả tìm kiếm</span>
+                </div>
+
                 <div class="table-section">
                     <table>
                         <thead>
@@ -154,7 +158,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <?php $i=1;  foreach($ds_vb_chung as $vb): ?> 
+                        <?php $i=1;  foreach($dsvb_phong_result as $vb): ?> 
                             <tr>
                                 <td class="idvb_chung" style="display: none;">
                                     <?php echo $vb['idvb_chung']?>
@@ -178,7 +182,7 @@
                     </table>
                 </div>
 
-                <div class="Pagination">
+                <!-- <div class="Pagination">
                     <button class="btn1" onclick="backBtn()"> <img src="<?=$base_url?>template/img/img_new/448-arrow.png" alt=""> Trước</button>
                     <ul class="pagination-ul">
                         <li class="link active" value="1" onclick="activeLink()">1</li>
@@ -189,7 +193,7 @@
                         <li class="link" value="6" onclick="activeLink()">6</li>
                     </ul>
                     <button class="btn2" onclick="nextBtn()">Sau <img src="<?=$base_url?>template/img/img_new/448-arrow.png" alt=""></button>
-                </div>  
+                </div>   -->
 
             </div>
         </div>     
@@ -198,10 +202,17 @@
 
 
 <script>
-    function deleteDocument(id){
-        var kq = confirm("Bạn có muốn xoá văn bản này không");
-        if( kq ){
-            window.location = '<?=$base_url?>phong/delete_vanban_chung/'+id;
+    function deleteDocument(id) {
+    if(confirm("Bạn có chắc chắn muốn xoá văn bản này không?")) {
+        $.ajax({
+            url: '<?=$base_url?>phong/delete_vanban_phong',
+            type: 'POST',
+            data: { id: id },
+            success: function(response) {
+                    alert("Văn bản đã được xoá thành công !");
+                    location.reload();
+                }
+            });
         }
     }
 </script>

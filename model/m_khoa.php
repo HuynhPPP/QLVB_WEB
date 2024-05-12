@@ -88,6 +88,32 @@
         return $ketqua;
     }
 
+    function admin_search_vanban_khoa($keyword) { 
+        if(!empty($keyword)) {
+            $sql = "SELECT * FROM vanban, khoa, loaivanban WHERE vanban.loaivanban = loaivanban.id AND vanban.tieude LIKE '%".$keyword."%' AND vanban.idkhoa = khoa.id ORDER BY vanban.idvb";
+        } else {
+            $sql = "SELECT * FROM vanban LIMIT 0,0";
+        }
+    
+        $ketqua = pdo_query($sql);
+        return $ketqua;
+    }
+
+    function admin_filter_vanban_khoa($start_day, $end_day) { 
+        if(!empty($start_day) && !empty($end_day)) {
+            $sql = "SELECT * FROM vanban, khoa, loaivanban WHERE vanban.loaivanban = loaivanban.id 
+            AND ngaydang BETWEEN '".$start_day."' AND '".$end_day."' 
+            AND vanban.idkhoa = khoa.id ORDER BY vanban.idvb";
+        } else {
+            $sql = "SELECT * FROM vanban LIMIT 0,0";
+        }
+    
+        $ketqua = pdo_query($sql);
+        return $ketqua;
+    }
+    
+    
+
 
     function get_new_VB_khoa($id) {
         $sql = "SELECT * FROM vanban, loaivanban, khoa WHERE vanban.loaivanban = loaivanban.id AND vanban.idkhoa = khoa.id AND";

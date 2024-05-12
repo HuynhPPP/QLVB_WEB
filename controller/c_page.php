@@ -82,14 +82,33 @@
                 document_deleteLoaiVanBan($_GET['id']);
                 header('Location: '.$base_url.'page/home_admin');                    
                 break;
-                
+
+            
             case 'mail':
                 require_once 'model/m_user.php';
+                require_once 'mail/send.php';
 
+                $mail = new MailSendAll();
+
+
+                if (isset($_POST['send'])) {
+                    $error = array();
+                    $emails = $_POST['mail'];
+                    if($emails == '') {
+                        $error['mail'] = '<script> alert("Không được để trống mail !"); </script>';
+                    }
+                    if(empty($error)) {
+                        $email_receive = $emails;
+                        $email_array = explode(",", $email_receive);
+                        $title = $_POST['tieude'];
+                        $content = $_POST['noidung'];
+                        $mail->sendMail_all($title, $content, $email_array);
+                         
+                        
+                    }
+                }
                 $dsTK = user_getAll();
-                // Hiển thị dữ liệu
                 $view_name = 'mail'; 
-                
                 break;
             default:
             

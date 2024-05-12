@@ -133,5 +133,11 @@ input[type=submit]:hover {
   transition: .5s;
 }
 
+.ck.ck-editor {
+  margin-top: 20px;
+  width: 50%;
+  margin-bottom: 20px;
+}
+
 
  
