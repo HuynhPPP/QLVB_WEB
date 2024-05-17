@@ -45,7 +45,7 @@
                                                 <select class="box" name="loaitaikhoan">
                                                     <option selected>-- Chọn quyền --</option>
                                                     <option value="0">Người dùng</option>
-                                                    <option value="1">Quản trị viên</option>
+                                                    <!-- <option value="1">Quản trị viên</option> -->
                                                     <option value="2">Quản lý</option>
                                                 </select>
                                                 <select class="box" name="idkhoa">
@@ -87,7 +87,7 @@
                                                 <select class="box" name="loaitaikhoan" id="role_user">
                                                     <option selected>-- Chọn quyền --</option>
                                                     <option value="0">Người dùng</option>
-                                                    <option value="1">Quản trị viên</option>
+                                                    <!-- <option value="1">Quản trị viên</option> -->
                                                     <option value="2">Quản lý</option>
                                                 </select>
                                                 <select class="box" name="idkhoa" id="khoa_user">
@@ -121,6 +121,7 @@
                                 <th>Email</th>
                                 <th>Khoa</th>
                                 <th>Vai trò</th>
+                                <th>Trạng thái</th>
                                 <th>Thao tác</th>
                             </tr>
                         </thead>
@@ -152,6 +153,23 @@
                                     }
                                 ?>    
                                 </td>
+
+                                <td>
+                                <?php
+                                    if ($tk['trangthai']==1) {
+                                        echo '<p class="text-active">
+                                        <a href="'.$base_url.'taikhoan/status/'.$tk['iduser'].'&status=0">Hoạt động</a>
+                                        </p>';
+                                    } 
+                                    else
+                                    {
+                                        echo '<p class="text-unactive">
+                                        <a href="'.$base_url.'taikhoan/status/'.$tk['iduser'].'&status=1">Dừng hoạt động</a>
+                                        </p>';
+                                    }
+                                    ?>
+                                </td>
+
                                 <td>
                                     <button type="button" class="open_modal_editUser"><i class="edit-btn fa-solid fa-pen-to-square"></i></button>
                                     <button onclick="deleteUser(<?=$tk['iduser']?>)"><i class="edit-btn fa-solid fa-trash"></i></button>
@@ -162,7 +180,7 @@
                         
                     </table>
                 </div>
-                <div class="Pagination">
+                <!-- <div class="Pagination">
                     <button class="btn1" onclick="backBtn()"> <img src="<?=$base_url?>template/img/img_new/448-arrow.png" alt=""> Trước</button>
                     <ul class="pagination-ul">
                         <li class="link active" value="1" onclick="activeLink()">1</li>
@@ -173,7 +191,7 @@
                         <li class="link" value="6" onclick="activeLink()">6</li>
                     </ul>
                     <button class="btn2" onclick="nextBtn()">Sau <img src="<?=$base_url?>template/img/img_new/448-arrow.png" alt=""></button>
-                </div>  
+                </div>   -->
             </div>     
         </div>
     </div> 

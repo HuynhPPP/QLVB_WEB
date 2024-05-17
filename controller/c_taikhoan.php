@@ -86,6 +86,14 @@
                 header('Location: '.$base_url.'taikhoan/home_admin');    
                 require_once('view/admin/v_admin_layout.php'); 
                 break;
+
+            case 'status':
+                require_once 'model/m_user.php';
+                $id = $_GET['id'];
+                $status  = $_GET['status'];
+                update_status($id, $status);
+                header('Location: '.$base_url.'taikhoan/home_admin');                    
+                break;
                 
 
             case 'delete':

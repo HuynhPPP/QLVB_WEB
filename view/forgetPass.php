@@ -19,9 +19,9 @@
             <div class="col-md-6 right">
                 <div class="input-box"> 
                    <header class="fs-4">Hệ thống văn bản</header>
-                   <form action="<?=$base_url?>user/quenmatkhau" method="POST">
+                   <form action="<?=$base_url?>user/quenmatkhau" method="POST" id="form_enterMail">
                         <div class="input-field">
-                                <input type="text" class="input" name="mail" id="username" autofocus>
+                                <input type="email" class="input" name="mail" id="username" autofocus>
                                 <label for="username">Nhập email của bạn</label> 
                             </div> 
                         
@@ -44,7 +44,8 @@
         
     </div>
 </div>
-        
+  
     <script src="https://kit.fontawesome.com/a1bc52aff1.js" crossorigin="anonymous"></script>
+   
 </body>
 </html>

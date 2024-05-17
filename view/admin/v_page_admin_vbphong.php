@@ -178,7 +178,7 @@
                     </table>
                 </div>
 
-                <div class="Pagination">
+                <!-- <div class="Pagination">
                     <button class="btn1" onclick="backBtn()"> <img src="<?=$base_url?>template/img/img_new/448-arrow.png" alt=""> Trước</button>
                     <ul class="pagination-ul">
                         <li class="link active" value="1" onclick="activeLink()">1</li>
@@ -189,7 +189,7 @@
                         <li class="link" value="6" onclick="activeLink()">6</li>
                     </ul>
                     <button class="btn2" onclick="nextBtn()">Sau <img src="<?=$base_url?>template/img/img_new/448-arrow.png" alt=""></button>
-                </div>  
+                </div>   -->
 
             </div>
         </div>     

@@ -9,9 +9,14 @@
             if( isset($_POST['TaiKhoan']) && isset($_POST['MatKhau']) ){
                 $kq = user_login($_POST['TaiKhoan'],$_POST['MatKhau']); 
                 if( $kq ){
-                    // Đúng, đăng nhập thành công
-                    $_SESSION['user'] = $kq;
-                    header('Location: '.$base_url.'page_user/trangchu');
+                    if ($kq['trangthai'] == 1) {
+                        // Đúng, đăng nhập thành công
+                        $_SESSION['user'] = $kq;
+                        header('Location: '.$base_url.'page_user/trangchu');
+                        exit();
+                    } else {
+                        $_SESSION['error_login'] = 'Tài khoản của bạn đã bị khóa!';
+                    }
                 }
                 else{
                     $_SESSION['error_login'] = 'Tên đăng nhập hoặc mật khẩu không đúng !';

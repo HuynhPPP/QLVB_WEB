@@ -284,6 +284,16 @@
                 
                 break;
 
+            case 'content_admin':
+                require_once 'model/m_khoa.php';
+                if(isset($_GET['id']) && ($_GET['id'] > 0)) {
+                    $vanban_khoa = loadone_vanban_khoa($_GET['id']);
+                    }   
+                    
+                $view_name = 'admin_content_vbkhoa';
+                require_once('view/admin/v_admin_layout.php');   
+                break;
+
 
             case 'delete':
                 require_once 'model/m_khoa.php';               

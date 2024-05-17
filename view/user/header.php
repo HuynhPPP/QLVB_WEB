@@ -12,12 +12,24 @@
                             <a href=""><span><?=$_SESSION['user']['taikhoan']?></span>
                             <i class="ml-5 fa-drop fa-solid fa-caret-down"></i></a>
                             <div class="dropdown-content">
+                            <a href="<?=$base_url?>page_user/renew_password">Đổi mật khẩu</a>
                                 <a href="<?=$base_url?>user/logout">Đăng xuất</a>
                             </div>
                         <?php endif; ?>
                         
                         <!-- Hiển thị khi có quyền là quản lý-->
-                        <?php if($_SESSION['user']['loaitaikhoan']>=1):?>   
+                        <?php if($_SESSION['user']['loaitaikhoan']==2):?>   
+                            <i class="fa-solid fa-user"></i>
+                            <a href=""><span><?=$_SESSION['user']['taikhoan']?></span>
+                            <i class="ml-5 fa-drop fa-solid fa-caret-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="<?=$base_url?>page/home_admin">Trang quản lí</a> 
+                            <a href="<?=$base_url?>page_user/renew_password">Đổi mật khẩu</a>
+                            <a href="<?=$base_url?>user/logout">Đăng xuất</a>
+                        </div>
+                        <?php endif; ?>
+
+                        <?php if($_SESSION['user']['loaitaikhoan']==1):?>   
                             <i class="fa-solid fa-user"></i>
                             <a href=""><span><?=$_SESSION['user']['taikhoan']?></span>
                             <i class="ml-5 fa-drop fa-solid fa-caret-down"></i></a>

@@ -201,21 +201,6 @@
                 require_once('view/admin/v_admin_layout.php'); 
                 break;
 
-            case 'list':
-                require_once 'model/m_document.php';
-                require_once 'model/m_phong.php';
-                $page = 1;
-                if( isset($_GET['id'])){
-                    $page = $_GET['id'];
-                }  
-                $dsvanban_chung = getAllVanBan_chung($page);  
-                $sotrang = ceil(total_document_chung()/8);  
-
-                $dsphong = getAllPhong();
-                $dsLoaiVanBan = document_getAllLoaiVanBan(); 
-                $view_name = 'list_document_phong';
-                require_once('view/v_admin_layout.php');
-                break;
 
             case 'content_admin':
                 require_once 'model/m_phong.php';
@@ -223,9 +208,9 @@
                     $vanban_chung = loadone_vanban_chung($_GET['id']);
                     }   
                 
-                $dsvanban_chung = getAllVanBan_chung();   
-                $view_name = 'content_document_chung';      
-                require_once('view/v_admin_layout.php');          
+                
+                $view_name = 'admin_content_vbphong';      
+                require_once('view/admin/v_admin_layout.php');          
                 break;
 
             case 'delete':

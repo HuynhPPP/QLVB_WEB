@@ -124,12 +124,13 @@
                 if (isset($_POST['btn_search_key'])) {
                     if(isset($_POST['key_word_vbkhoa']) && !empty($_POST['key_word_vbkhoa'])) {
                         $keyword = $_POST['key_word_vbkhoa'];  
-                        $dsvb_khoa_result = admin_search_vanban_khoa($keyword);
+                       
                     } else {
                         $keyword = '';
                         $_SESSION['thongbao'] = 'Không tìm thấy kết quả tìm kiếm hoặc bạn chưa nhập từ khoá !';
                     }
                 }
+                $dsvb_khoa_result = admin_search_vanban_khoa($keyword);
                 $dsLoaiVanBan = document_getAllLoaiVanBan();
                 $dskhoa = getAllKhoa();
                 
@@ -144,12 +145,13 @@
                 if (isset($_POST['btn_search_key'])) {
                     if(isset($_POST['key_word_vbphong']) && !empty($_POST['key_word_vbphong'])) {
                         $keyword = $_POST['key_word_vbphong'];  
-                        $dsvb_phong_result = admin_search_vanban_phong($keyword);
+                        
                     } else {
                         $keyword = '';
                         $_SESSION['thongbao'] = 'Không tìm thấy kết quả tìm kiếm hoặc bạn chưa nhập từ khoá !';
                     }
                 }
+                $dsvb_phong_result = admin_search_vanban_phong($keyword);
                 $dsphong = getAllPhong();
                 
 

@@ -175,7 +175,7 @@
                                 </td>
                                 <td><?=$i?></td>
                                 <td>
-                                    <a href="<?=$base_url?>vanban/content/<?=$vb['idvb']?>"><?=$vb['tieude']?></a>
+                                    <a href="<?=$base_url?>khoa/content_admin/<?=$vb['idvb']?>"><?=$vb['tieude']?></a>
                                 </td>
                                 <td><?=$vb['loaivanban']?></td>
                                 <td><?=$vb['tenkhoa']?></td>

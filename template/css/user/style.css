@@ -96,14 +96,13 @@ article {
 }
 
 .menu-bar {
-    
     float: right;
     width: 70%;
     padding-top: 10px;
 }
 
 .menu-content {
-   
+    
     display: flex;
 }
 

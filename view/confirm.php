@@ -20,7 +20,7 @@
                 <div class="input-box"> 
                    <header class="fs-4">Hệ thống văn bản</header>
                    <form action="" method="POST">
-                        <div class="input-field">
+                        <div class="input-field" id="">
                             <input type="text" class="input" name="maxacnhan" id="username" required="" autocomplete="on" autofocus>
                             <label for="username">Nhập mã xác nhận</label> 
                         </div> 
@@ -46,7 +46,9 @@
         
     </div>
 </div>
-        
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
     <script src="https://kit.fontawesome.com/a1bc52aff1.js" crossorigin="anonymous"></script>
+   
 </body>
 </html>

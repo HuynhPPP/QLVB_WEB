@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?=$base_url?>template/css/style_login.css">
     <link rel="stylesheet" href="<?=$base_url?>template/bootstrap-5.3.2-dist/bootstrap-5.3.2-dist/css/bootstrap.min.css">
-    <title>Trang đăng nhập</title>
+    <title>Đổi mật khẩu</title>
 </head>
 <body>
   <div class="wrapper">
@@ -20,27 +20,35 @@
             <div class="col-md-6 right">
                 <div class="input-box"> 
                    <header class="fs-4">Hệ thống văn bản</header>
-                   <form action="" method="POST" id="formLogin_validation">
+                   <form action="<?=$base_url?>page_user/renew_password" method="POST">
                         <div class="input-field">
-                                <input type="text" class="input" name="TaiKhoan" id="username" required="" autocomplete="on" autofocus >
-                                <label for="username">Tài khoản</label> 
+                                <input type="password" class="input" name="old_pass" id="username" required="" autofocus>
+                                <label for="username">Nhập mật khẩu hiện tại</label> 
                             </div> 
                         <div class="input-field">
-                                <input type="password" class="input" name="MatKhau" id="pass" required="" >
-                                <label for="pass">Mật khẩu</label>
+                                <input type="password" class="input" name="new_pass" id="pass" required="">
+                                <label for="pass">Nhập mật khẩu mới</label>
                         </div> 
                         
                         <div class="input-field">
-                                <input type="submit" class="submit" value="Đăng nhập">  
+                                <input type="submit" name="submit_change_pass" class="submit" value="Xác nhận">  
                         </div> 
                     </form>
-                    <?php if (isset($_SESSION['error_login'])):?>
+
+                    <?php if (isset($error['error_comfirm'])) : ?>
                         <div class="mt-4 alert alert-danger" role="alert">
-                        <?= $_SESSION['error_login']?>
+                            <?=$error['error_comfirm']?>
                         </div>
-                        <?php endif; unset($_SESSION['error_login']);?>
+                    <?php elseif (isset($error['success'])) : ?>
+                        <div class="mt-4 alert alert-success" role="alert"> 
+                            <?=$error['success']?>
+                        </div>
+                    <?php endif ?>
+
+
                    <div class="signin">
-                        <span><a href="<?=$base_url?>user/quenmatkhau" class="fs-5">Quên mật khẩu ?</a></span>
+                        <span><a href="<?=$base_url?>user/quenmatkhau" class="">Quên mật khẩu ?</a></span>
+                        <div class="mt-4"><a href="<?=$base_url?>page_user/trangchu" class=" backpageuser">Quay lại trang chủ</a></div>
                    </div>
                 </div>  
                 
@@ -49,10 +57,7 @@
         
     </div>
 </div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
-    <script src="<?=$base_url?>template/Script/validation_form.js"></script>
+        
     <script src="https://kit.fontawesome.com/a1bc52aff1.js" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -62,6 +62,12 @@
         return pdo_query("SELECT * FROM vanban, loaivanban, khoa WHERE vanban.loaivanban = loaivanban.id AND vanban.idkhoa = khoa.id ORDER BY ngaydang DESC ");
     }
 
+    function loadone_vanban_khoa($id) {
+        $sql = "SELECT * FROM vanban, loaivanban WHERE vanban.loaivanban = loaivanban.id AND idvb=".$id;
+        $vanban_khoa = pdo_query_one($sql);
+        return $vanban_khoa;
+    }
+
     function get_VB_khoa($id,$page=1) {
         $start = ($page - 1)*6;
         $sql = "SELECT * FROM vanban, loaivanban, khoa WHERE vanban.loaivanban = loaivanban.id AND vanban.idkhoa = khoa.id AND";

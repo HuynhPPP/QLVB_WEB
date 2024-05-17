@@ -118,17 +118,22 @@
 }
 
 input[type=submit] {
-  background-color: #04AA6D;
-  border: none;
+  background-color: #0b57d0;
+  /* border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px; */
   color: white;
+  font-weight: 600;
   padding: 16px 32px;
   text-decoration: none;
   margin: 4px 2px;
   cursor: pointer;
+  border: none;
 }
 
 input[type=submit]:hover {
-  background-color: #1b976a;
+  background-color: #164187;
   cursor: pointer;
   transition: .5s;
 }
@@ -137,6 +142,14 @@ input[type=submit]:hover {
   margin-top: 20px;
   width: 50%;
   margin-bottom: 20px;
+}
+
+.ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) {
+  height: 130px;
+}
+
+.ck-rounded-corners .ck.ck-editor__main>.ck-editor__editable, .ck.ck-editor__main>.ck-editor__editable.ck-rounded-corners {
+  height: 130px;
 }
 
 

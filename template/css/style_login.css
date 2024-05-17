@@ -118,13 +118,28 @@ img{
     font-size: smaller;
     margin-top: 30px;
 }
+
+.signin .backpageuser {
+    color: #2937fa;
+    text-decoration: none;
+    font-weight: 600;
+    transition: .5s;
+    font-size: 18px;
+}
+
 span a{
     text-decoration: none;
     font-weight: 600;
     color: #2937fa;
     transition: .5s;
+    font-size: 18px;
 }
 span a:hover{
+    text-decoration: underline;
+    color: #000;
+}
+
+.signin .backpageuser:hover {
     text-decoration: underline;
     color: #000;
 }
@@ -161,6 +176,14 @@ span a:hover{
 .previous-page a {
     color: #000;
     text-decoration: none;
+}
+
+label.error {
+    font-weight: 700;
+    
+    color: #f00;
+    font-size: 14px;
+    margin-left: 130px;
 }
 
 

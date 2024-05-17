@@ -90,7 +90,7 @@
     }
 
     function loadone_vanban_chung($id) {
-        $sql = "SELECT * FROM vanban_chung WHERE idvb_chung=".$id;
+        $sql = "SELECT * FROM vanban_chung, loaivanban WHERE vanban_chung.id_loaivanban = loaivanban.id AND idvb_chung=".$id;
         $vanban_chung = pdo_query_one($sql);
         return $vanban_chung;
     }

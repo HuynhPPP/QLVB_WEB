@@ -23,7 +23,7 @@
     }
 
     function user_checkTaiKhoan($taikhoan) {
-        return pdo_query("SELECT * FROM user WHERE taikhoan=?", $taikhoan);
+        return pdo_query_one("SELECT * FROM user WHERE taikhoan=?", $taikhoan);
     }
 
     function user_add($taikhoan, $matkhau, $mail, $loaitaikhoan, $khoa){
@@ -42,7 +42,15 @@
     function forget_password($pass, $email) {
         pdo_execute("UPDATE user SET matkhau=? WHERE mail=?", $pass, $email);
     }
+
+    function update_status($id, $status) {
+        pdo_execute("UPDATE user SET trangthai=? WHERE iduser=?", $status, $id);
+    }
     
+    function update_password($hashed_password, $taikhoan) {
+        pdo_execute("UPDATE user SET matkhau=? WHERE taikhoan=?", $hashed_password, $taikhoan);
+    }
+
     
 
     function user_getById($Id) {
