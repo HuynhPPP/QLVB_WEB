@@ -26,6 +26,10 @@
         return pdo_query_one("SELECT * FROM user WHERE taikhoan=?", $taikhoan);
     }
 
+    function user_checkmail($mail) {
+        return pdo_query_one("SELECT * FROM user WHERE mail=?", $mail);
+    }
+
     function user_add($taikhoan, $matkhau, $mail, $loaitaikhoan, $khoa){
         pdo_execute("INSERT INTO user(`taikhoan`,`matkhau`,`mail`,`loaitaikhoan`,`idkhoa`)
                     VALUES(?,?,?,?,?)",$taikhoan, $matkhau, $mail, $loaitaikhoan, $khoa);

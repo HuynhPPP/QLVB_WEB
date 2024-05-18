@@ -101,7 +101,7 @@
                     $keyword = $_POST['keyword_vb_phong'];  
                 } else {
                     $keyword = '';
-                    $_SESSION['thongbao'] = 'Không tìm thấy kết quả tìm kiếm hoặc bạn chưa nhập từ khoá !';
+                    // $_SESSION['thongbao'] = 'Không tìm thấy kết quả tìm kiếm hoặc bạn chưa nhập từ khoá !';
                 }
 
                 $dsvb_phong_result = search_vanban_phong($keyword, $id);
@@ -139,12 +139,19 @@
                     $phong = $_POST['idphong'];
                     $ngayky = $_POST['ngayky'];
                     $file = $_FILES['file']['name'];
+
+                    $kq = check_vbphong($tieude);
+                    if ( $kq ) { // Đúng, bị trùng, không thêm
+                        $_SESSION['thongbao']='Văn bản đã tồn tại !' ;
+                    }else {
+                        addVanBan_chung($tieude, $noidung, $loaivb, $phong, $ngayky, $file);
+                        $target_dir = "upload/file_phong/";
+                        $target_file = $target_dir . basename($_FILES["file"]["name"]);
+                        move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
+                        $_SESSION['success'] = 'Đăng văn bản thành công !';
+                    }
                     
-                    addVanBan_chung($tieude, $noidung, $loaivb, $phong, $ngayky, $file);
-                    $_SESSION['thongbao'] = 'Đăng văn bản thành công !';
-                    $target_dir = "upload/file_phong/";
-                    $target_file = $target_dir . basename($_FILES["file"]["name"]);
-                    move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
+                   
 
                 }
                 header('Location: '.$base_url.'phong/home_admin');    
@@ -188,14 +195,22 @@
                     $ngayky = $_POST['ngaydang'];
                     $file = $_FILES['file']['name'];
 
-                    if($file!=""){
-                    $target_dir = "upload/file_phong/";
-                    $target_file = $target_dir . basename($_FILES["file"]["name"]);
-                    move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
-                    }else{
-                        $file="";
+                    $kq = check_vbphong($tieude);
+                    if ( $kq ) { // Đúng, bị trùng, không thêm
+                        $_SESSION['thongbao']='Văn bản đã tồn tại !' ;
+                    }else {
+                        if($file!=""){
+                            $target_dir = "upload/file_phong/";
+                            $target_file = $target_dir . basename($_FILES["file"]["name"]);
+                            move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
+                            }else{
+                                $file="";
+                            }
+                            editVanBan_chung($tieude, $noidung, $loaivb, $phong, $ngayky, $file, $id);
+                            $_SESSION['success'] = 'Cập nhật văn bản thành công !';
                     }
-                    editVanBan_chung($tieude, $noidung, $loaivb, $phong, $ngayky, $file, $id);
+
+                    
                 }
                 header('Location: '.$base_url.'phong/home_admin');    
                 require_once('view/admin/v_admin_layout.php'); 

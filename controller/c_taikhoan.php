@@ -20,6 +20,7 @@
                 require_once 'model/m_user.php';
                 require_once 'model/m_khoa.php';
                 if  ( isset($_POST['confirm_modal_addUser']) ) {
+                    // $thongbao = array();
                     $taikhoan = $_POST['taikhoan'];
                     $matkhau = $_POST['matkhau'];
                     $mail = $_POST['mail'];
@@ -28,14 +29,17 @@
 
                     $hashed_password = password_hash($matkhau, PASSWORD_DEFAULT);
                     
+                    $kq2 = user_checkmail($mail);
                     $kq = user_checkTaiKhoan($taikhoan);
                     if ( $kq ) { // Đúng, bị trùng, không thêm
-                        $_SESSION['loi']='Tài khoản với tên đăng nhập <strong>'.$taikhoan.'</strong> đã tồn tại.' ;
+                        $_SESSION['thongbao']='Tài khoản với tên đăng nhập <strong>'.$taikhoan.'</strong> đã tồn tại.' ;
+                    }elseif($kq2) {
+                        $_SESSION['thongbao']='Tài khoản với mail <strong>'.$mail.'</strong> đã tồn tại.' ;
                     }
                     else { // Sai, không trùng, thêm tài khoản
                         
                         user_add($taikhoan, $hashed_password, $mail, $loaitaikhoan, $khoa);
-                        $_SESSION['thongbao'] = 'Đã tạo tài khoản với tên đăng nhập <strong>'.$taikhoan.'</strong>.';
+                        $_SESSION['success'] = 'Tạo tài khoản với tên đăng nhập <strong>'.$taikhoan.'</strong> thành công !';
                         
                     }
                 }
@@ -79,9 +83,15 @@
                     $loaitk = $_POST['loaitaikhoan'];
                     $khoa = $_POST['idkhoa'];
                     
-                    $hashed_password = password_hash($matkhau, PASSWORD_DEFAULT);
-
-                    user_edit($hoten, $hashed_password, $mail, $loaitk, $khoa, $id);
+                    $kq = user_checkTaiKhoan($hoten);
+                    if ( $kq ) { // Đúng, bị trùng, không thêm
+                        $_SESSION['thongbao']='Tài khoản với tên đăng nhập <strong>'.$hoten.'</strong> đã tồn tại.' ;
+                    }
+                    else {
+                        $hashed_password = password_hash($matkhau, PASSWORD_DEFAULT);
+                        user_edit($hoten, $hashed_password, $mail, $loaitk, $khoa, $id);
+                        $_SESSION['success'] = 'Cập nhật tài khoản thành công !';
+                    }
                 }
                 header('Location: '.$base_url.'taikhoan/home_admin');    
                 require_once('view/admin/v_admin_layout.php'); 

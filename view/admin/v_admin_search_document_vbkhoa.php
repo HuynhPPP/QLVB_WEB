@@ -53,7 +53,7 @@
                                 </button> -->
                         </form>   
                         <!--Modal ADD start-->
-                            <div class="modal-container-addVB" id="modal-container-addVB">
+                            <!-- <div class="modal-container-addVB" id="modal-container-addVB">
                                 <div class="modal-addVB">
                                     <div class="modal-header-addVB">
                                         <h2>Thêm văn bản</h2>
@@ -61,7 +61,7 @@
                                     </div>
                                     <div class="modal-content-addVB" id="insert_data_vbkhoa">
                                         <div class="admin-add-form">
-                                            <form action="<?=$base_url?>khoa/add_vb_khoa" method="post" enctype="multipart/form-data">
+                                            <form action="<?=$base_url?>khoa/add_vb_khoa" method="post" enctype="multipart/form-data" id="form_add_vbkhoa">
                                                 <input type="text" name="tieude" id="tieude_vbkhoa" placeholder="Nhập tiêu đề" class="box">
                                 
                                                 <textarea name="noidung" id="noidung_vbkhoa" cols="20" rows="5" placeholder="Nhập nội dung" class="box"></textarea>
@@ -96,7 +96,7 @@
                                     </div>
                                     
                                 </div>
-                            </div>
+                            </div> -->
                         <!--Modal ADD end-->
 
 
@@ -109,7 +109,7 @@
                                     </div>
                                     <div class="modal-content-addVB">
                                         <div class="admin-add-form">
-                                            <form action="<?=$base_url?>khoa/update_vb_khoa" method="post" enctype="multipart/form-data">
+                                            <form action="<?=$base_url?>khoa/update_vb_khoa" method="post" enctype="multipart/form-data" id="form_edit_vbkhoa">
                                                 <input type="hidden" name="idvb" id='idvb'>
                                                 <input type="text" name="tieude" id="tieude" placeholder="Nhập tiêu đề" class="box">
                                                 <textarea name="noidung" id="noidung" cols="20" rows="5" placeholder="Nhập nội dung" class="box"></textarea>
@@ -215,6 +215,50 @@
         </div>
     </div> 
 </div>
+<?php if (isset($_SESSION['thongbao'])):?>
+    <figure class="notification">
+        <div class="notification__body">
+            <div class="notification__description">
+                <div class="icon__wrapper">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                    fill="none" stroke-linecap="round" stroke-linejoin="round"
+                >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M6 6l12 12m0 -12l-12 12"></path>
+                </svg>
+
+                </div>                    
+                <?= $_SESSION['thongbao']?>
+            </div> 
+        </div>
+        <div class="notification__progress"></div>
+    </figure>
+    <?php unset($_SESSION['thongbao']); ?>
+<?php endif?>   
+<?php if (isset($_SESSION['success'])):?>
+    <figure class="notification-success">
+        <div class="notification__body">
+            <div class="notification__description">
+                <div class="icon__wrapper">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                    fill="none" stroke-linecap="round" stroke-linejoin="round"
+                >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+
+                </div>                    
+                <?= $_SESSION['success']?>
+            </div> 
+        </div>
+        <div class="notification__progress_success"></div>
+    </figure>
+    <?php unset($_SESSION['success']); ?>
+<?php endif?>  
 
 
 <script>
@@ -233,9 +277,11 @@
     }
 </script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
 <script src="<?=$base_url?>template/Script/script-modal_add.js"></script>
 <script src="<?=$base_url?>template/Script/script-modal_edit.js"></script>
-
+<script src="<?=$base_url?>template/Script/validation_form_addvbkhoa.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
 

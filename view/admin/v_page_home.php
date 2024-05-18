@@ -94,7 +94,7 @@
                                     </div>
                                     <div class="modal-content-addKhoa">
                                         <div class="admin-add-form">
-                                            <form  method="post" id="form_add_Khoa">
+                                            <form  method="post" id="form_add_Khoa" id="form-add-khoa">
                                                 <input type="text" name="tenkhoa" id="ten_Khoa" placeholder="Nhập khoa mới" class="box">  
                                               
                                                 <div class="modal-footer-addKhoa">
@@ -184,7 +184,7 @@
                                     </div>
                                     <div class="modal-content-addLoaiVB">
                                         <div class="admin-add-form">
-                                            <form method="post" id="form_add_loaiVB">
+                                            <form method="post" id="form_add_loaiVB" id="form-add-loaivb">
                                                 <input type="text" name="loaivanban" id="ten_loaiVB" placeholder="Nhập loại văn bản mới" class="box">   
                                                 
                                                 <div class="modal-footer-addLoaiVB">
@@ -252,9 +252,11 @@
     </div>
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
 <script src="<?=$base_url?>template/Script/script-modal-Khoa.js"></script>
 <script src="<?=$base_url?>template/Script/script-modal-LoaiVB.js"></script>
-
+<script src="<?=$base_url?>template/Script/validation_form_pagemain.js"></script>
 
 <script>
     function deleteKhoa(id){

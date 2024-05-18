@@ -159,6 +159,20 @@
     }
 
     
+    function admin_filter_vanban_phong($start_day, $end_day) { 
+        if(!empty($start_day) && !empty($end_day)) {
+            $sql = "SELECT * FROM vanban_chung, phong, loaivanban WHERE vanban_chung.id_loaivanban = loaivanban.id 
+            AND ngaydang BETWEEN '".$start_day."' AND '".$end_day."' 
+            AND vanban_chung.idphong = phong.id ORDER BY vanban_chung.idvb_chung";
+        } else {
+            $sql = "SELECT * FROM vanban_chung LIMIT 0,0";
+        }
+    
+        $ketqua = pdo_query($sql);
+        return $ketqua;
+    }
+
+    
 
     function list_document_newest() {
         $sql = "SELECT * FROM vanban_chung ORDER BY ngaydang DESC LIMIT 0,6"; 

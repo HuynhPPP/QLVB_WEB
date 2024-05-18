@@ -116,6 +116,8 @@
 
                 $view_name = 'admin_search_document_vbkhoa';
                 break;
+
+            
             
             case 'search_vbKhoa':
                 require_once 'model/m_khoa.php';
@@ -127,7 +129,7 @@
                        
                     } else {
                         $keyword = '';
-                        $_SESSION['thongbao'] = 'Không tìm thấy kết quả tìm kiếm hoặc bạn chưa nhập từ khoá !';
+                        // $_SESSION['thongbao'] = 'Không tìm thấy kết quả tìm kiếm hoặc bạn chưa nhập từ khoá !';
                     }
                 }
                 $dsvb_khoa_result = admin_search_vanban_khoa($keyword);
@@ -136,6 +138,28 @@
                 
 
                 $view_name = 'admin_search_document_vbkhoa';
+                break;
+
+            case 'filter_date_vbphong':
+                require_once 'model/m_phong.php';
+                require_once 'model/m_document.php';
+
+                if (isset($_POST['filter_vbphong'])) {
+                    if(isset($_POST['ngaybatdau']) && isset($_POST['ngayketthuc'])) {
+                        $start_day = $_POST['ngaybatdau'];  
+                        $end_day = $_POST['ngayketthuc']; 
+                        $dsvb_phong_result = admin_filter_vanban_phong($start_day, $end_day);
+                    } else {
+                        $start_day = '';
+                        $end_day = '';
+                        echo '<script> alert("Bạn chưa chọn ngày !");</script>';
+                    }
+                }
+                $dsLoaiVanBan = document_getAllLoaiVanBan();
+                $dsphong = getAllPhong();
+                
+
+                $view_name = 'admin_search_document_vbphong';
                 break;
 
             case 'search_vbPhong':
@@ -148,7 +172,7 @@
                         
                     } else {
                         $keyword = '';
-                        $_SESSION['thongbao'] = 'Không tìm thấy kết quả tìm kiếm hoặc bạn chưa nhập từ khoá !';
+                        // $_SESSION['thongbao'] = 'Không tìm thấy kết quả tìm kiếm hoặc bạn chưa nhập từ khoá !';
                     }
                 }
                 $dsvb_phong_result = admin_search_vanban_phong($keyword);

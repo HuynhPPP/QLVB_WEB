@@ -130,31 +130,31 @@ th:nth-child(1) {
 }
 
 th:nth-child(2) {
-    width: 12%;
+    width: 10%;
 }
 
 th:nth-child(3) {
-    width: 27%;
+    width: 20%;
 }
 
 th:nth-child(4) {
-    width: 10%;
+    width: 12%;
 }
 
 th:nth-child(5) {
-    width: 18%;
+    width: 15%;
 }
 
 th:nth-child(6) {
-    width: 13%;
+    width: 12%;
 }
 
 th:nth-child(7) {
-    width: 10%;
+    width: auto;
 }
 
 th:nth-child(8) {
-    width: 15%;
+    width: 10%;
 }
 
 

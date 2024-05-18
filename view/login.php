@@ -16,7 +16,6 @@
                 <!-------------      image     ------------->  
                 <!-- <img src="img/document-logo.jpg" alt=""> -->
             </div>
-
             <div class="col-md-6 right">
                 <div class="input-box"> 
                    <header class="fs-4">Hệ thống văn bản</header>
@@ -34,19 +33,35 @@
                                 <input type="submit" class="submit" value="Đăng nhập">  
                         </div> 
                     </form>
-                    <?php if (isset($_SESSION['error_login'])):?>
-                        <div class="mt-4 alert alert-danger" role="alert">
-                        <?= $_SESSION['error_login']?>
-                        </div>
-                        <?php endif; unset($_SESSION['error_login']);?>
+
                    <div class="signin">
                         <span><a href="<?=$base_url?>user/quenmatkhau" class="fs-5">Quên mật khẩu ?</a></span>
                    </div>
-                </div>  
-                
+                </div>          
             </div>
-        </div> 
-        
+        </div>    
+        <?php if (isset($_SESSION['error_login'])):?>
+            <figure class="notification">
+                <div class="notification__body">
+                    <div class="notification__description">
+                        <div class="icon__wrapper">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                            fill="none" stroke-linecap="round" stroke-linejoin="round"
+                        >
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M6 6l12 12m0 -12l-12 12"></path>
+                        </svg>
+
+                        </div>                    
+                        <?= $_SESSION['error_login']?>
+                    </div> 
+                </div>
+                <div class="notification__progress"></div>
+            </figure>
+            <?php unset($_SESSION['error_login']); ?>
+        <?php endif?>   
     </div>
 </div>
 

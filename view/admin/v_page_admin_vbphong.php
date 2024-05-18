@@ -4,6 +4,8 @@
     <link rel="stylesheet" href="<?=$base_url?>template/css/admin/pagination-style-admin.css">
     <link rel="stylesheet" href="<?=$base_url?>template/css/admin/modal-style.css">
     <link rel="stylesheet" href="<?=$base_url?>template/css/admin/form-style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"/>
 </head>
 
 
@@ -25,11 +27,11 @@
         <div class="main-table">
             <div class="table">
                 <div class="table_header">
-                    <form class="frm_search_date">
+                    <form action="<?=$base_url?>vanban/filter_date_vbphong" class="frm_search_date" method="post">
                         <div class="form-search-date">
-                            <input type="text" class="date-start" name="" id="start-date" placeholder="Ngày bắt đầu"/>
-                            <input type="text" class="date-end" name="" id="end-date" placeholder="Ngày kết thúc"/>
-                            <button class="btn-filter" name="filter" id="filter-vbphong" data-idkhoa="">
+                            <input type="text" class="date-start" name="ngaybatdau" id="start-date-2" placeholder="Ngày bắt đầu"/>
+                            <input type="text" class="date-end" name="ngayketthuc" id="end-date-2" placeholder="Ngày kết thúc"/>
+                            <button class="btn-filter" name="filter_vbphong">
                                 <span><i class="fa-solid fa-sort"></i> Lọc</span>
                             </button>
                         </div>
@@ -54,7 +56,7 @@
                                 </div>
                                 <div class="modal-content-addVB">
                                     <div class="admin-add-form">
-                                        <form action="<?=$base_url?>phong/add_vb_phong" method="post" enctype="multipart/form-data">
+                                        <form action="<?=$base_url?>phong/add_vb_phong" method="post" enctype="multipart/form-data" id="form-add-vbphong">
                                             <input type="text" name="tieude" id="" placeholder="Nhập tiêu đề" class="box">
                                             <textarea name="noidung" id="" cols="20" rows="5" placeholder="Nhập nội dung" class="box"></textarea>
                                             <select name="idloaivb" id="" class="box">
@@ -100,7 +102,7 @@
                                 </div>
                                 <div class="modal-content-addVB">
                                     <div class="admin-add-form">
-                                        <form action="<?=$base_url?>phong/update_vb_phong" method="post" enctype="multipart/form-data">
+                                        <form action="<?=$base_url?>phong/update_vb_phong" method="post" enctype="multipart/form-data" id="form-edit-vbphong">
                                             <input type="hidden" name="idvb" id='idvb'>
                                             <input type="text" name="tieude" id="tieude" placeholder="Nhập tiêu đề" class="box">
                                             <textarea name="noidung" id="noidung" cols="20" rows="5" placeholder="Nhập nội dung" class="box"></textarea>
@@ -195,6 +197,50 @@
         </div>     
     </div>
 </div> 
+<?php if (isset($_SESSION['thongbao'])):?>
+    <figure class="notification">
+        <div class="notification__body">
+            <div class="notification__description">
+                <div class="icon__wrapper">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                    fill="none" stroke-linecap="round" stroke-linejoin="round"
+                >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M6 6l12 12m0 -12l-12 12"></path>
+                </svg>
+
+                </div>                    
+                <?= $_SESSION['thongbao']?>
+            </div> 
+        </div>
+        <div class="notification__progress"></div>
+    </figure>
+    <?php unset($_SESSION['thongbao']); ?>
+<?php endif?>   
+<?php if (isset($_SESSION['success'])):?>
+    <figure class="notification-success">
+        <div class="notification__body">
+            <div class="notification__description">
+                <div class="icon__wrapper">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                    fill="none" stroke-linecap="round" stroke-linejoin="round"
+                >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+
+                </div>                    
+                <?= $_SESSION['success']?>
+            </div> 
+        </div>
+        <div class="notification__progress_success"></div>
+    </figure>
+    <?php unset($_SESSION['success']); ?>
+<?php endif?>  
 
 
 <script>
@@ -206,8 +252,13 @@
     }
 </script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
 <script src="<?=$base_url?>template/Script/script-modal_add_vbphong.js"></script>
 <script src="<?=$base_url?>template/Script/script-modal_edit_vbphong.js"></script>
+<script src="<?=$base_url?>template/Script/validation_form_vbphong.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
 
 
 <script>
@@ -242,3 +293,19 @@
         });
     });        
 </script>
+
+<!--Modal FILTER DATE end-->    
+<script>
+      $(document).ready(function() { 
+        $.datepicker.setDefaults({
+            dateFormat: 'yy-mm-dd'
+        });
+        $(function() {
+            $("#start-date-2").datepicker();
+            $("#end-date-2").datepicker();
+        });
+
+       
+});
+</script>
+<!--Modal FILTER DATE end--> 

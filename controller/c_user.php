@@ -19,7 +19,7 @@
                     }
                 }
                 else{
-                    $_SESSION['error_login'] = 'Tên đăng nhập hoặc mật khẩu không đúng !';
+                    $_SESSION['error_login'] = 'Tên đăng nhập hoặc mật khẩu không chính xác !';
                 }
             }                        
             require_once 'view/login.php';

@@ -14,6 +14,14 @@
         return pdo_query("SELECT * FROM loaivanban WHERE loaivanban=?", $tenloaivb);
     }
 
+    function check_vbkhoa($tieude) {
+        return pdo_query_one("SELECT * FROM vanban WHERE tieude=?", $tieude);
+    }
+
+    function check_vbphong($tieude) {
+        return pdo_query_one("SELECT * FROM vanban_chung WHERE tenvanban=?", $tieude);
+    }
+
     function document_addLoaiVanBan($tenloaivb) {
         pdo_execute("INSERT INTO loaivanban(`loaivanban`) VALUES(?)",$tenloaivb);
     }

@@ -140,13 +140,17 @@
                     $ngayky = $_POST['ngayky'];
                     $file = $_FILES['file']['name'];
 
-                    document_addVanBan_Khoa($tieude, $noidung, $loaivb, $khoa, $ngayky, $file);
-                    // $_SESSION['thongbao'] = 'Đăng văn bản thành công !';
-                    $target_dir = "upload/file_khoa/";
-                    $target_file = $target_dir . basename($_FILES["file"]["name"]);
-                    move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
-
-                    
+                    $kq = check_vbkhoa($tieude);
+                    if ( $kq ) { // Đúng, bị trùng, không thêm
+                        $_SESSION['thongbao']='Văn bản đã tồn tại !' ;
+                    }else {
+                        document_addVanBan_Khoa($tieude, $noidung, $loaivb, $khoa, $ngayky, $file);
+                        // $_SESSION['thongbao'] = 'Đăng văn bản thành công !';
+                        $target_dir = "upload/file_khoa/";
+                        $target_file = $target_dir . basename($_FILES["file"]["name"]);
+                        move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
+                        $_SESSION['success'] = 'Đăng văn bản thành công !';
+                    } 
                     
                 }
                 header('Location: '.$base_url.'khoa/home_admin');    
@@ -190,18 +194,28 @@
                     $ngayky = $_POST['ngaydang'];
                     $file = $_FILES['file']['name'];
 
-                    if($file!=""){
-                    $target_dir = "upload/file_khoa/";
-                    $target_file = $target_dir . basename($_FILES["file"]["name"]);
-                    move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
-                    }else{
-                        $file="";
+                    
+                    $kq = check_vbkhoa($tieude);
+                    if ( $kq ) { // Đúng, bị trùng, không thêm
+                        $_SESSION['thongbao']='Văn bản đã tồn tại !' ;
+                    }else {
+                        if($file!=""){
+                            $target_dir = "upload/file_khoa/";
+                            $target_file = $target_dir . basename($_FILES["file"]["name"]);
+                            move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
+                            }else{
+                                $file="";
+                            }
+                            edit_vbkhoa($tieude, $noidung, $loaivb, $khoa, $ngayky, $file, $id);
+                            $_SESSION['success'] = 'Cập nhật văn bản thành công !';
                     }
-                    edit_vbkhoa($tieude, $noidung, $loaivb, $khoa, $ngayky, $file, $id);
+                    
                 }
                 header('Location: '.$base_url.'khoa/home_admin');    
                 require_once('view/admin/v_admin_layout.php'); 
                 break;
+
+            
 
            
 
