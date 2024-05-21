@@ -137,7 +137,7 @@
                     $noidung = $_POST['noidung'];
                     $loaivb = $_POST['idloaivb'];
                     $phong = $_POST['idphong'];
-                    $ngayky = $_POST['ngayky'];
+                    $ngayky = date('Y-m-d');
                     $file = $_FILES['file']['name'];
 
                     $kq = check_vbphong($tieude);
@@ -195,10 +195,10 @@
                     $ngayky = $_POST['ngaydang'];
                     $file = $_FILES['file']['name'];
 
-                    $kq = check_vbphong($tieude);
-                    if ( $kq ) { // Đúng, bị trùng, không thêm
-                        $_SESSION['thongbao']='Văn bản đã tồn tại !' ;
-                    }else {
+                    // $kq = check_vbphong($tieude);
+                    // if ( $kq ) { // Đúng, bị trùng, không thêm
+                    //     $_SESSION['thongbao']='Văn bản đã tồn tại !' ;
+                    // }else {
                         if($file!=""){
                             $target_dir = "upload/file_phong/";
                             $target_file = $target_dir . basename($_FILES["file"]["name"]);
@@ -208,7 +208,7 @@
                             }
                             editVanBan_chung($tieude, $noidung, $loaivb, $phong, $ngayky, $file, $id);
                             $_SESSION['success'] = 'Cập nhật văn bản thành công !';
-                    }
+                    // }
 
                     
                 }
@@ -235,9 +235,10 @@
                 require_once('view/v_admin_layout.php');                
                 break;
 
-            case 'delete_vanban_phong':
+            case 'delete_vanban_chung':
                 require_once 'model/m_phong.php';               
-                document_deleteVB_chung($_POST['id']);
+                document_deleteVB_chung($_GET['id']);
+                header('Location: '.$base_url.'phong/home_admin'); 
                               
                 break;
 

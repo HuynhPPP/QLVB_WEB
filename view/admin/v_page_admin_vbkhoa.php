@@ -85,7 +85,11 @@
                                                     ?>
                                                 </select>
                                                 <label for="date" class="lb">Chọn ngày đăng :</label>
-                                                <input type="date" id="ngaydang_vbkhoa" name="ngayky" placeholder="Chọn ngày đăng" value="" min="2018-01-01" max="2024-12-31" class="box"/>
+                                                <input type="date" id="ngaydang_vbkhoa" name="ngayky" value="<?php 
+                                                                                                                    $date = date('Y-m-d');
+                                                                                                                    $date_formatted = date('d-m-Y', strtotime($date)); 
+                                                                                                                    echo $date; ?>" 
+                                                                                                                    class="box" readonly/>
                                                 <label for="file" class="lb">Chọn file :</label>
                                                 <input type="file" name="file" id="tenfile_vbkhoa" class="box">
 
@@ -179,7 +183,7 @@
                                 </td>
                                 <td><?=$vb['loaivanban']?></td>
                                 <td><?=$vb['tenkhoa']?></td>
-                                <td><?=$vb['ngaydang']?></td>
+                                <td><?=$vb['formatted_ngaydang']?></td>
                                 <td>
                                     <a href="<?=$base_url?>/khoa/download/<?=$vb['file']?>"><?=$vb['file']?></a>
                                 </td>
@@ -318,7 +322,7 @@
 <script>
       $(document).ready(function() { 
         $.datepicker.setDefaults({
-            dateFormat: 'yy-mm-dd'
+            dateFormat: 'dd-mm-yy'
         });
         $(function() {
             $("#start-date").datepicker();

@@ -21,10 +21,12 @@
         return pdo_query_one("SELECT * FROM khoa WHERE id=?", $Idkhoa);
     }
 
-    function document_addVanBan_Khoa($tieude, $noidung, $loaivb, $khoa, $ngayky, $file) {  
+    function  document_addVanBan_Khoa($tieude, $noidung, $loaivb, $khoa, $ngayky, $file) {  
+        
         pdo_execute("INSERT INTO vanban(`tieude`, `noidung`, `loaivanban`, `idkhoa`, `ngaydang`, `file`)
-                 VALUES(?,?,?,?,?,?)",$tieude, $noidung, $loaivb, $khoa, $ngayky, $file);
+                     VALUES(?,?,?,?,?,?)",$tieude, $noidung, $loaivb, $khoa, $ngayky, $file);
     }
+    
 
     function edit_vbkhoa($tieude, $noidung, $loaivb, $khoa, $ngayky, $file, $id) {
         if($file != "") {
@@ -59,8 +61,9 @@
     }
 
     function getAll_VB_khoa() {
-        return pdo_query("SELECT * FROM vanban, loaivanban, khoa WHERE vanban.loaivanban = loaivanban.id AND vanban.idkhoa = khoa.id ORDER BY ngaydang DESC ");
+        return pdo_query("SELECT vanban.*, loaivanban.*, khoa.*, DATE_FORMAT(vanban.ngaydang, '%d-%m-%Y') AS formatted_ngaydang FROM vanban, loaivanban, khoa WHERE vanban.loaivanban = loaivanban.id AND vanban.idkhoa = khoa.id ORDER BY vanban.ngaydang DESC");
     }
+    
 
     function loadone_vanban_khoa($id) {
         $sql = "SELECT * FROM vanban, loaivanban WHERE vanban.loaivanban = loaivanban.id AND idvb=".$id;
@@ -96,27 +99,45 @@
 
     function admin_search_vanban_khoa($keyword) { 
         if(!empty($keyword)) {
-            $sql = "SELECT * FROM vanban, khoa, loaivanban WHERE vanban.loaivanban = loaivanban.id AND vanban.tieude LIKE '%".$keyword."%' AND vanban.idkhoa = khoa.id ORDER BY vanban.idvb";
+            $sql = "SELECT *, DATE_FORMAT(ngaydang, '%d-%m-%Y') AS formatted_ngaydang 
+                    FROM vanban, khoa, loaivanban 
+                    WHERE vanban.loaivanban = loaivanban.id 
+                    AND vanban.tieude LIKE '%".$keyword."%' 
+                    AND vanban.idkhoa = khoa.id 
+                    ORDER BY vanban.idvb";
         } else {
-            $sql = "SELECT * FROM vanban LIMIT 0,0";
+            $sql = "SELECT *, DATE_FORMAT(ngaydang, '%d-%m-%Y') AS formatted_ngaydang 
+                    FROM vanban LIMIT 0,0";
         }
     
         $ketqua = pdo_query($sql);
         return $ketqua;
     }
+    
 
     function admin_filter_vanban_khoa($start_day, $end_day) { 
         if(!empty($start_day) && !empty($end_day)) {
-            $sql = "SELECT * FROM vanban, khoa, loaivanban WHERE vanban.loaivanban = loaivanban.id 
-            AND ngaydang BETWEEN '".$start_day."' AND '".$end_day."' 
-            AND vanban.idkhoa = khoa.id ORDER BY vanban.idvb";
+            // Chuyển định dạng ngày
+            $start_day = date('Y-m-d', strtotime(str_replace('/', '-', $start_day)));
+            $end_day = date('Y-m-d', strtotime(str_replace('/', '-', $end_day)));
+    
+            // Tạo câu truy vấn với điều kiện tìm kiếm ngày
+            $sql = "SELECT *, DATE_FORMAT(ngaydang, '%d-%m-%Y') AS formatted_ngaydang 
+                    FROM vanban, khoa, loaivanban 
+                    WHERE vanban.loaivanban = loaivanban.id 
+                    AND vanban.ngaydang BETWEEN '".$start_day."' AND '".$end_day."' 
+                    AND vanban.idkhoa = khoa.id 
+                    ORDER BY vanban.idvb";
         } else {
-            $sql = "SELECT * FROM vanban LIMIT 0,0";
+            $sql = "SELECT *, DATE_FORMAT(ngaydang, '%d-%m-%Y') AS formatted_ngaydang 
+                    FROM vanban LIMIT 0,0";
         }
     
+        // Thực hiện truy vấn
         $ketqua = pdo_query($sql);
         return $ketqua;
     }
+    
     
     
 

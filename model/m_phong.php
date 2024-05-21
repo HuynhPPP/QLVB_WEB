@@ -38,8 +38,8 @@
     }
 
     function getAll_VB_chung() {
-        return pdo_query("SELECT * FROM vanban_chung, loaivanban, phong 
-        WHERE vanban_chung.idphong = phong.id AND vanban_chung.id_loaivanban = loaivanban.id ORDER BY vanban_chung.ngaydang DESC");
+        return pdo_query("SELECT vanban_chung.*, loaivanban.*, phong.*, DATE_FORMAT(vanban_chung.ngaydang, '%d-%m-%Y') AS formatted_ngaydang FROM vanban_chung, loaivanban, phong 
+        WHERE vanban_chung.id_loaivanban = loaivanban.id AND vanban_chung.idphong = phong.id ORDER BY vanban_chung.ngaydang DESC");
     }
 
 

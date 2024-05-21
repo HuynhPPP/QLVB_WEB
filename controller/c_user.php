@@ -6,22 +6,30 @@
         
             case 'login':
             require_once 'model/m_user.php';  
-            if( isset($_POST['TaiKhoan']) && isset($_POST['MatKhau']) ){
-                $kq = user_login($_POST['TaiKhoan'],$_POST['MatKhau']); 
-                if( $kq ){
-                    if ($kq['trangthai'] == 1) {
-                        // Đúng, đăng nhập thành công
-                        $_SESSION['user'] = $kq;
-                        header('Location: '.$base_url.'page_user/trangchu');
-                        exit();
-                    } else {
-                        $_SESSION['error_login'] = 'Tài khoản của bạn đã bị khóa!';
+            if(isset($_POST['btn_login'])){ 
+                $thongbao = array();
+                if( isset($_POST['TaiKhoan']) && isset($_POST['MatKhau']) ){
+                   
+                    $kq = user_login($_POST['TaiKhoan'],$_POST['MatKhau']); 
+                    if( $kq ){
+                        if ($kq['trangthai'] == 1) {
+                            // Đúng, đăng nhập thành công
+                            $_SESSION['user'] = $kq;
+                            header('Location: '.$base_url.'page_user/trangchu');
+                            exit();
+                        } else {
+                            $thongbao['error_login'] = 'Tài khoản của bạn đã bị khóa!';
+                        }
+                    }
+                    else{
+                        $thongbao['error_login'] = 'Tên đăng nhập hoặc mật khẩu không chính xác!';
                     }
                 }
-                else{
-                    $_SESSION['error_login'] = 'Tên đăng nhập hoặc mật khẩu không chính xác !';
-                }
-            }                        
+                // header('Location: '.$base_url.'user/login');
+                // exit();
+               
+            }   
+                                 
             require_once 'view/login.php';
             break;
             

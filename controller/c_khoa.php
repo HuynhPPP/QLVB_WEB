@@ -137,7 +137,7 @@
                     $noidung = $_POST['noidung'];
                     $loaivb = $_POST['idloaivb'];
                     $khoa = $_POST['idkhoa'];
-                    $ngayky = $_POST['ngayky'];
+                    $ngayky = date('Y-m-d');
                     $file = $_FILES['file']['name'];
 
                     $kq = check_vbkhoa($tieude);
@@ -195,10 +195,10 @@
                     $file = $_FILES['file']['name'];
 
                     
-                    $kq = check_vbkhoa($tieude);
-                    if ( $kq ) { // Đúng, bị trùng, không thêm
-                        $_SESSION['thongbao']='Văn bản đã tồn tại !' ;
-                    }else {
+                    // $kq = check_vbkhoa($tieude);
+                    // if ( $kq ) { // Đúng, bị trùng, không thêm
+                    //     $_SESSION['thongbao']='Văn bản đã tồn tại !' ;
+                    // }else {
                         if($file!=""){
                             $target_dir = "upload/file_khoa/";
                             $target_file = $target_dir . basename($_FILES["file"]["name"]);
@@ -208,7 +208,7 @@
                             }
                             edit_vbkhoa($tieude, $noidung, $loaivb, $khoa, $ngayky, $file, $id);
                             $_SESSION['success'] = 'Cập nhật văn bản thành công !';
-                    }
+                    // }
                     
                 }
                 header('Location: '.$base_url.'khoa/home_admin');    

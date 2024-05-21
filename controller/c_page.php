@@ -95,13 +95,18 @@
                     $error = array();
                     $emails = $_POST['mail'];
                     if($emails == '') {
-                        $error['mail'] = '<script> alert("Không được để trống mail !"); </script>';
+                        $error['mail'] = 'Không được để trống mail !';
+                     
                     }
                     if(empty($error)) {
                         $email_receive = $emails;
                         $email_array = explode(",", $email_receive);
                         $title = $_POST['tieude'];
                         $content = $_POST['noidung'];
+                        if($content == '') {
+                            $error['mail'] = 'Bạn chưa nhập nội dung !';
+                         
+                        }
                         $mail->sendMail_all($title, $content, $email_array);
                          
                         

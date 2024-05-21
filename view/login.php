@@ -30,7 +30,7 @@
                         </div> 
                         
                         <div class="input-field">
-                                <input type="submit" class="submit" value="Đăng nhập">  
+                                <input type="submit" name="btn_login" class="submit" value="Đăng nhập">  
                         </div> 
                     </form>
 
@@ -40,7 +40,7 @@
                 </div>          
             </div>
         </div>    
-        <?php if (isset($_SESSION['error_login'])):?>
+        <?php if (isset($thongbao['error_login'])):?>
             <figure class="notification">
                 <div class="notification__body">
                     <div class="notification__description">
@@ -55,12 +55,12 @@
                         </svg>
 
                         </div>                    
-                        <?= $_SESSION['error_login']?>
+                        <?= $thongbao['error_login'];?>
                     </div> 
                 </div>
                 <div class="notification__progress"></div>
             </figure>
-            <?php unset($_SESSION['error_login']); ?>
+            <?php unset($thongbao['error_login']); ?>
         <?php endif?>   
     </div>
 </div>

@@ -4,6 +4,8 @@
     <link rel="stylesheet" href="<?=$base_url?>template/css/admin/pagination-style-admin.css">
     <link rel="stylesheet" href="<?=$base_url?>template/css/admin/modal-style.css">
     <link rel="stylesheet" href="<?=$base_url?>template/css/admin/form-style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"/>
 </head>
 
 
@@ -25,11 +27,11 @@
         <div class="main-table">
             <div class="table">
                 <div class="table_header">
-                    <form class="frm_search_date">
+                    <form action="<?=$base_url?>vanban/filter_date_vbphong" class="frm_search_date" method="post">
                         <div class="form-search-date">
-                            <input type="text" class="date-start" name="" id="start-date" placeholder="Ngày bắt đầu"/>
-                            <input type="text" class="date-end" name="" id="end-date" placeholder="Ngày kết thúc"/>
-                            <button class="btn-filter" name="filter" id="filter-vbphong" data-idkhoa="">
+                            <input type="text" class="date-start" name="ngaybatdau" id="start-date-2" placeholder="Ngày bắt đầu"/>
+                            <input type="text" class="date-end" name="ngayketthuc" id="end-date-2" placeholder="Ngày kết thúc"/>
+                            <button class="btn-filter" name="filter_vbphong">
                                 <span><i class="fa-solid fa-sort"></i> Lọc</span>
                             </button>
                         </div>
@@ -41,9 +43,9 @@
                                 <input  placeholder="Nhập tên văn bản" class="input_search" name="key_word_vbphong">
                                 <button class="btn_search" type="submit" name="btn_search_key">Tìm kiếm</button>
                             </div>
-                            <!-- <button type="button" id="open_modal_addVBPhong" class="add_new">
+                            <button type="button" id="open_modal_addVBPhong" class="add_new">
                                 + Thêm văn bản
-                            </button> -->
+                            </button>
                     </form> 
                     <!--Modal start-->
                         <div class="modal-container-addVB" id="modal-container-addVBPhong">
@@ -217,8 +219,13 @@
     }
 </script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
 <script src="<?=$base_url?>template/Script/script-modal_add_vbphong.js"></script>
 <script src="<?=$base_url?>template/Script/script-modal_edit_vbphong.js"></script>
+<script src="<?=$base_url?>template/Script/validation_form_vbphong.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
 
 
 <script>
@@ -253,3 +260,20 @@
         });
     });        
 </script>
+
+
+<!--Modal FILTER DATE end-->    
+<script>
+      $(document).ready(function() { 
+        $.datepicker.setDefaults({
+            dateFormat: 'yy-mm-dd'
+        });
+        $(function() {
+            $("#start-date-2").datepicker();
+            $("#end-date-2").datepicker();
+        });
+
+       
+});
+</script>
+<!--Modal FILTER DATE end--> 

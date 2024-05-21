@@ -183,7 +183,7 @@
                                 </td>
                                 <td><?=$vb['loaivanban']?></td>
                                 <td><?=$vb['tenkhoa']?></td>
-                                <td><?=$vb['ngaydang']?></td>
+                                <td><?=$vb['formatted_ngaydang']?></td>
                                 <td>
                                     <a href="<?=$base_url?>/khoa/download/<?=$vb['file']?>"><?=$vb['file']?></a>
                                 </td>
@@ -329,7 +329,7 @@
 <script>
       $(document).ready(function() { 
         $.datepicker.setDefaults({
-            dateFormat: 'yy-mm-dd'
+            dateFormat: 'dd-mm-yy'
         });
         $(function() {
             $("#start-date").datepicker();

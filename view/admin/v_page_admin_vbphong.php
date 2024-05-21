@@ -57,9 +57,9 @@
                                 <div class="modal-content-addVB">
                                     <div class="admin-add-form">
                                         <form action="<?=$base_url?>phong/add_vb_phong" method="post" enctype="multipart/form-data" id="form-add-vbphong">
-                                            <input type="text" name="tieude" id="" placeholder="Nhập tiêu đề" class="box">
-                                            <textarea name="noidung" id="" cols="20" rows="5" placeholder="Nhập nội dung" class="box"></textarea>
-                                            <select name="idloaivb" id="" class="box">
+                                            <input type="text" name="tieude" id="tieude_vbphong" placeholder="Nhập tiêu đề" class="box">
+                                            <textarea name="noidung" id="noidung_vbphong" cols="20" rows="5" placeholder="Nhập nội dung" class="box"></textarea>
+                                            <select name="idloaivb" id="id_loaivanban_phong" class="box">
                                                 <option value="">--Chọn loại văn bản--</option>
                                                 <?php
                                                     foreach ($dsLoaiVanBan as $lvb) {
@@ -68,7 +68,7 @@
                                                 ?>
                                             </select>
 
-                                            <select name="idphong" id="" class="box">
+                                            <select name="idphong" id="id_phong_vbphong" class="box">
                                                 <option value="">--Chọn phòng--</option>
                                                 <?php
                                                     foreach ($dsphong  as $phong) {
@@ -78,7 +78,11 @@
                                             </select>
                                             
                                             <label for="date" class="lb">Chọn ngày đăng :</label>
-                                            <input type="date" id="start" name="ngayky" placeholder="Chọn ngày đăng" value="" min="2018-01-01" max="2024-12-31" class="box"/>
+                                                <input type="date" id="ngaydang_vbkhoa" name="ngayky" value="<?php 
+                                                                                                                    $date = date('Y-m-d');
+                                                                                                                    $date_formatted = date('d-m-Y', strtotime($date)); 
+                                                                                                                    echo $date; ?>" 
+                                                                                                                    class="box" readonly/>
                                             <label for="file" class="lb">Chọn file :</label>
                                             <input type="file" name="file" id="" class="box">
 
@@ -166,7 +170,7 @@
                                     <a href="<?=$base_url?>phong/content_admin/<?=$vb['idvb_chung']?>"><?=$vb['tenvanban']?></a>
                                 </td>
                                 <td> <?=$vb['loaivanban']?></td>
-                                <td><?=$vb['ngaydang']?></td>
+                                <td><?=$vb['formatted_ngaydang']?></td>
                                 <td>
                                     <a href="<?=$base_url?>/phong/download_file_phong/<?=$vb['file']?>"><?=$vb['file']?></a>
                                 </td>
