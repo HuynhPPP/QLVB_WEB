@@ -131,7 +131,7 @@
                                             <label for="date" class="lb">Chọn ngày đăng :</label>
                                             <input type="date" id="ngaydang" name="ngaydang" placeholder="Chọn ngày đăng" value="" min="2018-01-01" max="2024-12-31" class="box"/>
                                             <p>file hiện tại: </p>
-                                            <label for="file" id="file" class="lb"></label>
+                                            <label for="file" id="file" class="lb file_now"></label>
                                             <input type="file" name="file" id="file" class="box">
 
                                             <div class="modal-footer-addVB">
@@ -260,10 +260,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
 <script src="<?=$base_url?>template/Script/script-modal_add_vbphong.js"></script>
 <script src="<?=$base_url?>template/Script/script-modal_edit_vbphong.js"></script>
+<script src="//cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
 <script src="<?=$base_url?>template/Script/validation_form_vbphong.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
 
+<script>
+        CKEDITOR.replace( 'noidung_vbphong' );
+</script>
+
+<script>
+        CKEDITOR.replace( 'noidung' );
+</script>
 
 <script>
     $(document).ready(function() { 
@@ -285,7 +293,7 @@
                         // console.log(Value['idvb']);
                         $('#idvb').val(Value['idvb_chung']);
                         $('#tieude').val(Value['tenvanban']);
-                        $('#noidung').val(Value['noidung']);
+                        CKEDITOR.instances['noidung'].setData(Value['noidung']); // Set data for CKEditor
                         $('#tenloaivb').val(Value['id_loaivanban']);
                         $('#tenphong').val(Value['idphong']);
                         $('#ngaydang').val(Value['ngaydang']);

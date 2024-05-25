@@ -49,7 +49,7 @@
                     </p>
 
                     <div class="card-content">
-                        <?=$noidung?>
+                            <?=$noidung?>    
                     </div>
                 </div>
             </div>

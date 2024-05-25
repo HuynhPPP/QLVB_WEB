@@ -14,6 +14,7 @@ $.validator.addMethod("firstCharAlphanumeric", function(value, element) {
 }, "Ký tự đầu tiên phải là chữ cái hoặc số.");
 
 
+
 $("#form_add_vbkhoa").validate({
     rules:{
         tieude:{
@@ -32,10 +33,7 @@ $("#form_add_vbkhoa").validate({
         },
         idkhoa:{
             required: true
-        },
-        ngayky:{
-            required: true
-        },
+        }
     },
     messages: {
         tieude:{

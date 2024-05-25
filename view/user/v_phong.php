@@ -10,6 +10,7 @@
     
 ?>
 <head>
+    <link rel="stylesheet" href="<?=$base_url?>template/css/user/notifiacation.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"/>
 </head>
 
@@ -29,9 +30,9 @@
                 </button>
             </div>
             <div class="box-search">
-                <form method="post" action="<?=$base_url?>phong/search_vanban_phong_name/<?=$id?>">
+                <form method="post" action="<?=$base_url?>phong/search_vanban_phong_name/<?=$id?>" id="form-search-name-phong">
                     <input type="search" name="keyword_vb_phong" placeholder="Nhập tên văn bản cần tìm kiếm..."> 
-                    <a href="<?=$base_url?>phong/search_vanban_phong_name/<?=$id?>">
+                    <a href="#" onclick="document.getElementById('form-search-name-phong').submit();">
                         <i class="fas fa-solid fa-magnifying-glass"></i>
                     </a>
                 </form>
@@ -89,6 +90,7 @@
                 } ?>     
             </div>
 
+           
             <div class="Pagination">
                 <a href="<?=$base_url?>/phong/home_user/<?=$phong['id']?>/<?=$page-1?>">
                     <button class="btn1" <?=($page <= 1)?'disabled':''?> onclick="backBtn()"> 
@@ -120,6 +122,13 @@
         </div>
         
 </article>
+
+<div id="notification-filter">
+
+</div>
+
+   
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
@@ -155,7 +164,26 @@
         }
         else
         {
-            alert("Bạn chưa chọn ngày !");
+            $('#notification-filter').html(`
+                        <figure class="notification">
+                            <div class="notification__body">
+                                <div class="notification__description">
+                                    <div class="icon__wrapper">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                            fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                        >
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M6 6l12 12m0 -12l-12 12"></path>
+                                        </svg>
+                                    </div>
+                                    Bạn chưa chọn ngày
+                                </div>
+                            </div>
+                            <div class="notification__progress"></div>
+                        </figure>
+                    `);
         }
 
         });   

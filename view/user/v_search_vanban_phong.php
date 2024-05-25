@@ -23,7 +23,7 @@
                 </button>
             </div> -->
             <div class="box-search">
-                <form method="post" action="<?=$base_url?>phong/search_vanban_phong/<?=$id?>">
+                <form method="post" action="<?=$base_url?>phong/search_vanban_phong_name/<?=$id?>">
                     <input type="search" name="keyword_vb_phong" placeholder="Nhập tên văn bản cần tìm kiếm..."> 
                     <a href="<?=$base_url?>phong/search_vanban_phong_name/<?=$id?>">
                         <i class="fas fa-solid fa-magnifying-glass"></i>
@@ -86,6 +86,13 @@
         </div>
         
 </article>
+
+<script>
+    if (window.history.replaceState )
+    {
+        window.history.replaceState(null, null, window.location.href);
+    }
+</script>
 
 
 

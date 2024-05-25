@@ -64,8 +64,13 @@
                                         <div class="admin-add-form">
                                             <form action="<?=$base_url?>khoa/add_vb_khoa" method="post" enctype="multipart/form-data" id="form_add_vbkhoa">
                                                 <input type="text" name="tieude" id="tieude_vbkhoa" placeholder="Nhập tiêu đề" class="box">
-                                
+
+                                                <label for="file" class="" style="display: inline-block;
+                                                                                  margin-bottom: 7px;
+                                                                                  ">Nội dung :</label>
                                                 <textarea name="noidung" id="noidung_vbkhoa" cols="20" rows="5" placeholder="Nhập nội dung" class="box"></textarea>
+                                                
+
                                                 <select id="loaivb_vbkhoa" name="idloaivb" class="box">
                                                     <option value="">--Chọn loại văn bản--</option>
                                                     <?php
@@ -140,7 +145,7 @@
                                                 <label for="date" class="lb">Chọn ngày đăng :</label>
                                                 <input type="date" id="ngaydang" name="ngaydang" placeholder="Chọn ngày đăng" value="" min="2018-01-01" max="2024-12-31" class="box"/>
                                                 <p>file hiện tại: </p>
-                                                <label for="file" id="file" class="lb"></label>
+                                                <label for="file" id="file" class="lb file_now"></label>
                                                 <input type="file" name="file"  class="box">
 
                                                 <div class="modal-footer-addVB">
@@ -273,6 +278,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
 <script src="<?=$base_url?>template/Script/script-modal_add.js"></script>
 <script src="<?=$base_url?>template/Script/script-modal_edit.js"></script>
+<script src="//cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
 <script src="<?=$base_url?>template/Script/validation_form_addvbkhoa.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
@@ -280,7 +286,13 @@
 
 
 
+<script>
+        CKEDITOR.replace( 'noidung' );
+</script>
 
+<script>
+        CKEDITOR.replace( 'noidung_vbkhoa' );
+</script>
 
 <!--Modal EDIT end--> 
 <script>
@@ -303,7 +315,7 @@
                         // console.log(Value['tieude']);
                         $('#idvb').val(Value['idvb']);
                         $('#tieude').val(Value['tieude']);
-                        $('#noidung').val(Value['noidung']);
+                        CKEDITOR.instances['noidung'].setData(Value['noidung']); // Set data for CKEditor
                         $('#tenloaivb').val(Value['loaivanban']);
                         $('#tenkhoa').val(Value['idkhoa']);
                         $('#ngaydang').val(Value['ngaydang']);

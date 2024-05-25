@@ -5,6 +5,7 @@
 ?>
 
 <head>
+    <link rel="stylesheet" href="<?=$base_url?>template/css/user/notifiacation.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"/>
 </head>
 
@@ -24,15 +25,15 @@
                 </button>
             </div>
             <div class="box-search">
-                <form method="post" action="<?=$base_url?>khoa/search_vanban_khoa/<?=$id?>">
+                <form method="post" action="<?=$base_url?>khoa/search_vanban_khoa/<?=$id?>" id="form-search-name-khoa">
                     <input type="search" name="keyword_vb_khoa" placeholder="Nhập tên văn bản cần tìm kiếm..."> 
-                    <a href="<?=$base_url?>khoa/search_vanban_khoa/<?=$id?>">
+                    <a href="#" onclick="document.getElementById('form-search-name-khoa').submit();">
                         <i class="fas fa-solid fa-magnifying-glass"></i>
                     </a>
                 </form>
             </div>
 
-        <div id="filter-vb" >
+        <div id="filter-vb">
             <!-- <p class="title-result">Kết quả tìm kiếm</p>
             <div class="box-result-search"> -->
                 <!-- <div class="box-content">
@@ -114,6 +115,10 @@
         
 </article>
 
+<div id="notification-filter">
+
+</div>
+
 <script>
     function search() {
       // Lấy giá trị từ ô input
@@ -166,7 +171,26 @@
         }
         else
         {
-            alert("Bạn chưa chọn ngày !");
+            $('#notification-filter').html(`
+                        <figure class="notification">
+                            <div class="notification__body">
+                                <div class="notification__description">
+                                    <div class="icon__wrapper">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                            fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                        >
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M6 6l12 12m0 -12l-12 12"></path>
+                                        </svg>
+                                    </div>
+                                    Bạn chưa chọn ngày
+                                </div>
+                            </div>
+                            <div class="notification__progress"></div>
+                        </figure>
+                    `);
         }
 
         });   
