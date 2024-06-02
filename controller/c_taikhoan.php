@@ -83,15 +83,10 @@
                     $loaitk = $_POST['loaitaikhoan'];
                     $khoa = $_POST['idkhoa'];
                     
-                    $kq = user_checkTaiKhoan($hoten);
-                    if ( $kq ) { // Đúng, bị trùng, không thêm
-                        $_SESSION['thongbao']='Tài khoản với tên đăng nhập <strong>'.$hoten.'</strong> đã tồn tại.' ;
-                    }
-                    else {
-                        $hashed_password = password_hash($matkhau, PASSWORD_DEFAULT);
-                        user_edit($hoten, $hashed_password, $mail, $loaitk, $khoa, $id);
-                        $_SESSION['success'] = 'Cập nhật tài khoản thành công !';
-                    }
+                    $hashed_password = password_hash($matkhau, PASSWORD_DEFAULT);
+                    user_edit($hoten, $hashed_password, $mail, $loaitk, $khoa, $id);
+                    $_SESSION['success'] = 'Cập nhật tài khoản thành công !';
+                    
                 }
                 header('Location: '.$base_url.'taikhoan/home_admin');    
                 require_once('view/admin/v_admin_layout.php'); 

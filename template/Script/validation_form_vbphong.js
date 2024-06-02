@@ -3,9 +3,7 @@ $.validator.addMethod("noMultipleSpaces", function(value, element) {
 }, "Không được chứa nhiều hơn một khoảng trắng liên tiếp.");
 
 $.validator.addMethod("normalText", function(value, element) {
-    return this.optional(element) || /^[a-zA-Z0-9\s.,!?'"ÀÁẢÃẠĂẰẮẲẴẶÂẦẤẨẪẬĐÈÉẺẼẸÊỀẾỂỄỆÌÍỈĨỊÒÓỎÕỌÔỒỐỔỖỘƠỜỚỞỠỢÙÚỦŨỤƯỪỨỬỮỰỲÝỶỸỴàáảãạăằắẳẵặâầấẩẫậđèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵ]*$/
-
-    .test(value);
+    return this.optional(element) || /^[a-zA-Z0-9\s.,!?'"ÀÁẢÃẠĂẰẮẲẴẶÂẦẤẨẪẬĐÈÉẺẼẸÊỀẾỂỄỆÌÍỈĨỊÒÓỎÕỌÔỒỐỔỖỘƠỜỚỞỠỢÙÚỦŨỤƯỪỨỬỮỰỲÝỶỸỴàáảãạăằắẳẵặâầấẩẫậđèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵ\-]*$/.test(value);
 }, "Chỉ chấp nhận văn bản bình thường (không chứa ký tự đặc biệt hoặc dấu xuống dòng).");
 
 $.validator.addMethod("firstCharAlphanumeric", function(value, element) {

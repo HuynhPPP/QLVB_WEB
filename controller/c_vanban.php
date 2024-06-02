@@ -190,6 +190,15 @@
                   if (isset($idfile)) {
                         $file = $idfile; // Tên file được truyền qua query parameter
 
+                        // Chuyển đổi các ký tự tiếng Việt sang không dấu
+                        $file = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $file);
+                        
+                        // Loại bỏ các ký tự không hợp lệ
+                        $file = preg_replace('/[^A-Za-z0-9_\-\.]/', '_', $file);
+                        
+                        // Xóa các dấu gạch dưới liên tiếp
+                        $file = preg_replace('/_+/', '_', $file);
+
                         $file_path = 'upload/'.$file; // Đường dẫn tới file
 
                         if (file_exists($file_path)) {

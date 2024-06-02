@@ -147,6 +147,7 @@
                                                 <p>file hiện tại: </p>
                                                 <label for="file" id="file" class="lb file_now"></label>
                                                 <input type="file" name="file"  class="box">
+                                                <input type="checkbox" name="delete_file" > <label for="delete_file">Xóa file hiện tại</label>
 
                                                 <div class="modal-footer-addVB">
                                                     <button type="submit" name="confirm_modal_editVB_khoa" class="btn-confirm-addVB" id="confirm_modal_editVBKHOA">Xác nhận</button>

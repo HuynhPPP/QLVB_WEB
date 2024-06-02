@@ -106,7 +106,7 @@
         if($file != "") {
             pdo_execute("UPDATE vanban_chung SET tenvanban=?, noidung=?, id_loaivanban=?, idphong=?, ngaydang=?, file=? WHERE idvb_chung=?",  $tieude, $noidung, $loaivb, $phong, $ngayky, $file, $id);    
         }else{
-            pdo_execute("UPDATE vanban_chung SET tenvanban=?, noidung=?, id_loaivanban=?, idphong=?, ngaydang=?  WHERE idvb_chung=?",  $tieude, $noidung, $loaivb, $phong, $ngayky, $id);    
+            pdo_execute("UPDATE vanban_chung SET tenvanban=?, noidung=?, id_loaivanban=?, idphong=?, ngaydang=?, file=?  WHERE idvb_chung=?",  $tieude, $noidung, $loaivb, $phong, $ngayky, $file, $id);    
         }           
     }
 
@@ -149,9 +149,15 @@
 
     function admin_search_vanban_phong($keyword) { 
         if(!empty($keyword)) {
-            $sql = "SELECT * FROM vanban_chung, phong, loaivanban WHERE vanban_chung.id_loaivanban = loaivanban.id AND vanban_chung.tenvanban LIKE '%".$keyword."%' AND vanban_chung.idphong = phong.id ORDER BY vanban_chung.idvb_chung";
+            $sql = "SELECT *, DATE_FORMAT(ngaydang, '%d-%m-%Y') AS formatted_ngaydang 
+                    FROM vanban_chung, phong, loaivanban 
+                    WHERE vanban_chung.id_loaivanban = loaivanban.id 
+                    AND vanban_chung.tenvanban LIKE '%".$keyword."%' 
+                    AND vanban_chung.idphong = phong.id 
+                    ORDER BY vanban_chung.idvb_chung";
         } else {
-            $sql = "SELECT * FROM vanban_chung LIMIT 0,0";
+            $sql = "SELECT *, DATE_FORMAT(ngaydang, '%d-%m-%Y') AS formatted_ngaydang 
+                    FROM vanban_chung LIMIT 0,0";
         }
     
         $ketqua = pdo_query($sql);
@@ -161,15 +167,25 @@
     
     function admin_filter_vanban_phong($start_day, $end_day) { 
         if(!empty($start_day) && !empty($end_day)) {
-            $sql = "SELECT * FROM vanban_chung, phong, loaivanban WHERE vanban_chung.id_loaivanban = loaivanban.id 
-            AND ngaydang BETWEEN '".$start_day."' AND '".$end_day."' 
-            AND vanban_chung.idphong = phong.id ORDER BY vanban_chung.idvb_chung";
+            $start_day = date('Y-m-d', strtotime(str_replace('/', '-', $start_day)));
+            $end_day = date('Y-m-d', strtotime(str_replace('/', '-', $end_day)));
+
+            // Tạo câu truy vấn với điều kiện tìm kiếm ngày
+            $sql = "SELECT *, DATE_FORMAT(ngaydang, '%d-%m-%Y') AS formatted_ngaydang 
+                    FROM vanban_chung, phong, loaivanban 
+                    WHERE vanban_chung.id_loaivanban = loaivanban.id 
+                    AND vanban_chung.ngaydang BETWEEN '".$start_day."' AND '".$end_day."' 
+                    AND vanban_chung.idphong = phong.id 
+                    ORDER BY vanban_chung.ngaydang DESC";
         } else {
-            $sql = "SELECT * FROM vanban_chung LIMIT 0,0";
+            $sql = "SELECT *, DATE_FORMAT(ngaydang, '%d-%m-%Y') AS formatted_ngaydang 
+                    FROM vanban_chung LIMIT 0,0";
         }
     
+        // Thực hiện truy vấn
         $ketqua = pdo_query($sql);
         return $ketqua;
+
     }
 
     

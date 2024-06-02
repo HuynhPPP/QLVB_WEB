@@ -43,58 +43,12 @@
                                 <input  placeholder="Nhập tên văn bản" class="input_search" name="key_word_vbphong">
                                 <button class="btn_search" type="submit" name="btn_search_key">Tìm kiếm</button>
                             </div>
-                            <button type="button" id="open_modal_addVBPhong" class="add_new">
-                                + Thêm văn bản
-                            </button>
+                           
                     </form> 
-                    <!--Modal start-->
-                        <div class="modal-container-addVB" id="modal-container-addVBPhong">
-                            <div class="modal-addVB">
-                                <div class="modal-header-addVB">
-                                    <h2>Thêm văn bản</h2>
-                                    <i class="fa fa-close" id="close-icon-addVBPhong"></i>
-                                </div>
-                                <div class="modal-content-addVB">
-                                    <div class="admin-add-form">
-                                        <form action="<?=$base_url?>phong/add_vb_phong" method="post" enctype="multipart/form-data">
-                                            <input type="text" name="tieude" id="" placeholder="Nhập tiêu đề" class="box">
-                                            <textarea name="noidung" id="" cols="20" rows="5" placeholder="Nhập nội dung" class="box"></textarea>
-                                            <select name="idloaivb" id="" class="box">
-                                                <option value="">--Chọn loại văn bản--</option>
-                                                <?php
-                                                    foreach ($dsLoaiVanBan as $lvb) {
-                                                        echo '<option value="'.$lvb['id'].'">'.$lvb['loaivanban'].'</option>';
-                                                    }
-                                                ?>
-                                            </select>
+                    
 
-                                            <select name="idphong" id="" class="box">
-                                                <option value="">--Chọn phòng--</option>
-                                                <?php
-                                                    foreach ($dsphong  as $phong) {
-                                                        echo '<option value="'.$phong['id'].'">'.$phong['tenphong'].'</option>';
-                                                    }
-                                                ?>
-                                            </select>
-                                            
-                                            <label for="date" class="lb">Chọn ngày đăng :</label>
-                                            <input type="date" id="start" name="ngayky" placeholder="Chọn ngày đăng" value="" min="2018-01-01" max="2024-12-31" class="box"/>
-                                            <label for="file" class="lb">Chọn file :</label>
-                                            <input type="file" name="file" id="" class="box">
-
-                                            <div class="modal-footer-addVB">
-                                                <button type="submit" name="confirm_modal_addVB_phong" class="btn-confirm-addVB" id="confirm_modal_addVBPhong">Xác nhận</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    <!--Modal end-->
-
-                    <!--Modal EDIT start-->
-                    <div class="modal-container-addVB" id="modal-container-editVBPhong">
+                     <!--Modal EDIT start-->
+                     <div class="modal-container-addVB" id="modal-container-editVBPhong">
                             <div class="modal-addVB">
                                 <div class="modal-header-addVB">
                                     <h2>Sửa văn bản</h2>
@@ -102,7 +56,7 @@
                                 </div>
                                 <div class="modal-content-addVB">
                                     <div class="admin-add-form">
-                                        <form action="<?=$base_url?>phong/update_vb_phong" method="post" enctype="multipart/form-data">
+                                        <form action="<?=$base_url?>phong/update_vb_phong" method="post" enctype="multipart/form-data" id="form-edit-vbphong">
                                             <input type="hidden" name="idvb" id='idvb'>
                                             <input type="text" name="tieude" id="tieude" placeholder="Nhập tiêu đề" class="box">
                                             <textarea name="noidung" id="noidung" cols="20" rows="5" placeholder="Nhập nội dung" class="box"></textarea>
@@ -127,7 +81,7 @@
                                             <label for="date" class="lb">Chọn ngày đăng :</label>
                                             <input type="date" id="ngaydang" name="ngaydang" placeholder="Chọn ngày đăng" value="" min="2018-01-01" max="2024-12-31" class="box"/>
                                             <p>file hiện tại: </p>
-                                            <label for="file" id="file" class="lb"></label>
+                                            <label for="file" id="file" class="lb file_now"></label>
                                             <input type="file" name="file" id="file" class="box">
 
                                             <div class="modal-footer-addVB">
@@ -170,7 +124,7 @@
                                     <a href="<?=$base_url?>phong/content_admin/<?=$vb['idvb_chung']?>"><?=$vb['tenvanban']?></a>
                                 </td>
                                 <td> <?=$vb['loaivanban']?></td>
-                                <td><?=$vb['ngaydang']?></td>
+                                <td><?=$vb['formatted_ngaydang']?></td>
                                 <td>
                                     <a href="<?=$base_url?>/phong/download_file_phong/<?=$vb['file']?>"><?=$vb['file']?></a>
                                 </td>
@@ -223,10 +177,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
 <script src="<?=$base_url?>template/Script/script-modal_add_vbphong.js"></script>
 <script src="<?=$base_url?>template/Script/script-modal_edit_vbphong.js"></script>
+<script src="//cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
 <script src="<?=$base_url?>template/Script/validation_form_vbphong.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
 
+<script>
+        CKEDITOR.replace( 'noidung' );
+</script>
 
 <script>
     $(document).ready(function() { 
@@ -248,7 +206,7 @@
                         // console.log(Value['idvb']);
                         $('#idvb').val(Value['idvb_chung']);
                         $('#tieude').val(Value['tenvanban']);
-                        $('#noidung').val(Value['noidung']);
+                        CKEDITOR.instances['noidung'].setData(Value['noidung']);
                         $('#tenloaivb').val(Value['id_loaivanban']);
                         $('#tenphong').val(Value['idphong']);
                         $('#ngaydang').val(Value['ngaydang']);

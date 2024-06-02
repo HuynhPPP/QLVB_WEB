@@ -154,23 +154,39 @@
             case 'add_vb_phong':
                 require_once 'model/m_document.php'; 
                 require_once 'model/m_phong.php';
+
+
                 if  (isset($_POST['confirm_modal_addVB_phong'])) {
                     $tieude = $_POST['tieude'];
                     $noidung = $_POST['noidung'];
                     $loaivb = $_POST['idloaivb'];
                     $phong = $_POST['idphong'];
                     $ngayky = date('Y-m-d');
-                    $file = $_FILES['file']['name'];
+                    $file = isset($_FILES['file']['name']) ? $_FILES['file']['name'] : '';
+
+                    if ($file != '') {
+                        $sanitized_file = sanitizeFileName($file);
+                    } else {
+                        $sanitized_file = '';
+                    }
 
                     $kq = check_vbphong($tieude);
                     if ( $kq ) { // Đúng, bị trùng, không thêm
                         $_SESSION['thongbao']='Văn bản đã tồn tại !' ;
                     }else {
-                        addVanBan_chung($tieude, $noidung, $loaivb, $phong, $ngayky, $file);
-                        $target_dir = "upload/file_phong/";
-                        $target_file = $target_dir . basename($_FILES["file"]["name"]);
-                        move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
-                        $_SESSION['success'] = 'Đăng văn bản thành công !';
+                        addVanBan_chung($tieude, $noidung, $loaivb, $phong, $ngayky, $sanitized_file);
+
+                        if ($sanitized_file != '') {
+                            $target_dir = "upload/file_phong/";
+                            $target_file = $target_dir . $sanitized_file;
+                            if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
+                                $_SESSION['success'] = 'Đăng văn bản thành công !';
+                            } else {
+                                $_SESSION['thongbao'] = 'Đăng không thành công !';
+                            }
+                        } else {
+                            $_SESSION['success'] = 'Đăng văn bản thành công !';
+                        }
                     }
                     
                    
@@ -215,25 +231,33 @@
                     $loaivb = $_POST['idloaivb'];
                     $phong = $_POST['idphong'];
                     $ngayky = $_POST['ngaydang'];
-                    $file = $_FILES['file']['name'];
 
-                    // $kq = check_vbphong($tieude);
-                    // if ( $kq ) { // Đúng, bị trùng, không thêm
-                    //     $_SESSION['thongbao']='Văn bản đã tồn tại !' ;
-                    // }else {
-                        if($file!=""){
-                            $target_dir = "upload/file_phong/";
-                            $target_file = $target_dir . basename($_FILES["file"]["name"]);
-                            move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
-                            }else{
-                                $file="";
-                            }
-                            editVanBan_chung($tieude, $noidung, $loaivb, $phong, $ngayky, $file, $id);
+                    $delete_file = isset($_POST['delete_file']) ? $_POST['delete_file'] : false;
+                    if ($delete_file) {
+                        $file = ''; // Nếu người dùng muốn xóa file, gán tên file rỗng
+                    } else {
+                        $file = isset($_FILES['file']['name']) ? $_FILES['file']['name'] : ''; // Lấy tên file mới nếu có
+                    }
+
+                 
+                    if($file!=""){
+                        $sanitized_file = sanitizeFileName($file);
+                        $target_dir = "upload/file_phong/";
+                        $target_file = $target_dir . $sanitized_file;
+                        if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
+                            // Cập nhật file mới vào cơ sở dữ liệu
+                            editVanBan_chung($tieude, $noidung, $loaivb, $phong, $ngayky, $sanitized_file, $id);
                             $_SESSION['success'] = 'Cập nhật văn bản thành công !';
-                    // }
-
-                    
+                        } else {
+                            $_SESSION['thongbao'] = 'Cập nhật không thành công !';
+                        }
+                    }
+                    editVanBan_chung($tieude, $noidung, $loaivb, $phong, $ngayky, $file, $id);
+                    $_SESSION['success'] = 'Cập nhật văn bản thành công !';
                 }
+                       
+                       
+                
                 header('Location: '.$base_url.'phong/home_admin');    
                 require_once('view/admin/v_admin_layout.php'); 
                 break;
@@ -306,17 +330,22 @@
 
                 case 'download_file_phong':
                     require_once 'model/m_document.php';  
+
+                 
+                
                    
                     $idfile = $_GET['id'];
                       if (isset($idfile)) {
-                            $file = $idfile; // Tên file được truyền qua query parameter
+                            $file = urldecode($idfile); // Giải mã tên file từ query parameter
+
+                            $sanitized_file = sanitizeFileName($file); // Chuẩn hóa tên file
     
-                            $file_path = 'upload/file_phong/'.$file; // Đường dẫn tới file
+                            $file_path = 'upload/file_phong/' . $sanitized_file; // Đường dẫn tới file
     
                             if (file_exists($file_path)) {
                                 header('Content-Description: File Transfer');
                                 header('Content-Type: application/octet-stream');
-                                header('Content-Disposition: attachment; filename="' . basename($file) . '"');
+                                header('Content-Disposition: attachment; filename="' . basename($sanitized_file) . '"');
                                 header('Expires: 0');
                                 header('Cache-Control: must-revalidate');
                                 header('Pragma: public');
@@ -327,10 +356,7 @@
                                 echo 'File không tồn tại.';
                             }
                         } 
-                        $dsphong = getAllPhong();
-                        $ds_vb_chung = getAll_VB_chung(); 
-                        
-                        $view_name = 'page_admin';               
+                                   
                     break;
         // --- ADMIN ---
             default:

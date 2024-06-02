@@ -150,34 +150,48 @@
                 require_once('view/admin/v_admin_layout.php');
                 break;
 
-            case 'add_vb_khoa':
-                require_once 'model/m_khoa.php';
-                require_once 'model/m_document.php';
-                if (isset($_POST['confirm_modal_addVB_khoa'])) {
-                    
-                    $tieude = $_POST['tieude'];
-                    $noidung = $_POST['noidung'];
-                    $loaivb = $_POST['idloaivb'];
-                    $khoa = $_POST['idkhoa'];
-                    $ngayky = date('Y-m-d');
-                    $file = $_FILES['file']['name'];
-
-                    $kq = check_vbkhoa($tieude);
-                    if ( $kq ) { // Đúng, bị trùng, không thêm
-                        $_SESSION['thongbao']='Văn bản đã tồn tại !' ;
-                    }else {
-                        document_addVanBan_Khoa($tieude, $noidung, $loaivb, $khoa, $ngayky, $file);
-                        // $_SESSION['thongbao'] = 'Đăng văn bản thành công !';
-                        $target_dir = "upload/file_khoa/";
-                        $target_file = $target_dir . basename($_FILES["file"]["name"]);
-                        move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
-                        $_SESSION['success'] = 'Đăng văn bản thành công !';
-                    } 
-                    
-                }
-                header('Location: '.$base_url.'khoa/home_admin');    
-                require_once('view/admin/v_admin_layout.php'); 
-                break;
+                case 'add_vb_khoa':
+                    require_once 'model/m_khoa.php';
+                    require_once 'model/m_document.php';
+                
+                    if (isset($_POST['confirm_modal_addVB_khoa'])) {
+                        $tieude = $_POST['tieude'];
+                        $noidung = $_POST['noidung'];
+                        $loaivb = $_POST['idloaivb'];
+                        $khoa = $_POST['idkhoa'];
+                        $ngayky = date('Y-m-d');
+                        $file = isset($_FILES['file']['name']) ? $_FILES['file']['name'] : '';
+                
+                        if ($file != '') {
+                            $sanitized_file = sanitizeFileName($file);
+                        } else {
+                            $sanitized_file = '';
+                        }
+                
+                        $kq = check_vbkhoa($tieude);
+                        if ($kq) { // Đúng, bị trùng, không thêm
+                            $_SESSION['thongbao'] = 'Văn bản đã tồn tại !';
+                        } else {
+                            document_addVanBan_Khoa($tieude, $noidung, $loaivb, $khoa, $ngayky, $sanitized_file);
+                
+                            if ($sanitized_file != '') {
+                                $target_dir = "upload/file_khoa/";
+                                $target_file = $target_dir . $sanitized_file;
+                                if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
+                                    $_SESSION['success'] = 'Đăng văn bản thành công !';
+                                } else {
+                                    $_SESSION['thongbao'] = 'Đăng không thành công !';
+                                }
+                            } else {
+                                $_SESSION['success'] = 'Đăng văn bản thành công !';
+                            }
+                        }
+                    }
+                
+                    header('Location: ' . $base_url . 'khoa/home_admin');
+                    require_once('view/admin/v_admin_layout.php');
+                    break;
+                
 
             case 'edit_vb_khoa':
                 require_once 'model/m_document.php';
@@ -203,43 +217,47 @@
                 }
                 break;
 
-            case 'update_vb_khoa':
-                require_once 'model/m_document.php';
-                require_once 'model/m_khoa.php';
-
-                if(isset($_POST['confirm_modal_editVB_khoa'])) {
-                    $id = $_POST['idvb'];
-                    $tieude = $_POST['tieude'];
-                    $noidung = $_POST['noidung'];
-                    $loaivb = $_POST['idloaivb'];
-                    $khoa = $_POST['idkhoa'];
-                    $ngayky = $_POST['ngaydang'];
-                    $file = $_FILES['file']['name'];
-
-                    
-                    // $kq = check_vbkhoa($tieude);
-                    // if ( $kq ) { // Đúng, bị trùng, không thêm
-                    //     $_SESSION['thongbao']='Văn bản đã tồn tại !' ;
-                    // }else {
-                        if($file!=""){
+                case 'update_vb_khoa':
+                    require_once 'model/m_document.php';
+                    require_once 'model/m_khoa.php';
+                
+                    if (isset($_POST['confirm_modal_editVB_khoa'])) {
+                        $id = $_POST['idvb'];
+                        $tieude = $_POST['tieude'];
+                        $noidung = $_POST['noidung'];
+                        $loaivb = $_POST['idloaivb'];
+                        $khoa = $_POST['idkhoa'];
+                        $ngayky = $_POST['ngaydang'];
+                        
+                        $delete_file = isset($_POST['delete_file']) ? $_POST['delete_file'] : false;
+                        if ($delete_file) {
+                            $file = ''; // Nếu người dùng muốn xóa file, gán tên file rỗng
+                        } else {
+                            $file = isset($_FILES['file']['name']) ? $_FILES['file']['name'] : ''; // Lấy tên file mới nếu có
+                        }
+                
+                        if ($file != '') {
+                            $sanitized_file = sanitizeFileName($file);
                             $target_dir = "upload/file_khoa/";
-                            $target_file = $target_dir . basename($_FILES["file"]["name"]);
-                            move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
-                            }else{
-                                $file="";
+                            $target_file = $target_dir . $sanitized_file;
+                
+                            if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
+                                // Cập nhật văn bản với tên file mới
+                                edit_vbkhoa($tieude, $noidung, $loaivb, $khoa, $ngayky, $sanitized_file, $id);
+                                $_SESSION['success'] = 'Cập nhật văn bản thành công !';
+                            } else {
+                                $_SESSION['thongbao'] = 'Cập nhật không thành công !';
                             }
+                        } else {
+                            // Cập nhật văn bản mà không thay đổi tên file
                             edit_vbkhoa($tieude, $noidung, $loaivb, $khoa, $ngayky, $file, $id);
                             $_SESSION['success'] = 'Cập nhật văn bản thành công !';
-                    // }
-                    
-                }
-                header('Location: '.$base_url.'khoa/home_admin');    
-                require_once('view/admin/v_admin_layout.php'); 
-                break;
-
-            
-
-           
+                        }
+                    }
+                
+                    header('Location: ' . $base_url . 'khoa/home_admin');
+                    require_once('view/admin/v_admin_layout.php');
+                    break;
 
             case 'admin_search_vanban_khoa':             
                 require_once 'model/m_document.php';
@@ -375,6 +393,7 @@
                     $idfile = $_GET['id'];
                       if (isset($idfile)) {
                             $file = $idfile; // Tên file được truyền qua query parameter
+
     
                             $file_path = 'upload/file_khoa/'.$file; // Đường dẫn tới file
     

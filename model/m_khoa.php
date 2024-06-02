@@ -29,10 +29,10 @@
     
 
     function edit_vbkhoa($tieude, $noidung, $loaivb, $khoa, $ngayky, $file, $id) {
-        if($file != "") {
+        if ($file != "") {
             pdo_execute("UPDATE vanban SET tieude=?, noidung=?, loaivanban=?, idkhoa=?, ngaydang=?, file=? WHERE idvb=?",  $tieude, $noidung, $loaivb, $khoa, $ngayky, $file, $id);    
-        }else{
-            pdo_execute("UPDATE vanban SET tieude=?, noidung=?, loaivanban=?, idkhoa=?, ngaydang=?  WHERE idvb=?",  $tieude, $noidung, $loaivb, $khoa, $ngayky, $id);    
+        } else {
+            pdo_execute("UPDATE vanban SET tieude=?, noidung=?, loaivanban=?, idkhoa=?, ngaydang=?, file=? WHERE idvb=?",  $tieude, $noidung, $loaivb, $khoa, $ngayky, $file, $id);    
         }           
     }
 

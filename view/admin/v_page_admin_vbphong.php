@@ -133,6 +133,7 @@
                                             <p>file hiện tại: </p>
                                             <label for="file" id="file" class="lb file_now"></label>
                                             <input type="file" name="file" id="file" class="box">
+                                            <input type="checkbox" name="delete_file" id="delete_file"> <label for="delete_file">Xóa file hiện tại</label>
 
                                             <div class="modal-footer-addVB">
                                                 <button type="submit" name="confirm_modal_editVB_phong" class="btn-confirm-addVB" id="confirm_modal_editVBPhong">Xác nhận</button>
@@ -310,7 +311,7 @@
 <script>
       $(document).ready(function() { 
         $.datepicker.setDefaults({
-            dateFormat: 'yy-mm-dd'
+            dateFormat: 'dd-mm-yy'
         });
         $(function() {
             $("#start-date-2").datepicker();

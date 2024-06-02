@@ -9,6 +9,17 @@
         return pdo_query_value("SELECT COUNT(*) FROM loaivanban");
     }
    
+    function sanitizeFileName($filename) {
+        $filename = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $filename); // Chuyển đổi các ký tự tiếng Việt sang không dấu
+        $filename = preg_replace('/[^A-Za-z0-9_\-\.]/', '_', $filename); // Loại bỏ các ký tự không hợp lệ
+        $filename = preg_replace('/_+/', '_', $filename); // Xóa các dấu gạch dưới liên tiếp
+
+         // Giới hạn độ dài của tên file
+        $max_length = 255; // Số ký tự tối đa cho tên file
+        $filename = mb_substr($filename, 0, $max_length, 'UTF-8'); // Cắt tên file nếu quá dài
+       
+        return $filename;
+    }
 
     function document_checkLoaiVanBan($tenloaivb) {
         return pdo_query("SELECT * FROM loaivanban WHERE loaivanban=?", $tenloaivb);

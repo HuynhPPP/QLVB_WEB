@@ -52,52 +52,7 @@
                                     + Thêm văn bản
                                 </button> -->
                         </form>   
-                        <!--Modal ADD start-->
-                            <!-- <div class="modal-container-addVB" id="modal-container-addVB">
-                                <div class="modal-addVB">
-                                    <div class="modal-header-addVB">
-                                        <h2>Thêm văn bản</h2>
-                                        <i class="fa fa-close" id="close-icon-addVB"></i>
-                                    </div>
-                                    <div class="modal-content-addVB" id="insert_data_vbkhoa">
-                                        <div class="admin-add-form">
-                                            <form action="<?=$base_url?>khoa/add_vb_khoa" method="post" enctype="multipart/form-data" id="form_add_vbkhoa">
-                                                <input type="text" name="tieude" id="tieude_vbkhoa" placeholder="Nhập tiêu đề" class="box">
-                                
-                                                <textarea name="noidung" id="noidung_vbkhoa" cols="20" rows="5" placeholder="Nhập nội dung" class="box"></textarea>
-                                                <select id="loaivb_vbkhoa" name="idloaivb" class="box">
-                                                    <option value="">--Chọn loại văn bản--</option>
-                                                    <?php
-                                                        foreach ($dsLoaiVanBan as $lvb) {
-                                                                
-                                                                echo '<option value="'.$lvb['id'].'">'.$lvb['loaivanban'].'</option>';
-                                                        }
-                                                    ?>
-                                                </select>
-                                                <select id="tenkhoa_vbkhoa" name="idkhoa" class="box">
-                                                    <option value="">--Chọn Khoa--</option>
-                                                    <?php
-                                                        foreach ($dskhoa as $khoa) {
-                                                                
-                                                                echo '<option value="'.$khoa['id'].'">'.$khoa['tenkhoa'].'</option>';
-                                                        }
-                                                    ?>
-                                                </select>
-                                                <label for="date" class="lb">Chọn ngày đăng :</label>
-                                                <input type="date" id="ngaydang_vbkhoa" name="ngayky" placeholder="Chọn ngày đăng" value="" min="2018-01-01" max="2024-12-31" class="box"/>
-                                                <label for="file" class="lb">Chọn file :</label>
-                                                <input type="file" name="file" id="tenfile_vbkhoa" class="box">
-
-                                                <div class="modal-footer-addVB">
-                                                    <button type="submit" name="confirm_modal_addVB_khoa" class="btn-confirm-addVB" id="confirm_modal_addVB">Xác nhận</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            </div> -->
-                        <!--Modal ADD end-->
+                       
 
 
                          <!--Modal EDIT start-->
@@ -136,7 +91,7 @@
                                                 <label for="date" class="lb">Chọn ngày đăng :</label>
                                                 <input type="date" id="ngaydang" name="ngaydang" placeholder="Chọn ngày đăng" value="" min="2018-01-01" max="2024-12-31" class="box"/>
                                                 <p>file hiện tại: </p>
-                                                <label for="file" id="file" class="lb"></label>
+                                                <label for="file" id="file" class="lb file_now"></label>
                                                 <input type="file" name="file"  class="box">
 
                                                 <div class="modal-footer-addVB">
@@ -281,11 +236,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
 <script src="<?=$base_url?>template/Script/script-modal_add.js"></script>
 <script src="<?=$base_url?>template/Script/script-modal_edit.js"></script>
+<script src="//cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
 <script src="<?=$base_url?>template/Script/validation_form_addvbkhoa.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
 
 
+<script>
+        CKEDITOR.replace( 'noidung' );
+</script>
 
 
 
@@ -310,7 +269,7 @@
                         // console.log(Value['tieude']);
                         $('#idvb').val(Value['idvb']);
                         $('#tieude').val(Value['tieude']);
-                        $('#noidung').val(Value['noidung']);
+                        CKEDITOR.instances['noidung'].setData(Value['noidung']);
                         $('#tenloaivb').val(Value['loaivanban']);
                         $('#tenkhoa').val(Value['idkhoa']);
                         $('#ngaydang').val(Value['ngaydang']);
