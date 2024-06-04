@@ -17,6 +17,7 @@
                 $dsLoaiVanBan = document_getAllLoaiVanBan(); 
                 // Hiển thị dữ liệu
                 $view_name = 'page_home'; 
+                require_once 'view/admin/v_admin_layout.php';
                
                 break;
 
@@ -26,11 +27,43 @@
                 require_once 'model/m_document.php';
                 require_once 'model/m_user.php';
 
-                if  ( isset($_POST['ten_Khoa']) ) {
+                if ( isset($_POST['click_edit_btn'])) {                   
                     $tenkhoa = $_POST['ten_Khoa'];
-                    addKhoa($tenkhoa);
+
+                    $kq = checkKhoa($tenkhoa);
+                    if ($kq) { // Đúng, bị trùng, không thêm
+                        $thongbao = "Tên khoa đã tồn tại !";
+                    } else {
+                        addKhoa($tenkhoa);
+                        $thongbao = "Thêm thành công !";
+                    }
+                    $encoded_message = json_encode($thongbao, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG);
+                    echo $encoded_message;
                 }
-                            
+              
+                   
+                break;
+
+            case 'add_loaiVB':
+                require_once 'model/m_phong.php'; 
+                require_once 'model/m_khoa.php';
+                require_once 'model/m_document.php';
+                
+                if ( isset($_POST['click_add_btn'])) {
+                    $tenloaivb = $_POST['ten_loaiVB'];  
+
+                    $kq = document_checkLoaiVanBan($tenloaivb);
+                    if ($kq) { // Đúng, bị trùng, không thêm
+                        $thongbao = "Tên loại văn bản đã tồn tại !";
+                    } else {
+                        document_addLoaiVanBan($tenloaivb);
+                        $thongbao = "Thêm thành công !";
+                    }     
+                    $encoded_message = json_encode($thongbao, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG);
+                    echo $encoded_message;                                                
+                }
+                  
+                    
                 break;
 
             case 'edit_khoa':
@@ -44,23 +77,9 @@
                     $column_name = $_POST['column_name'];
                 }                       
                     edit_Khoa($id_khoa, $text, $column_name);
-                        
-                
                 break;
 
-            case 'add_loaiVB':
-                require_once 'model/m_phong.php'; 
-                require_once 'model/m_khoa.php';
-                require_once 'model/m_document.php';
-                require_once 'model/m_user.php';
-
-                if  ( isset($_POST['ten_loaiVB']) ) {
-                    $tenloaivb = $_POST['ten_loaiVB'];
-                     document_addLoaiVanBan($tenloaivb);
-                }
-                // header('Location: '.$base_url.'page/home_admin');
-                 
-                break;
+            
 
             case 'edit_loaiVB':
                 require_once 'model/m_phong.php'; 
@@ -73,8 +92,7 @@
                     $column_name = $_POST['column_name'];
                 }                       
                     document_editLoaiVanBan($id_loaiVB, $text, $column_name);
-                      
-                
+                                      
                 break;
 
             case 'delete_loaiVB':
@@ -114,11 +132,12 @@
                 }
                 $dsTK = user_getAll();
                 $view_name = 'mail'; 
+                require_once 'view/admin/v_admin_layout.php';
                 break;
             default:
             
             break;
         }
-        require_once 'view/admin/v_admin_layout.php';
+       
     }
 ?>

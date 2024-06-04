@@ -89,7 +89,7 @@
                                                         }
                                                     ?>
                                                 </select>
-                                                <label for="date" class="lb">Chọn ngày đăng :</label>
+                                                <label for="date" class="lb">Ngày đăng :</label>
                                                 <input type="date" id="ngaydang_vbkhoa" name="ngayky" value="<?php 
                                                                                                                     $date = date('Y-m-d');
                                                                                                                     $date_formatted = date('d-m-Y', strtotime($date)); 
@@ -142,7 +142,7 @@
                                                         }
                                                     ?>
                                                 </select>
-                                                <label for="date" class="lb">Chọn ngày đăng :</label>
+                                                <label for="date" class="lb">Ngày đăng :</label>
                                                 <input type="date" id="ngaydang" name="ngaydang" placeholder="Chọn ngày đăng" value="" min="2018-01-01" max="2024-12-31" class="box"/>
                                                 <p>file hiện tại: </p>
                                                 <label for="file" id="file" class="lb file_now"></label>

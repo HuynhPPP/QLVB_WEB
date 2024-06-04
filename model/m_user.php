@@ -14,6 +14,16 @@
         return null;
     }
 
+    function save_remember_me_token($user_id, $token) {
+        // Lưu token vào cơ sở dữ liệu
+        pdo_execute("INSERT INTO user_tokens(user_id, token, created_at) VALUES (?, ?, NOW()) ON DUPLICATE KEY UPDATE token = VALUES(token), created_at = VALUES(created_at)", $user_id, $token);
+    }
+
+    function getUserByToken($token) {
+        // Lấy thông tin người dùng dựa trên token
+        return pdo_query_one("SELECT * FROM user INNER JOIN user_tokens t ON user.iduser = t.user_id WHERE t.token = ? AND t.created_at > NOW() - INTERVAL 30 DAY", $token);
+    }
+
     function user_getAll() {
         return pdo_query("SELECT * FROM user, khoa WHERE user.idkhoa = khoa.id");
     }

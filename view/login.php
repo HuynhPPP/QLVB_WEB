@@ -21,7 +21,7 @@
                    <header class="fs-4">Hệ thống văn bản</header>
                    <form action="" method="POST" id="formLogin_validation">
                         <div class="input-field">
-                                <input type="text" class="input" name="TaiKhoan" id="username" required="" autocomplete="on" autofocus >
+                        <input type="text" class="input" name="TaiKhoan" id="username" required autocomplete="on" autofocus value="<?php echo $taiKhoan ?>">
                                 <label for="username">Tài khoản</label> 
                             </div> 
                         <div class="input-field">
@@ -31,6 +31,8 @@
                         
                         <div class="input-field">
                                 <input type="submit" name="btn_login" class="submit" value="Đăng nhập">  
+                                <div class="mt-4"> <input type="checkbox" name="remember_me" id="remember_me"> Ghi nhớ tài khoản ?</div>
+                              
                         </div> 
                     </form>
 

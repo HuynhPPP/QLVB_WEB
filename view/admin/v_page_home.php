@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="<?=$base_url?>template/css/admin/modal-add-khoa.css">   
     <link rel="stylesheet" href="<?=$base_url?>template/css/admin/modal-add-loaiVB.css">
     <link rel="stylesheet" href="<?=$base_url?>template/css/admin/form-style.css">
+    <link rel="stylesheet" href="<?=$base_url?>template/css/admin/nottification_admin.css">
 </head>
 
 
@@ -15,6 +16,8 @@
         </div>
          <a href="<?=$base_url?>page_user/trangchu"><i class="fa-solid fa-arrow-right"></i> <span>Trang người dùng</span></a>
     </div>
+
+
 
     <div class="card-container">
         <div class="card-wrapper">
@@ -138,7 +141,7 @@
                                 <th>Thao tác</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="table-khoa">
                         <?php $i=1;  foreach($dskhoa as $khoa): ?> 
                             <tr>
                                 <td><?=$i?></td>
@@ -252,6 +255,11 @@
     </div>
 </div>
 
+<div id="notification-edit-khoa">
+
+
+</div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
 <script src="<?=$base_url?>template/Script/script-modal-Khoa.js"></script>
@@ -282,20 +290,97 @@
         
 
         $('#btn_add_Khoa').on('click', function(){
+            event.preventDefault();
             var ten_Khoa = $('#ten_Khoa').val();
 
             if(ten_Khoa == '') {
-            alert('Bạn chưa nhập tên khoa');
+                $('#notification-edit-khoa').html(`
+                    <figure class="notification" style="z-index: 1;">
+                        <div class="notification__body">
+                            <div class="notification__description">
+                                <div class="icon__wrapper">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                >
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M6 6l12 12m0 -12l-12 12"></path>
+                                </svg>
+
+                                </div>                    
+                                Bạn chưa nhập tên khoa !
+                            </div> 
+                        </div>
+                        <div class="notification__progress"></div>
+                    </figure>
+                `);
+                
 
             }else {
                 $.ajax({
                     url: "<?=$base_url?>page/add_khoa",
                     method: "POST",
-                    data:{ten_Khoa:ten_Khoa},
-                    success: function(data) {
-                        
-                        alert('Thêm thành công !');
-                        
+                    data: {
+                        'click_edit_btn': true,
+                        'ten_Khoa':ten_Khoa,
+                    },
+                   
+                    success: function(response) {
+                        var decoded_message = JSON.parse(response);
+                        console.log(decoded_message);
+
+                        // Create notification element based on the message content
+                        var notification_class;
+                        var notification_icon;
+                        var notification_message;
+
+                        if (decoded_message === "Thêm thành công !") {
+                        notification_class = "notification-success"; // Set class for success notification
+                        notification_progress = "notification__progress_success";
+                        notification_icon = `
+                            <svg
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                            fill="none" stroke-linecap="round" stroke-linejoin="round"
+                            >
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M5 12l5 5l10 -10"></path>
+                            </svg>
+                        `; // Use success icon
+                        notification_message = "Thêm thành công !"; // Set success message
+                        } else {
+                        notification_class = "notification"; // Set class for error notification
+                        notification_progress = "notification__progress";
+                        notification_icon = `
+                            <svg
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                            fill="none" stroke-linecap="round" stroke-linejoin="round"
+                            >
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M6 6l12 12m0 -12l-12 12"></path>
+                            </svg>
+                        `; // Use error icon
+                        notification_message = "Tên khoa đã tồn tại !"; // Set error message
+                        }
+
+                        var notification_html = `
+                        <figure class="${notification_class}" style="z-index: 1;">
+                            <div class="notification__body">
+                            <div class="notification__description">
+                                <div class="icon__wrapper">
+                                ${notification_icon}
+                                </div>
+                                ${notification_message}
+                            </div>
+                            <div class="${notification_progress}"></div>
+                            </div>
+                        </figure>
+                        `;
+
+                        $('#notification-edit-khoa').html(notification_html);
+                     
                     }
                 });
             }
@@ -310,20 +395,94 @@
         
 
         $('#btn_add_loaiVB').on('click', function(){
+            event.preventDefault();
             var ten_loaiVB = $('#ten_loaiVB').val();
 
             if(ten_loaiVB == '') {
-            alert('Bạn chưa nhập tên loại văn bản');
+                $('#notification-edit-khoa').html(`
+                    <figure class="notification" style="z-index: 1;">
+                        <div class="notification__body">
+                            <div class="notification__description">
+                                <div class="icon__wrapper">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                >
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M6 6l12 12m0 -12l-12 12"></path>
+                                </svg>
+
+                                </div>                    
+                                Bạn chưa nhập loại văn bản !
+                            </div> 
+                        </div>
+                        <div class="notification__progress"></div>
+                    </figure>
+                `);
 
             }else {
                 $.ajax({
                     url: "<?=$base_url?>page/add_loaiVB",
                     method: "POST",
-                    data:{ten_loaiVB:ten_loaiVB},
-                    success: function(data) {
-                        
-                        alert('Thêm thành công !');
-                        
+                    data: {
+                        'click_add_btn': true,
+                        'ten_loaiVB':ten_loaiVB,
+                    },
+                    success: function(response) {
+                        var decoded_message = JSON.parse(response);
+                        console.log(decoded_message);
+
+                        // Create notification element based on the message content
+                        var notification_class;
+                        var notification_icon;
+                        var notification_message;
+
+                        if (decoded_message === "Thêm thành công !") {
+                        notification_class = "notification-success"; // Set class for success notification
+                        notification_progress = "notification__progress_success";
+                        notification_icon = `
+                            <svg
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                            fill="none" stroke-linecap="round" stroke-linejoin="round"
+                            >
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M5 12l5 5l10 -10"></path>
+                            </svg>
+                        `; // Use success icon
+                        notification_message = "Thêm thành công !"; // Set success message
+                        } else {
+                        notification_class = "notification"; // Set class for error notification
+                        notification_progress = "notification__progress";
+                        notification_icon = `
+                            <svg
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                            fill="none" stroke-linecap="round" stroke-linejoin="round"
+                            >
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M6 6l12 12m0 -12l-12 12"></path>
+                            </svg>
+                        `; // Use error icon
+                        notification_message = "Loại văn bản đã tồn tại !"; // Set error message
+                        }
+
+                        var notification_html = `
+                        <figure class="${notification_class}" style="z-index: 1;">
+                            <div class="notification__body">
+                            <div class="notification__description">
+                                <div class="icon__wrapper">
+                                ${notification_icon}
+                                </div>
+                                ${notification_message}
+                            </div>
+                            <div class="${notification_progress}"></div>
+                            </div>
+                        </figure>
+                        `;
+
+                        $('#notification-edit-khoa').html(notification_html);       
                     }
                 });
             }
@@ -341,7 +500,27 @@
                     data:{id:id, text:text, column_name:column_name},
                     success: function(data) {
                         
-                        alert('Chỉnh sửa thành công !');
+                        $('#notification-edit-khoa').html(`
+                        <figure class="notification-success" style="z-index: 1;">
+                        <div class="notification__body">
+                            <div class="notification__description">
+                                <div class="icon__wrapper">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                >
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M5 12l5 5l10 -10"></path>
+                                </svg>
+
+                                </div>                    
+                                Cập nhật thành công !
+                            </div> 
+                        </div>
+                        <div class="notification__progress_success"></div>
+                    </figure>
+                    `);
                         
                     }
                 });
@@ -365,7 +544,27 @@
                     data:{id:id, text:text, column_name:column_name},
                     success: function(data) {
                         
-                        alert('Chỉnh sửa thành công !');
+                        $('#notification-edit-khoa').html(`
+                        <figure class="notification-success">
+                        <div class="notification__body">
+                            <div class="notification__description">
+                                <div class="icon__wrapper">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                >
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M5 12l5 5l10 -10"></path>
+                                </svg>
+
+                                </div>                    
+                                Cập nhật thành công !
+                            </div> 
+                        </div>
+                        <div class="notification__progress_success"></div>
+                    </figure>
+                    `);
                         
                     }
                 });

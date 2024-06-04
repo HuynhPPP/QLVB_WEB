@@ -15,6 +15,26 @@
                         if ($kq['trangthai'] == 1) {
                             // Đúng, đăng nhập thành công
                             $_SESSION['user'] = $kq;
+
+                             // Kiểm tra nếu checkbox "Ghi nhớ tài khoản" được chọn
+                            if (isset($_POST['remember_me'])) {
+                                // Tạo token duy nhất
+                                $token = bin2hex(random_bytes(32));
+                                
+                                // Lưu token vào cookie
+                                setcookie('remember_me_token', $token, time() + (86400 * 30), "/"); // Cookie có hiệu lực trong 30 ngày
+                                
+                                
+                                // Lưu token vào cơ sở dữ liệu
+                                save_remember_me_token($kq['iduser'], $token);
+                            } else {
+                                // Xóa cookie nếu không chọn "Ghi nhớ tài khoản"
+                                if (isset($_COOKIE['remember_me_token'])) {
+                                    setcookie('remember_me_token', '', time() - 3600, "/");
+                                    
+                                }
+                            }
+
                             header('Location: '.$base_url.'page_user/trangchu');
                             exit();
                         } else {
@@ -25,10 +45,27 @@
                         $thongbao['error_login'] = 'Tên đăng nhập hoặc mật khẩu không chính xác!';
                     }
                 }
-                // header('Location: '.$base_url.'user/login');
-                // exit();
+
+               
+                
                
             }   
+            // Kiểm tra nếu đã có cookie thì tự động điền vào form
+            if (isset($_COOKIE['remember_me_token'])) {
+                   
+                $token = $_COOKIE['remember_me_token'];
+             
+                $user = getUserByToken($token);
+               
+
+                if ($user) {
+                    $taiKhoan = $user['taikhoan'];
+                } else {
+                    $taiKhoan = 'tài khoản rỗng';
+                }
+            } else {
+                $taiKhoan = '';
+            }
                                  
             require_once 'view/login.php';
             break;
