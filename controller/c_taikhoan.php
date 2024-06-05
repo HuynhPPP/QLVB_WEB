@@ -104,6 +104,7 @@
             case 'delete':
                 require_once 'model/m_user.php';
                 user_delete($_GET['id']);
+                $_SESSION['success'] = 'Xóa tài khoản thành công !';
                 header('Location: '.$base_url.'taikhoan/home_admin');                    
                 break;
            

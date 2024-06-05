@@ -98,6 +98,7 @@
             case 'delete_loaiVB':
                 require_once 'model/m_document.php';               
                 document_deleteLoaiVanBan($_GET['id']);
+                $_SESSION['success'] = 'Xóa loại văn bản thành công !';  
                 header('Location: '.$base_url.'page/home_admin');                    
                 break;
 

@@ -1,7 +1,7 @@
 <head>
     <link rel="stylesheet" href="<?=$base_url?>template/css/admin/admin-style-trangchu.css">
     <link rel="stylesheet" href="<?=$base_url?>template/css/admin/admin-table-user.css">
-    <link rel="stylesheet" href="<?=$base_url?>template/css/admin/pagination-style-admin.css">
+   
     <link rel="stylesheet" href="<?=$base_url?>template/css/admin/modal-add-user.css">
     <link rel="stylesheet" href="<?=$base_url?>template/css/admin/form-style.css">
 </head>

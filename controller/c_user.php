@@ -60,6 +60,8 @@
 
                 if ($user) {
                     $taiKhoan = $user['taikhoan'];
+                    header('Location: '.$base_url.'page_user/trangchu');
+                    exit();
                 } else {
                     $taiKhoan = 'tài khoản rỗng';
                 }
@@ -139,14 +141,18 @@
               
                 
           case 'logout':
-            if(isset($_POST['submit'])){
-
+            session_unset();
+            session_destroy();
+            
+            // Xóa cookie "remember_me_token"
+            if (isset($_COOKIE['remember_me_token'])) {
+                setcookie('remember_me_token', '', time() - 3600, "/", "", true, true); // HttpOnly và Secure
             }
 
-              header('Location: '. $base_url .'user/login');
-              break;   
-              
-         
+            // Chuyển hướng đến trang đăng nhập
+            header('Location: '. $base_url .'user/login');
+            break;
+                               
           default:
               # code...
               break;

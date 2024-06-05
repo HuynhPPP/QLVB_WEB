@@ -284,6 +284,7 @@
             case 'delete_vanban_chung':
                 require_once 'model/m_phong.php';               
                 document_deleteVB_chung($_GET['id']);
+                $_SESSION['success'] = 'Xóa văn bản thành công !';
                 header('Location: '.$base_url.'phong/home_admin'); 
                               
                 break;

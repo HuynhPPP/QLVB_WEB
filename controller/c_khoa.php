@@ -352,13 +352,17 @@
             case 'delete':
                 require_once 'model/m_khoa.php';               
                 deleteKhoa($_GET['id']);
-                header('Location: '.$base_url.'page/home_admin');    
+                header('Location: '.$base_url.'page/home_admin'); 
+                $_SESSION['success'] = 'Xóa khoa thành công !';   
                 require_once('view/admin/v_admin_layout.php');                
                 break;
 
             case 'delete_document':
-                require_once 'model/m_khoa.php';              
+                require_once 'model/m_khoa.php';    
+
                 documentKhoa_delete($_GET['id']);
+                $_SESSION['success'] = 'Xóa văn bản thành công !';
+
                 header('Location: '.$base_url.'khoa/home_admin'); 
                 break;
 

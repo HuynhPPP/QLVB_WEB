@@ -46,7 +46,7 @@ class MailSendAll
         $mail->send();
         $error['success'] = 'Đã gửi thành công!';
         } catch (Exception $e) {
-        $error['mail'] = 'Gửi không thành công !';
+        $error['mail'] = 'Nội dung và tiêu đề không được bỏ trống !';
         }
     }
 }

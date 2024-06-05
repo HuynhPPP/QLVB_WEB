@@ -203,13 +203,14 @@ label.error {
     border-radius: 0.375rem;
     background-color: var(--toast-background);
     color: var(--text);
-    max-width: 29rem;
-    width: 100%;
+    max-width: auto;
+    width: auto;
     transform: translateY(30px);
     opacity: 0;
     visibility: hidden;
     animation: fade-in 3s linear;
     border-radius: 0.75rem;
+
 }
 
 .notification__description {
